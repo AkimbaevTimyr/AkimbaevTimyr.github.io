@@ -1,11 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addBestMovies, addFavoriteMovies, addPopularMovies } from "../actions/MovieActionCreator";
+import { addBestMovies, addFavoriteMovies, addPersonalMovies, addPersonalSeries, addPopularMovies, addUpcomingPremiers } from "../actions/MovieActionCreator";
 import { IMovieState } from "../../types/MoviesTypes";
 
 const initialState: IMovieState = {
     bestMovies: [],
     popularMovies: [],
     favoriteMovies: [],
+    personalMovies: [],
+    personalSeries: [],
+    upcomingPremiers: [],
 }
 
 const moviesSlice = createSlice({
@@ -20,7 +23,16 @@ const moviesSlice = createSlice({
             state.popularMovies = action.payload;
         },
         [addFavoriteMovies.fulfilled.type]: (state, action) =>{
-            state.favoriteMovies = action.payload
+            state.favoriteMovies = action.payload;
+        },
+        [addPersonalMovies.fulfilled.type]: (state, action) =>{
+            state.personalMovies = action.payload;
+        },
+        [addPersonalSeries.fulfilled.type]: (state, action) =>{
+            state.personalSeries = action.payload;
+        },
+        [addUpcomingPremiers.fulfilled.type]: (state, action) =>{
+            state.upcomingPremiers = action.payload;
         }
     }
 })

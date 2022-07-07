@@ -3,8 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { getFavoriteMovie } from '../../http/favoritesMovie'
 import { addFavoriteMovies } from '../../store/actions/MovieActionCreator'
 import { IFavoriteMovie, IMovie } from '../../types/MoviesTypes'
-import MoviesItem from '../MoviesItem'
-
+import FavoriteItem from '../FavoriteItem'
 const WatchList: FC = () => {
   const {user} = useAppSelector(state => state.user)
   const {favoriteMovies} = useAppSelector(state => state.movies)
@@ -15,7 +14,7 @@ const WatchList: FC = () => {
   return (
     <div>
       {favoriteMovies.map((el: IFavoriteMovie ) =>(
-        <MoviesItem id={el.id} poster_path={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} overview={el.overview} />
+        <FavoriteItem id={el.id} poster_path={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} overview={el.overview} favorite={el.favorite}/>
       ))}
     </div>
   )

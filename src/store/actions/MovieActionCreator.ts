@@ -34,3 +34,36 @@ export const addFavoriteMovies = createAsyncThunk(
         }
     }
 )
+
+export const addPersonalMovies = createAsyncThunk(
+    'movie/addPersonalMovie',
+    async(movies: IMovie[], thunkAPI) =>{
+        try{
+            return movies
+        }catch(e){
+
+        }
+    }
+)
+
+export const addPersonalSeries = createAsyncThunk(
+    'movie/addPersonalSeries',
+    async(series: IMovie[], thunkAPI) =>{
+        try{
+            return series
+        }catch(e){
+
+        }
+    }
+)
+
+export const addUpcomingPremiers = createAsyncThunk(
+    "movie/addUpcomingPremiers",
+    async(movies: IMovie[], thunkAPI) =>{
+        try{
+            return movies
+        }catch(e){
+
+        }
+    }
+)

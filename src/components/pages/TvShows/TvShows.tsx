@@ -6,7 +6,7 @@ import { useAppSelector } from '../../../hooks/redux'
 import Loading from '../../Loading/loading'
 import { ITvShows } from '../../../types/TvShowTypes'
 import Pagination from '../../pagination.tsx/pagination'
-import MoviesItem from '../../MoviesItem'
+import TvShowsItem from '../../TvShowsItem'
 
 const TvShows = () => {
     const dispatch = useAppDispatch()
@@ -30,7 +30,7 @@ const TvShows = () => {
       {popularTvShows.length === 0 ? <Loading /> : (<>
         <div className='flex flex-wrap mr-10 justify-center'>
           {popularTvShows.map((el: ITvShows) => (
-            <MoviesItem key={el.id} id={el.id} title={el.original_name} poster_path={el.poster_path} release_date={el.release_date} vote_average={el.vote_average} overview={el.overview} />
+            <TvShowsItem key={el.id} id={el.id} title={el.original_name} poster_path={el.poster_path} release_date={el.release_date} vote_average={el.vote_average} overview={el.overview} />
           ))}
         </div> <Pagination changePage={(page: number) => changePage(page)}/>
       </>

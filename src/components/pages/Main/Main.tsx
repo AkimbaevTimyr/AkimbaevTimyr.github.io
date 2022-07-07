@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
+import PersonalFilms from './PersonalFilms/PersonalFilms'
+import PersonalSeries from './PersonalSeries/PersonalSeries'
+import UpcomingPremiers from './UpcomingPremires/UpcomingPremiers'
 
 
 const Main = () => {
@@ -11,7 +14,9 @@ const Main = () => {
   }, [])
   return (
    <div>
-    Главная
+    <PersonalFilms />
+    <PersonalSeries />
+    <UpcomingPremiers />
    </div>
   )
 }

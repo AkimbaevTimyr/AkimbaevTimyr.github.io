@@ -26,21 +26,21 @@ const BestMovies = () => {
     }
     const { bestMovies, favoriteMovies } = useAppSelector(state => state.movies)
 
-    function changeFavorite () {
-        for (let i = 0; i <= bestMovies.length; i++) {
-            if (favoriteMovies.length == 0) {
-                return 1
-            } else {
-                if (bestMovies[i].title == favoriteMovies[i].title) {
-                    console.log(bestMovies[i].title)
-                }
-            }
-        }
-        console.log('done')
-    }
+    // function changeFavorite () {
+    //     for (let i = 0; i <= bestMovies.length; i++) {
+    //         if (favoriteMovies.length == 0) {
+    //             return 1
+    //         } else {
+    //             if (bestMovies[i].title == favoriteMovies[i].title) {
+    //                 console.log(bestMovies[i].title)
+    //             }
+    //         }
+    //     }
+    //     console.log('done')
+    // }
     return (
         <>
-            {changeFavorite()}
+            {/* {changeFavorite()} */}
             {bestMovies.length === 0 ? <Loading /> : (<>
                 <div className='flex flex-wrap mr-10 justify-center'>
                     {bestMovies.map((el: IMovie) => (

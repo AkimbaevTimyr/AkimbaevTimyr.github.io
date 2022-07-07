@@ -13,7 +13,7 @@ interface MoviesItemProps {
     favorite?: boolean;
 }
 
-const MoviesItem: FC<MoviesItemProps> = ({id,  poster_path, vote_average, title, release_date, overview, favorite }) => {
+const TvShowsItem: FC<MoviesItemProps> = ({id,  poster_path, vote_average, title, release_date, overview, favorite }) => {
     const [buttonCondition, setButtonCondition] = useState<boolean>(true)
     const {user} = useAppSelector(state => state.user)
     const handleClick = () => {
@@ -35,7 +35,7 @@ const MoviesItem: FC<MoviesItemProps> = ({id,  poster_path, vote_average, title,
     return (
         <div className='bg-gray-50 flex justify-center w-1/3 mt-5 hover:bg-gray-100 ml-10 py-2.5 rounded-xl'>
             <div className="relative ">
-                <Link to={`/movie/${id}`}>
+                <Link to={`/tv/${id}`}>
                     <img
                         className="w-36 rounded-xl"
                         src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`}
@@ -70,4 +70,4 @@ const MoviesItem: FC<MoviesItemProps> = ({id,  poster_path, vote_average, title,
     )
 }
 
-export default MoviesItem
+export default TvShowsItem

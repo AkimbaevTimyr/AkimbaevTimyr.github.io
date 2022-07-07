@@ -1,7 +1,7 @@
 import './App.css';
-import Main from './components/pages/Main';
+import Main from './components/pages/Main/Main';
 import NavBar from './components/NavBar';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Router } from 'react-router-dom'
 import Films from './components/pages/Films/Films';
 import WatchList from './components/pages/FavoriteMovies';
 import TvShows from './components/pages/TvShows/TvShows';
@@ -10,6 +10,11 @@ import BestMovies from './components/pages/Films/BestMovies';
 import Login from './components/pages/Login';
 import Registration from './components/pages/Registration';
 import MoviePage from './components/pages/MoviePage';
+import TvShowsPage from './components/pages/TvShowsPage';
+import PersonalFilmsItems from './components/pages/Main/PersonalFilms/PersonalFilmsItems';
+import PersonalSeriesItem from './components/pages/Main/PersonalSeries/PersonalSeriesItem';
+import UpcomingPremiers from './components/pages/Main/UpcomingPremires/UpcomingPremiers';
+import UpcomingPremiersItem from './components/pages/Main/UpcomingPremires/UpcomingPremiersItem';
 
 function App() {
   return (
@@ -48,6 +53,20 @@ function App() {
         {/* Movie Page */}
         <Routes>
           <Route path="movie/:id" element={<MoviePage />}/>
+        </Routes>
+        <Routes>
+          <Route path="tv/:id" element={<TvShowsPage />}/>
+        </Routes>
+
+        {/* Personal Series,Movies,Premiers */}
+        <Routes>
+          <Route  path='personal-films' element={<PersonalFilmsItems />}/>
+        </Routes>
+        <Routes>
+          <Route  path='personal-series' element={<PersonalSeriesItem />}/>
+        </Routes>
+        <Routes>
+          <Route  path='upcoming-premiers' element={<UpcomingPremiersItem />}/>
         </Routes>
     </>
   );

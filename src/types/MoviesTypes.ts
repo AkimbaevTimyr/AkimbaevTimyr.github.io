@@ -2,6 +2,9 @@ export interface IMovieState{
     bestMovies: IMovie[];
     popularMovies: IMovie[];
     favoriteMovies: IFavoriteMovie[];
+    personalMovies: IMovie[];
+    personalSeries: IMovie[];
+    upcomingPremiers: IMovie[];
 }
 export type IMovie = {
     id: number;
@@ -23,3 +26,4 @@ export type IFavoriteMovie = {
     poster_path: string | null;
     favorite: boolean;
 }
+
