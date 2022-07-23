@@ -1,4 +1,6 @@
+import { async } from '@firebase/util'
 import {createAsyncThunk} from '@reduxjs/toolkit'
+import { useAppSelector } from '../../hooks/redux'
 import { IFavoriteMovie, IMovie } from '../../types/MoviesTypes'
 
 
@@ -62,6 +64,17 @@ export const addUpcomingPremiers = createAsyncThunk(
     async(movies: IMovie[], thunkAPI) =>{
         try{
             return movies
+        }catch(e){
+
+        }
+    }
+)
+
+export const deleteMovie = createAsyncThunk(
+    "movie/deleteFavoriteMovie",
+    async(id: number, thunkAPI) =>{
+        try{
+            return id
         }catch(e){
 
         }

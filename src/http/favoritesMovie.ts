@@ -1,5 +1,5 @@
 import { db } from "../firebase-config";
-import { collection, query, where, updateDoc, doc, getDocs , addDoc, increment, deleteDoc } from "firebase/firestore";
+import { collection, query, where,  doc, getDocs , addDoc, deleteDoc } from "firebase/firestore";
 
 export const getFavoriteMovie = async (email: string): Promise<any>=> {
     const querySnapshot = await getDocs(collection(db, "favorites"));
@@ -12,7 +12,6 @@ export const addFavorites = async (movie: any) =>{
 }
 
 export const deleteFavoriteMovie = async (id: number) =>{
-    console.log(id)
     const ordersRef = collection(db, "favorites")
     const q = query(ordersRef, where("id", "==", id))
     const data = (await getDocs(q)).docs

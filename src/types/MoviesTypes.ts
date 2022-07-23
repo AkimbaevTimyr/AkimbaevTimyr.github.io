@@ -19,7 +19,7 @@ export type IMovie = {
 export type IFavoriteMovie = {
     email: string;
     id: number;
-    title: string;
+    original_name: string;
     release_date: string;
     overview: string;
     vote_average: number;

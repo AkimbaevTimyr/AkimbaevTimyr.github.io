@@ -1,6 +1,8 @@
 import React, {FC} from 'react'
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../hooks/redux';
 import { deleteFavoriteMovie } from '../http/favoritesMovie';
+import { deleteMovie } from '../store/actions/MovieActionCreator';
 interface FavoriteItemProps {
     id: number ;
     poster_path: string | null;
@@ -12,8 +14,10 @@ interface FavoriteItemProps {
 }
 
 const FavoriteItem: FC<FavoriteItemProps> = ({id,  poster_path, vote_average, title, release_date, overview, favorite }) => {
+    const dispatch = useAppDispatch()
     const deleteFavorites = async(id: number) =>{
         await deleteFavoriteMovie(id)
+        dispatch(deleteMovie(id))
     }
   return (
     <div className='bg-gray-50 flex justify-center w-1/3 mt-5 hover:bg-gray-100 ml-10 py-2.5 rounded-xl'>

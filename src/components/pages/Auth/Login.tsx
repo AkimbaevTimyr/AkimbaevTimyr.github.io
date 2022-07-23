@@ -1,10 +1,11 @@
 import React, {useState, FC} from 'react'
-import { authentication } from '../../firebase-config';
+import { authentication } from '../../../firebase-config';
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/redux';
-import { addUser } from '../../store/actions/UserActionCreator';
+import { useAppDispatch } from '../../../hooks/redux';
+import { addUser } from '../../../store/actions/UserActionCreator';
+import { getFavoriteMovie } from '../../../http/favoritesMovie';
 
 const Login: FC = () => {
   const navigate = useNavigate()
@@ -18,6 +19,7 @@ const Login: FC = () => {
         console.log(userCredential)
         let {email} = userCredential.user;
         dispatch(addUser({email}))
+        getFavoriteMovie(String(email))
         navigate('/')
       })
       .catch((error) => {

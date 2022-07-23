@@ -9,4 +9,5 @@ export type ITvShows = {
     overview: string;
     vote_average: number;
     poster_path: string | null;
+    first_air_date: string;
 }

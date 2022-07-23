@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {Routes,Link} from 'react-router-dom'
 import FilmsComponents from '../../FilmsComponents'
 import bestMoviesImg from '../../../images/250bestmovies.png'
 import popularFilmsImg from '../../../images/popularfilms.png'
-const Films  = () => {
+const Films: FC  = () => {
   return (
     <div className='items-center'>
         <FilmsComponents img={bestMoviesImg} title="Лучшие фильмы" subtitle='Лучшие фильмы' link="/films/bestmovies"/>

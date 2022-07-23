@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, FC } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { addPopularMovies } from '../../../store/actions/MovieActionCreator'
 import axios from 'axios'
@@ -7,7 +7,7 @@ import Loading from '../../Loading/loading'
 import MoviesItem from '../../MoviesItem'
 import { IMovie } from '../../../types/MoviesTypes'
 
-const PopularFilms = () => {
+const PopularFilms: FC = () => {
   const dispatch = useAppDispatch()
   useEffect(() => {
     const getMovies = async () => {
@@ -23,14 +23,21 @@ const PopularFilms = () => {
     }
     getMovies()
   }
-  const { popularMovies } = useAppSelector(state => state.movies)
+  const { popularMovies, favoriteMovies } = useAppSelector(state => state.movies)
+  function changeFilmFavorite(): any {
+    return popularMovies.map((el: any) => {
+        if (favoriteMovies.some(({ id }: any) => id == el.id)) {
+            return <MoviesItem key={el.id} id={el.id} title={el.title} poster_path={el.poster_path} release_date={el.release_date} vote_average={el.vote_average} overview={el.overview} favorite={true} />
+        } else {
+            return <MoviesItem key={el.id} id={el.id} title={el.title} poster_path={el.poster_path} release_date={el.release_date} vote_average={el.vote_average} overview={el.overview} favorite={false} />
+        }
+    })
+}
   return (
     <>
       {popularMovies.length === 0 ? <Loading /> : (<>
         <div className='flex flex-wrap mr-10 justify-center'>
-          {popularMovies.map((el: IMovie) => (
-            <MoviesItem key={el.id} title={el.title} id={el.id} poster_path={el.poster_path} release_date={el.release_date} vote_average={el.vote_average} overview={el.overview} />
-          ))}
+          {changeFilmFavorite()}
         </div> <Pagination changePage={(page: number) => changePage(page)} />
       </>
       )}
