@@ -1,16 +1,17 @@
 import React, { useEffect, useState, FC } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import { addFavorites, deleteFavoriteMovie } from '../../http/favoritesMovie'
-import { useAppSelector } from '../../hooks/redux'
-import Loading from '../Loading/loading'
+import { addFavorites, deleteFavoriteMovie } from '../../../http/favoritesMovie'
+import { useAppSelector } from '../../../hooks/redux'
+import Loading from '../../Loading/loading'
+import './style.css'
 
 const TvShowsPage: FC = () => {
     let { id } = useParams()
     const [tv, setTv] = useState<any>({})
     const { user } = useAppSelector(state => state.user)
     const { favoriteMovies } = useAppSelector(state => state.movies)
-    const { poster_path, name, overview, vote_average, genres, first_air_date, last_air_date } = tv;
+    const { original_title, poster_path, name, overview, vote_average, genres, first_air_date, last_air_date } = tv;
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
     useEffect(() => {
         const getMovies = async () => {
@@ -32,7 +33,54 @@ const TvShowsPage: FC = () => {
         await deleteFavoriteMovie(id)
     }
     return (
-        <>
+        
+        <div className="moviePage" >
+        <div className="itemImg">
+            <img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`} alt="" className="itemImg" />
+            <p className="rating">8.8</p>
+        </div>
+        <div className="item_descr">
+            <h2 className="item_header">{name}</h2>
+            <h2 className="item_subheader">{original_title}</h2>
+            <div className="item_buttons">
+                <div className="button_watch">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                        stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                    Смотреть
+                </div>
+                <div className="button_watch_later">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                        stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Буду смотреть
+                </div>
+            </div>
+            <div className="about">
+                <h2>О фильме</h2>
+                <ul className="about_list">
+                    <li className="list_item">
+                        <span>Жанр: </span>
+                        {/* <span>{genres.map((el: any) => console.log(el))} </span> */}
+                    </li>
+                    <li className="list_item">
+                        <span>Премьера в мире: </span>
+                        <span>{first_air_date}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    )
+}
+
+export default TvShowsPage
+
+
+
+{/* <>
             {poster_path === undefined ? (<Loading />) : (<div className="flex relative justify-center w-1/2 max-w-screen-xl px-4 py-8 mx-auto">
                 <div className='mr-5'>
                     <img
@@ -75,8 +123,4 @@ const TvShowsPage: FC = () => {
                     </div>
                 </div>
             </div>)}
-        </>
-    )
-}
-
-export default TvShowsPage
+        </> */}

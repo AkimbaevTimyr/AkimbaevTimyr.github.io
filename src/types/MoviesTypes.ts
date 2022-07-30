@@ -20,7 +20,7 @@ export type IFavoriteMovie = {
     email: string;
     id: number;
     original_name: string;
-    release_date: string;
+    first_air_date: string;
     overview: string;
     vote_average: number;
     poster_path: string | null;

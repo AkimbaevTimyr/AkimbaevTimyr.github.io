@@ -6,7 +6,7 @@ import { useAppSelector } from '../../../hooks/redux'
 import Loading from '../../Loading/loading'
 import { ITvShows } from '../../../types/TvShowTypes'
 import Pagination from '../../pagination.tsx/pagination'
-import TvShowsItem from '../../TvShowsItem'
+import TvShowsItem from '../../TvShowsItem/TvShowItem'
 
 const TvShows = () => {
     const dispatch = useAppDispatch()
@@ -25,21 +25,13 @@ const TvShows = () => {
       getMovies()
     }
     const { popularTvShows } = useAppSelector(state => state.tvShows)
-    const {favoriteMovies} = useAppSelector(state => state.movies)
-    function changeFilmFavorite(): any {
-      return popularTvShows.map((el: ITvShows) => {
-          if (favoriteMovies.some(({ id }: any) => id == el.id)) {
-              return <TvShowsItem key={el.id} id={el.id} original_name={el.original_name} poster_path={el.poster_path} first_air_date={el.first_air_date} vote_average={el.vote_average} overview={el.overview} favorite={true} />
-          } else {
-              return <TvShowsItem key={el.id} id={el.id} original_name={el.original_name} poster_path={el.poster_path} first_air_date={el.first_air_date} vote_average={el.vote_average} overview={el.overview} favorite={false} />
-          }
-      })
-  }
   return (
     <>
       {popularTvShows.length === 0 ? <Loading /> : (<>
-        <div className='flex flex-wrap mr-10 justify-center'>
-          {changeFilmFavorite()}
+        <div className='items'>
+          {popularTvShows.map((el: ITvShows) => (
+            <TvShowsItem id={el.id} img={el.poster_path} title={el.original_name} vote_average={el.vote_average} release_date={el.first_air_date} type="сериал" />
+          ))}
         </div> <Pagination changePage={(page: number) => changePage(page)}/>
       </>
       )}

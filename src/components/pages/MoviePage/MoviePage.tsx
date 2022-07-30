@@ -1,9 +1,10 @@
 import React, { useEffect, useState, FC } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import Loading from '../Loading/loading'
-import { useAppSelector } from '../../hooks/redux'
-import { addFavorites, deleteFavoriteMovie } from '../../http/favoritesMovie'
+import Loading from '../../Loading/loading'
+import { useAppSelector } from '../../../hooks/redux'
+import { addFavorites, deleteFavoriteMovie } from '../../../http/favoritesMovie'
+import './style.css'
 
 const MoviePage: FC = () => {
     let { id } = useParams()
@@ -11,7 +12,7 @@ const MoviePage: FC = () => {
     const { user } = useAppSelector(state => state.user)
     const { favoriteMovies } = useAppSelector(state => state.movies)
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
-    const { poster_path, title, overview, vote_average, genres, release_date, } = movie;
+    const { poster_path, title, overview, vote_average, genres, release_date, original_name, original_title, first_air_date } = movie;
     useEffect(() => {
         const getMovies = async () => {
             let { data } = await axios.get<any>(`https://api.themoviedb.org/3/movie/${id}?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU`)
@@ -32,12 +33,64 @@ const MoviePage: FC = () => {
         await deleteFavoriteMovie(id)
     }
     return (
-            <>
-            {poster_path  === undefined ? (<Loading />) : (<div className="flex relative justify-center w-1/2 max-w-screen-xl px-4 py-8 mx-auto">
+        <div className='movieContainer'>
+            <div className="moviePage" >
+                <div className="itemImg">
+                    <img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`} alt="" className="itemImg" />
+                    <p className="rating">8.8</p>
+                    <div className="item_descr">
+                        <h2 className="item_subheader line">Описание</h2>
+                        <div className='line'></div>
+                    </div>
+                </div>
+                <div className="item_about">
+                    <h2 className="item_header">{title}</h2>
+                    <h2 className="item_subheader">{original_name || original_title}</h2>
+                    <div className="item_buttons">
+                        <div className="button_watch">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                                stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            Смотреть
+                        </div>
+                        <div className="button_watch_later">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                                stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Буду смотреть
+                        </div>
+                    </div>
+                    <div className="about">
+                        <h2>О фильме</h2>
+                        <ul className="about_list">
+                            <li className="list_item">
+                                <span>Жанр: </span>
+                                <span>драма, криминал, детектив, боевик</span>
+                            </li>
+                            <li className="list_item">
+                                <span>Премьера в мире: </span>
+                                <span>{release_date || first_air_date}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    )
+}
+
+export default MoviePage
+
+
+
+{/* {poster_path  === undefined ? (<Loading />) : (<div className="flex relative justify-center w-1/2 max-w-screen-xl px-4 py-8 mx-auto">
             <div className='mr-5'>
                 <img
                     className=" w-36 rounded-xl"
-                    src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`}
+                   
                 />
             </div>
             <div className=''>
@@ -75,10 +128,4 @@ const MoviePage: FC = () => {
                     </p>
                 </div>
             </div>
-        </div>)}
-        </>
-    )
-}
-
-export default MoviePage
-
+        </div>)} */}

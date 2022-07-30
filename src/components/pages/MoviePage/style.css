@@ -1,0 +1,141 @@
+.movieContainer{
+    background-color: rgb(244,244,244);
+}
+.moviePage{
+    width: 1000px;
+    height: 91vh;
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    margin: 0 auto;
+    padding-top: 30px
+}
+
+.itemImg{
+    position: relative;
+}
+
+img{
+    border-radius:5px;
+    width: 300px;
+}
+.rating{
+    display: flex;
+    position: absolute;
+    top: 0px;
+    margin: 10px 0px 0px 7px;
+    border: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: green;
+    color: white;
+    font-size: 16px;
+    font-family: "Fira sans", sans-serif;
+    font-weight: 400;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.item_descr{
+    margin-top: 20px;
+}
+
+.item_descr_header{
+
+}
+
+.item_about{
+    margin-left: 30px;
+}
+
+.item_header{
+    width: 450px;
+    font-size: 40px;
+    font-family: "Fira sans", sans-serif;
+    font-weight: 800;
+    color: rgba(31, 31, 31);
+}
+
+.line::before{
+    content: "";
+    border: 1px solid black
+}
+
+
+.item_subheader{
+    font-size: 20px;
+    font-family: "Fira sans", sans-serif;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.item_buttons{
+    display: flex;
+    margin-top: 15px;
+}
+
+.button_watch{
+    display: flex;
+    margin-right: 30px;
+    background-color: rgb(0, 83, 130);
+    padding: 15px;
+    color: #ffffff;
+    font-family: "Fira sans", sans-serif;
+    border-radius: 20px;
+    font-weight: 500;
+    align-items: center;
+    cursor: pointer;
+}
+
+.button_watch:hover{
+    transition: opacity 124ms linear, transform 124ms linear;
+    transform: scale(1.03);
+}
+
+.button_watch svg{
+    margin-right: 10px;
+}
+.button_watch_later{
+    display: flex;
+    margin-right: 30px;
+    padding: 15px;
+    color: rgb(0, 83, 130);
+    border: 1px solid rgb(0, 83, 130);
+    font-family: "Fira sans", sans-serif;
+    border-radius: 20px;
+    font-weight: 500;
+    align-items: center;
+    cursor: pointer;
+}
+
+.active{
+    background-color: rgb(0, 83, 130);
+    color: #ffffff;
+}
+
+.button_watch_later:hover{
+    transition: opacity 124ms linear, transform 124ms linear;
+    transform: scale(1.03);
+}
+
+.button_watch_later svg{
+    margin-right: 10px;
+}
+
+
+.about{
+    margin-top: 15px;
+}
+
+.about_list{
+    list-style-type: none;
+}
+
+.list_item{
+    display: flex;
+    justify-content: space-between;
+}
+
+.list_item span{
+    margin-right: 30px;
+}

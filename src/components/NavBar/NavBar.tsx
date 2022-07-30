@@ -3,8 +3,9 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { Link } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import {exit} from '../store/actions/UserActionCreator'
+import { useAppDispatch, useAppSelector } from '../../hooks/redux'
+import {exit} from '../../store/actions/UserActionCreator'
+import './style.css'
 
 const navigation = [
     { name: 'Главная', href: '/', },
@@ -25,7 +26,7 @@ const NavBar: FC = () => {
         dispatch(exit(false))
     }
     return (
-        <div><Disclosure as="nav" className="bg-gray-800">
+        <div className='container'><Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
                 <>
                     <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">

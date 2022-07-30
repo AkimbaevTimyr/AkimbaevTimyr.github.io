@@ -1,16 +1,16 @@
 import './App.css';
 import Main from './components/pages/Main/Main';
-import NavBar from './components/NavBar';
+import NavBar from './components/NavBar/NavBar';
 import { Routes, Route} from 'react-router-dom'
 import Films from './components/pages/Films/Films';
-import WatchList from './components/pages/FavoriteMovies';
+import WatchList from './components/pages/FavoriteMovies/FavoriteMovies';
 import TvShows from './components/pages/TvShows/TvShows';
-import PopularFilms from './components/pages/Films/PopularFilms';
-import BestMovies from './components/pages/Films/BestMovies';
+import PopularFilms from './components/pages/Films/PopularFilms/PopularFilms';
+import BestMovies from './components/pages/Films/BestMovies/BestMovies';
 import Login from './components/pages/Auth/Login';
 import Registration from './components/pages/Auth/Registration';
-import MoviePage from './components/pages/MoviePage';
-import TvShowsPage from './components/pages/TvShowsPage';
+import MoviePage from './components/pages/MoviePage/MoviePage';
+import TvShowsPage from './components/pages/TvShowsPage/TvShowsPage';
 import PersonalFilmsItems from './components/pages/Main/PersonalFilms/PersonalFilmsItems';
 import PersonalSeriesItem from './components/pages/Main/PersonalSeries/PersonalSeriesItem';
 import UpcomingPremiersItem from './components/pages/Main/UpcomingPremires/UpcomingPremiersItem';
@@ -26,7 +26,7 @@ function App() {
   const {favoriteMovies} = useAppSelector(state => state.movies)
   
   return (
-    <>
+    <div className='container'>
         <NavBar />
         {/* Navigation Routes */}
         <Routes>
@@ -79,7 +79,7 @@ function App() {
         <Routes>
           <Route  path='upcoming-premiers' element={<UpcomingPremiersItem />}/>
         </Routes>
-    </>
+    </div>
   );
 }
 

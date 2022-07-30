@@ -1,0 +1,55 @@
+.item{
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.itemImg{
+    position: relative;
+}
+
+.itemImg img{
+    border-radius:5px;
+    width: 200px;
+    cursor: pointer;
+}
+
+img:hover{
+    transition: opacity 124ms linear, transform 124ms linear;
+    transform: scale(1.03);
+}
+
+
+.itemDescr{
+    margin-top: 15px;
+    width: 200px;
+}
+
+.itemDescrHeader{
+    font-size: 24px;
+    font-family: "Fira sans", sans-serif;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.itemYear{
+    font-size: 16px;
+    font-weight: 100;
+    margin-top: 5px;
+}
+
+.rating{
+    display: flex;
+    position: absolute;
+    top: 0px;
+    margin: 10px 0px 0px 7px;
+    border: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: green;
+    color: white;
+    font-size: 16px;
+    font-family: "Fira sans", sans-serif;
+    font-weight: 400;
+    padding: 5px;
+    border-radius: 5px;
+}

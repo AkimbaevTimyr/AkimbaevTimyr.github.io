@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import MoviesItem from '../MoviesItem'
 
@@ -11,6 +11,10 @@ const SearchPage = () => {
         setMovies(data.results)
         return ''
     }
+
+    useEffect(()=>{
+        axios.get(` https://api.kinopoisk.dev/movie&search=326&token=7XH7E97-1V8M2Z5-N64FBTF-AZEWPX9`).then(data => console.log(data))
+    },[])
     return (
         <div className=''>
             <div className="w-96 m-auto " >
