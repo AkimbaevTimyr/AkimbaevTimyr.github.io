@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import {exit} from '../../store/actions/UserActionCreator'
 import './style.css'
+import axios from 'axios'
+import SearchMenu from '../SearchMenu/SearchMenu'
 
 const navigation = [
     { name: 'Главная', href: '/', },
@@ -20,11 +22,22 @@ function classNames(...classes: any) {
 
 const NavBar: FC = () => {
     const [current, setCurrent] = useState<string>('Главная')
+    const [searchValue, setSearchValue] = useState<string>('')
     const {isAuth} = useAppSelector(state => state.user)
     const dispatch = useAppDispatch()
     const handleClick = () =>{
         dispatch(exit(false))
     }
+    const [movies, setMovies] = useState<[]>([])
+
+    const click = async (e: any) => {
+        e.preventDefault()
+        setSearchValue(e.target.value)
+        let { data } = await axios.get<any>(`https://api.themoviedb.org/3/search/multi?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US&query=${searchValue}&page=1&include_adult=false`)
+        setMovies(data.results)
+        return ''
+    }
+    console.log(movies)
     return (
         <div className='container'><Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
@@ -60,13 +73,24 @@ const NavBar: FC = () => {
                                 </div>
                             </div>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                                <Link to="/search-page">
-                                    <button title='Поиск по фильмам'type="submit" className=" top-0 right-0 p-2.5 text-sm font-medium text-white "><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
-                                </Link>
+                                <div className='search'>
+                                    <Link to="/search-page">
+                                        <input className='search_input' onChange={e => click(e)} />
+                                        <button title='Поиск по фильмам'type="submit" className=" top-0 right-0 p-2.5 text-sm font-medium text-white "><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
+                                    </Link>
+                                    {searchValue.length === 0 ? '' : 
+                                     <div className="search_menu">
+                                        <div className="search_items">
+                                                {movies.map((el : any) => (
+                                                    <SearchMenu id={el.id} img={el.poster_path || el.babackdrop_path || el.profile_path} name={el.title || el.name} vote_average={el.vote_average} runtime={el.runtime} release_date={el.release_date || el.first_air_date} type={el.type}/>
+                                                ))}
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+                                
                                 <Menu as="div" className="ml-3 relative">
-
                                     <div>
-
                                         <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                                             <span className="sr-only">Open user menu</span>
                                             <img

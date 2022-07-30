@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import MoviesItem from '../MoviesItem'
+import MoviesItem from '../../MoviesItem'
+import FilmItem from '../../FilmItem/FilmItem'
 
 const SearchPage = () => {
     const [text, setText] = useState<string>('')
@@ -12,9 +13,6 @@ const SearchPage = () => {
         return ''
     }
 
-    useEffect(()=>{
-        axios.get(` https://api.kinopoisk.dev/movie&search=326&token=7XH7E97-1V8M2Z5-N64FBTF-AZEWPX9`).then(data => console.log(data))
-    },[])
     return (
         <div className=''>
             <div className="w-96 m-auto " >
@@ -25,9 +23,9 @@ const SearchPage = () => {
                     </div>
                 </form>
             </div>
-            <div className='flex flex-wrap justify-center'>
+            <div className='items'>
                 {movies && movies.map((el: any) => (
-                    <MoviesItem id={el.id} poster_path={el.poster_path} vote_average={el.vote_average} title={el.title} release_date={el.release_date} overview={el.overview} favorite={true} />
+                     <FilmItem  id={el.id} img={el.poster_path} title={el.original_name || el.title} vote_average={el.vote_average} release_date={el.first_air_date || el.release_date} type={el.media_type == 'movie' ? 'фильм' : 'сериал'}/>
                 ))}
             </div>
         </div>

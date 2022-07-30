@@ -1,0 +1,31 @@
+.search{
+    position: relative;
+}
+.search_input{
+    position: relative;
+    width: 350px;
+    z-index: 0;
+}
+::-webkit-scrollbar {
+    width: 10px; 
+    height: 10px; 
+}
+
+::-webkit-scrollbar-thumb{
+    background: rgb(28,30,50);
+    border-radius: 10px;
+}
+.search_menu{
+    z-index: 1;
+    position: absolute;
+  width: 350px;
+  height: 500px;  
+  background-color: rgb(31,41,55);
+  padding: 10px;
+  scroll-behavior: auto;
+    overflow-y: scroll; 
+    scrollbar-color: #458245 #714826; 
+    scrollbar-width: thin 
+}
+
+

@@ -18,7 +18,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { addFavoriteMovies } from './store/actions/MovieActionCreator';
 import { getFavoriteMovie } from './http/favoritesMovie';
-import SearchPage from './components/pages/SearchPage';
+import SearchPage from './components/pages/SearchPage/SearchPage';
 
 function App() {
   const dispatch = useAppDispatch()

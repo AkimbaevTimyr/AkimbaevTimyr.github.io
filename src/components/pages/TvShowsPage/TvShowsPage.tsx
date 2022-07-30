@@ -11,7 +11,8 @@ const TvShowsPage: FC = () => {
     const [tv, setTv] = useState<any>({})
     const { user } = useAppSelector(state => state.user)
     const { favoriteMovies } = useAppSelector(state => state.movies)
-    const { original_title, poster_path, name, overview, vote_average, genres, first_air_date, last_air_date } = tv;
+    const { budget, tagline, production_countries, runtime, original_title, poster_path, name, overview, vote_average, genres, first_air_date, last_air_date, original_name } = tv;
+    console.log(tv)
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
     useEffect(() => {
         const getMovies = async () => {
@@ -24,7 +25,7 @@ const TvShowsPage: FC = () => {
     const addFavoriteMovie = async () => {
         setButtonCondition(true)
         const movie = {
-            email: user.email, id, poster_path, vote_average, title: name, release_date: 1, overview, favorite: true
+            email: user.email, id, poster_path, vote_average, title: name, release_date: first_air_date, overview, favorite: true, type:'сериал'
         }
         await addFavorites(movie)
     }
@@ -33,44 +34,70 @@ const TvShowsPage: FC = () => {
         await deleteFavoriteMovie(id)
     }
     return (
-        
-        <div className="moviePage" >
-        <div className="itemImg">
-            <img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`} alt="" className="itemImg" />
-            <p className="rating">8.8</p>
-        </div>
-        <div className="item_descr">
-            <h2 className="item_header">{name}</h2>
-            <h2 className="item_subheader">{original_title}</h2>
-            <div className="item_buttons">
-                <div className="button_watch">
-                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
-                        stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                    </svg>
-                    Смотреть
+        <div className='movieContainer'>
+            <div className="moviePage" >
+                <div className="movie">
+                    <div className="itemImg">
+                        <img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`} alt="" className="itemImg" />
+                        <p className="rating">8.8</p>
+                    </div>
+                    <div className="item_about">
+                        <h2 className="item_header">{name}</h2>
+                        <h2 className="item_subheader">{ original_name}</h2>
+                        <div className="item_buttons">
+                            <div className="button_watch">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                                    stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                                Смотреть
+                            </div>
+                            {buttonCondition === true ? (<div onClick={() => deleteFavorites(id)} className="button_watch_later">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                Буду смотреть
+                            </div>) : (<div onClick={() => addFavoriteMovie()} className="button_watch_later">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
+                                    stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                Буду смотреть
+                            </div>)}
+                        </div>
+                        <div className="about">
+                            <h2>О сериале</h2>
+                            <ul className="about_list">
+                                <li className="list_item">
+                                    <span>Страны: </span>
+                                    <span>{production_countries?.map((el: any) => el.name + ", ") ||'—' }</span>
+                                </li>
+                                <li className="list_item">
+                                    <span>Жанр: </span>
+                                    <span>{genres?.map((el: any) => el.name + ", ")}</span>
+                                </li>
+                                <li className="list_item">
+                                    <span>Слоган: </span>
+                                    <span>{tagline || '—'}</span>
+                                </li>
+                                <li className="list_item">
+                                    <span>Бюджет: </span>
+                                    <span>{budget != undefined ? `$ ${budget?.toLocaleString('ru-RU')}` : '—' }</span>
+                                </li>
+                                <li className="list_item">
+                                    <span>Время: </span>
+                                    <span>{runtime != undefined ? `${runtime} мин.` : '—'}</span>
+                                </li>
+                                <li className="list_item">
+                                    <span>Премьера в мире: </span>
+                                    <span>{first_air_date?.toLocaleString('ru-RU', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div className="button_watch_later">
-                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
-                        stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    Буду смотреть
+                <div className="item_descr">
+                    <h2 className="item_subheader">Описание</h2>
+                    {overview}
                 </div>
-            </div>
-            <div className="about">
-                <h2>О фильме</h2>
-                <ul className="about_list">
-                    <li className="list_item">
-                        <span>Жанр: </span>
-                        {/* <span>{genres.map((el: any) => console.log(el))} </span> */}
-                    </li>
-                    <li className="list_item">
-                        <span>Премьера в мире: </span>
-                        <span>{first_air_date}</span>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
     )
