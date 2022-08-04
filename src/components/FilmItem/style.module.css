@@ -1,16 +1,14 @@
 .item{
-    width: 300px;
+    margin-right: 20px;
     margin-bottom: 20px;
+    width: 200px
 }
 
-.itemImg{
+.img{
     position: relative;
-}
-
-.itemImg img{
     border-radius:5px;
-    width: 200px;
     cursor: pointer;
+    width: auto;
 }
 
 img:hover{
@@ -19,19 +17,18 @@ img:hover{
 }
 
 
-.itemDescr{
+.descr{
     margin-top: 15px;
-    width: 200px;
 }
 
-.itemDescrHeader{
+.header{
     font-size: 24px;
     font-family: "Fira sans", sans-serif;
     font-weight: 300;
     cursor: pointer;
 }
 
-.itemYear{
+.year{
     font-size: 16px;
     font-weight: 100;
     margin-top: 5px;

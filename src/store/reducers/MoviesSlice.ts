@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addBestMovies, addFavoriteMovies, addPersonalMovies, addPersonalSeries, addPopularMovies, addUpcomingPremiers,  deleteMovie } from "../actions/MovieActionCreator";
+import { getBestMovies, getPersonalSeries, getUpcomingPremiers, getPopularMovies, getPersonalMovies, addFavoriteMovies, deleteMovie, getMoviesById, } from "../actions/MovieActionCreator";
 import { IMovieState } from "../../types/MoviesTypes";
+
 
 const initialState: IMovieState = {
     bestMovies: [],
@@ -9,34 +10,51 @@ const initialState: IMovieState = {
     personalMovies: [],
     personalSeries: [],
     upcomingPremiers: [],
+    currentMovie: {
+        id: 1,
+        title: "",
+        backdrop_path: "",
+        release_date: "",
+        overview: "",
+        vote_average: 1,
+        poster_path: "",
+    },
 }
 
 const moviesSlice = createSlice({
     name: "movies",
     initialState,
     reducers: {},
-    extraReducers:{
-        [addBestMovies.fulfilled.type]: (state, action) =>{
+    extraReducers: {
+        [getBestMovies.fulfilled.type]: (state, action) => {
             state.bestMovies = action.payload;
         },
-        [addPopularMovies.fulfilled.type]: (state, action) =>{
+        [getPopularMovies.fulfilled.type]: (state, action) => {
             state.popularMovies = action.payload;
         },
-        [addFavoriteMovies.fulfilled.type]: (state, action) =>{
-            state.favoriteMovies = action.payload;
-        },
-        [addPersonalMovies.fulfilled.type]: (state, action) =>{
+        [getPersonalMovies.fulfilled.type]: (state, action) => {
             state.personalMovies = action.payload;
         },
-        [addPersonalSeries.fulfilled.type]: (state, action) =>{
+        [getPersonalSeries.fulfilled.type]: (state, action) => {
             state.personalSeries = action.payload;
+            console.log(state.personalSeries)
         },
-        [addUpcomingPremiers.fulfilled.type]: (state, action) =>{
+        [getUpcomingPremiers.fulfilled.type]: (state, action) => {
             state.upcomingPremiers = action.payload;
         },
         [deleteMovie.fulfilled.type]: (state, action) => {
             state.favoriteMovies = state.favoriteMovies.filter(el => el.id !== action.payload)
+        },
+        [addFavoriteMovies.fulfilled.type]: (state, action) => {
+            state.favoriteMovies = action.payload;
+        },
+        // [getAllMovies.fulfilled.type] : (state, action) =>{
+        //     console.log(action.payload)
+        // } 
+        [getMoviesById.fulfilled.type] : (state, action) =>{
+            state.currentMovie = action.payload
         }
+
     }
 })
 

@@ -1,13 +1,13 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState, useRef, useLayoutEffect } from 'react'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import {exit} from '../../store/actions/UserActionCreator'
-import './style.css'
+import { exit } from '../../store/actions/UserActionCreator'
+import styles from './style.module.css'
 import axios from 'axios'
-import SearchMenu from '../SearchMenu/SearchMenu'
+import SearchItems from '../SearchMenu/SearchItems'
 
 const navigation = [
     { name: 'Главная', href: '/', },
@@ -21,11 +21,19 @@ function classNames(...classes: any) {
 }
 
 const NavBar: FC = () => {
+    const inputRef = useRef<HTMLHeadingElement>(null)
+    useEffect(()=>{
+        document.addEventListener('click', (e: any)=> {
+            if(inputRef.current != null) {
+               inputRef.current.style.display = 'none';
+            }
+        })
+    }, [])
     const [current, setCurrent] = useState<string>('Главная')
     const [searchValue, setSearchValue] = useState<string>('')
-    const {isAuth} = useAppSelector(state => state.user)
+    const { isAuth } = useAppSelector(state => state.user)
     const dispatch = useAppDispatch()
-    const handleClick = () =>{
+    const handleClick = () => {
         dispatch(exit(false))
     }
     const [movies, setMovies] = useState<[]>([])
@@ -37,7 +45,6 @@ const NavBar: FC = () => {
         setMovies(data.results)
         return ''
     }
-    console.log(movies)
     return (
         <div className='container'><Disclosure as="nav" className="bg-gray-800">
             {({ open }) => (
@@ -73,22 +80,23 @@ const NavBar: FC = () => {
                                 </div>
                             </div>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                                <div className='search'>
+                                <div className={styles.search}>
+                                    <input placeholder='Поиск...' value={searchValue || ""} className={styles.search_input} onChange={e => click(e)} />
                                     <Link to="/search-page">
-                                        <input className='search_input' onChange={e => click(e)} />
-                                        <button title='Поиск по фильмам'type="submit" className=" top-0 right-0 p-2.5 text-sm font-medium text-white "><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
+                                        <button title='Поиск по фильмам' type="submit" className="  top-0 right-0 p-2.5 text-sm font-medium text-white "><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
                                     </Link>
-                                    {searchValue.length === 0 ? '' : 
-                                     <div className="search_menu">
-                                        <div className="search_items">
-                                                {movies.map((el : any) => (
-                                                    <SearchMenu id={el.id} img={el.poster_path || el.babackdrop_path || el.profile_path} name={el.title || el.name} vote_average={el.vote_average} runtime={el.runtime} release_date={el.release_date || el.first_air_date} type={el.type}/>
+                                    {searchValue.length === 0 ? '' :
+                                        <div  ref={inputRef} className={styles.search_menu}>
+                                            <div id='items' className={styles.search_items}>
+                                                {movies.length == 0 ? <div className={styles.empty}>По вашему запросу ничего не найдено</div> : 
+                                                movies.map((el: any) => (
+                                                    <Link to={el.media_type == 'tv' ? `tv/${el.id}` : `movie/${el.id}`} onClick={()=> setSearchValue('')}>
+                                                        <SearchItems key={el.id} id={el.id} img={el.poster_path || el.babackdrop_path || el.profile_path} name={el.title || el.name} vote_average={el.vote_average} runtime={el.runtime} release_date={el.release_date || el.first_air_date} type={el.media_type || 'movie'} /> </Link>
                                                 ))}
+                                            </div>
                                         </div>
-                                    </div>
                                     }
                                 </div>
-                                
                                 <Menu as="div" className="ml-3 relative">
                                     <div>
                                         <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -133,21 +141,21 @@ const NavBar: FC = () => {
                                             <Menu.Item>
                                                 {isAuth === true ? ({ active }) => (
                                                     <Link to="/login">
-                                                    <a
-                                                     onClick={()=> handleClick()}
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                        Выйти
-                                                    </a>
+                                                        <a
+                                                            onClick={() => handleClick()}
+                                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                        >
+                                                            Выйти
+                                                        </a>
                                                     </Link>
-                                                ) : ( { active }) => (
+                                                ) : ({ active }) => (
                                                     <Link to="/login">
-                                                    <a
-                                                       
-                                                        className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                    >
-                                                                                                               Войти
-                                                    </a>
+                                                        <a
+
+                                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                        >
+                                                            Войти
+                                                        </a>
                                                     </Link>
                                                 )}
                                             </Menu.Item>

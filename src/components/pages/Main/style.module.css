@@ -1,0 +1,38 @@
+.items {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 30px 0px 0px 100px;
+}
+
+.header_block {
+    width: 1300;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header {
+    font-size: 34px;
+    margin-left: 150px;
+    font-weight: 500;
+}
+
+.films {
+    display: block;
+    align-items: center;
+}
+
+.watch_button {
+    margin-right: 80px;
+    font-weight: 500;
+    background-color: rgb(31, 41, 55);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.watch_button:hover {
+    transition: opacity 124ms linear, transform 124ms linear;
+    transform: scale(1.03);
+}

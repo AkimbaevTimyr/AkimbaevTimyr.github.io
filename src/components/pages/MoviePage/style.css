@@ -150,3 +150,9 @@ img{
 .list_item span{
     margin-right: 30px;
 }
+
+
+.simular_movies{
+    display: flex;
+    margin-top: 20px;
+}

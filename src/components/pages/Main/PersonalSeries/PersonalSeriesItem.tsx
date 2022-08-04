@@ -2,15 +2,21 @@ import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppSelector } from '../../../../hooks/redux'
 import { IMovie } from '../../../../types/MoviesTypes'
-
+import FilmItem from '../../../FilmItem/FilmItem'
+import Loading from '../../../Loading/loading'
+import styles from '../style.module.css'
 
 const PersonalSeriesItem: FC = () => {
     const { personalSeries } = useAppSelector(state => state.movies)
     return (
-        <div className='mt-5 flex flex-wrap'>
-            {personalSeries.map((el: IMovie) => (
-                <Link to={`/tv/${el.id}`}><div className='ml-5 cursor-pointer w-32 mb-3'><img alt='series-image' className='rounded-xl' src={`https://image.tmdb.org/t/p/w220_and_h330_face/${el.poster_path}`} /></div></Link>
-            ))}
+        <div className={styles.items}>
+             {personalSeries.length === 0 ? <Loading /> : (<>
+             <div className={styles.items}>
+                 {personalSeries.map((el: any) => (
+                     <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.first_air_date} type="сериал"/>
+                 ))}
+             </div>
+         </>)}
         </div>
     )
 }

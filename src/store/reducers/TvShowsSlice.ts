@@ -1,10 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ITvShowsState } from "../../types/TvShowTypes";
-import { addTvShows } from "../actions/TvShowActionCreator";
+import { getTvShows, getTvShowsById } from "../actions/TvShowActionCreator";
 
 
 const initialState: ITvShowsState = {
     popularTvShows: [],
+    currentTvShow: {
+        id: 1,
+        original_name: "",
+        backdrop_path: "",
+        release_date: "",
+        overview: "",
+        vote_average: 1,
+        poster_path: "",
+        first_air_date: "",
+    },
 }
 
 const tvShowsSlice = createSlice({
@@ -12,9 +22,11 @@ const tvShowsSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: {
-        [addTvShows.fulfilled.type] : (state, action) =>{
+        [getTvShows.fulfilled.type]: (state, action) => {
             state.popularTvShows = action.payload;
-            console.log(state.popularTvShows)
+        },
+        [getTvShowsById.fulfilled.type]: (state, action) => {
+            state.currentTvShow = action.payload
         }
     }
 })

@@ -8,20 +8,19 @@ import './style.css'
 
 const TvShowsPage: FC = () => {
     let { id } = useParams()
-    const [tv, setTv] = useState<any>({})
+    const [movieKey, setMovieKey] = useState<string>('')
     const { user } = useAppSelector(state => state.user)
     const { favoriteMovies } = useAppSelector(state => state.movies)
-    const { budget, tagline, production_countries, runtime, original_title, poster_path, name, overview, vote_average, genres, first_air_date, last_air_date, original_name } = tv;
-    console.log(tv)
+    const {currentTvShow} = useAppSelector(state => state.tvShows)
+    const { budget, tagline, production_countries, runtime,  poster_path, name, overview, vote_average, genres, first_air_date, original_name } = currentTvShow;
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
+
     useEffect(() => {
-        const getMovies = async () => {
-            let { data } = await axios.get<any>(`https://api.themoviedb.org/3/tv/${id}?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU`)
-            setTv(data)
-        }
+        axios.get<any>(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US`).then((data: any) => setMovieKey(data.data.results[0].key))
         const findItem = favoriteMovies.find((el: any) => el.id == id ? setButtonCondition(true) : '')
-        getMovies()
     }, [])
+
+
     const addFavoriteMovie = async () => {
         setButtonCondition(true)
         const movie = {
@@ -50,7 +49,9 @@ const TvShowsPage: FC = () => {
                                     stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                 </svg>
-                                Смотреть
+                                <a href={`https://www.youtube.com/watch?v=${movieKey}`}>
+                                    Смотреть
+                                </a>
                             </div>
                             {buttonCondition === true ? (<div onClick={() => deleteFavorites(id)} className="button_watch_later">
                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>

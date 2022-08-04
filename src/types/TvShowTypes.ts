@@ -1,5 +1,6 @@
 export interface ITvShowsState {
     popularTvShows: ITvShows[];
+    currentTvShow: ITvShows;
 }
 export type ITvShows = {
     id: number ;

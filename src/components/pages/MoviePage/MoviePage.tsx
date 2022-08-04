@@ -1,31 +1,28 @@
 import React, { useEffect, useState, FC } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Loading from '../../Loading/loading'
 import { useAppSelector } from '../../../hooks/redux'
 import { addFavorites, deleteFavoriteMovie } from '../../../http/favoritesMovie'
 import './style.css'
+import SimularMovies from '../../SimuralMovies/SimularMovies'
 
 const MoviePage: FC = () => {
     let { id } = useParams()
-    const [movie, setMovie] = useState<any>({})
+    const [movieKey, setMovieKey] = useState<string>('')
     const { user } = useAppSelector(state => state.user)
-    const { favoriteMovies } = useAppSelector(state => state.movies)
+    const { favoriteMovies, currentMovie} = useAppSelector(state => state.movies)
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
-    const { poster_path, title, overview, vote_average, genres, release_date, original_name, original_title, tagline, production_countries, budget, runtime } = movie;
-    console.log(movie)
+    const { poster_path, title, overview, vote_average, genres, release_date, original_name, original_title, tagline, production_countries, budget, runtime } = currentMovie;
     useEffect(() => {
-        const getMovies = async () => {
-            let { data } = await axios.get<any>(`https://api.themoviedb.org/3/movie/${id}?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU`)
-            setMovie(data)
-        }
+         axios.get<any>(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US`).then((data: any) => setMovieKey(data.data.results[0].key))
         const findItem = favoriteMovies.find((el: any) => el.id === id ? setButtonCondition(true) : '')
-        getMovies()
     }, [])
+    
     const addFavoriteMovie = async () => {
         setButtonCondition(true)
         const movie = {
-            email: user.email, id, poster_path, vote_average, title, release_date, overview, favorite: true, type:'фильм'
+            email: user.email, id, poster_path, vote_average, title, release_date, overview, favorite: true, type: 'фильм'
         }
         await addFavorites(movie)
     }
@@ -38,8 +35,10 @@ const MoviePage: FC = () => {
             <div className="moviePage" >
                 <div className='movie'>
                     <div className="itemImg">
-                        <img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`} alt="" className="itemImg" />
-                        <p className="rating">8.8</p>
+                        {poster_path == undefined ? (<img src='https://st.kp.yandex.net/images/film_big/4781063.jpg' className="itemImg" />) : (
+                            <><img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`} alt="" className="itemImg" />
+                                <p className="rating">8.8</p></>
+                        )}
                     </div>
                     <div className="item_about">
                         <h2 className="item_header">{title}</h2>
@@ -50,7 +49,9 @@ const MoviePage: FC = () => {
                                     stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                 </svg>
-                                Смотреть
+                                <a href={`https://www.youtube.com/watch?v=${movieKey}`}>
+                                    Смотреть
+                                </a>
                             </div>
                             {buttonCondition === true ? (<div onClick={() => deleteFavorites(id)} className="button_watch_later">
                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
@@ -59,7 +60,7 @@ const MoviePage: FC = () => {
                                 </svg>
                                 Буду смотреть
                             </div>) : (<div onClick={() => addFavoriteMovie()} className="button_watch_later">
-                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                                 Буду смотреть
                             </div>)}
                         </div>
@@ -97,6 +98,17 @@ const MoviePage: FC = () => {
                 <div className="item_descr">
                     <h2 className="item_subheader">Описание</h2>
                     {overview}
+                </div>
+                <br />
+                <div>
+                    Похожее кино
+                </div>
+                <div className="simular_movies">
+                    <SimularMovies />
+                    <SimularMovies />
+                    <SimularMovies />
+                    <SimularMovies />
+                    <SimularMovies />
                 </div>
             </div>
         </div>

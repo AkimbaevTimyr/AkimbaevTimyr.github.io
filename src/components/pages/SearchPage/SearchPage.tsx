@@ -12,7 +12,6 @@ const SearchPage = () => {
         setMovies(data.results)
         return ''
     }
-
     return (
         <div className=''>
             <div className="w-96 m-auto " >

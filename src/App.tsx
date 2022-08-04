@@ -2,7 +2,7 @@ import './App.css';
 import Main from './components/pages/Main/Main';
 import NavBar from './components/NavBar/NavBar';
 import { Routes, Route} from 'react-router-dom'
-import Films from './components/pages/Films/Films';
+import Films from './components/pages/Films';
 import WatchList from './components/pages/FavoriteMovies/FavoriteMovies';
 import TvShows from './components/pages/TvShows/TvShows';
 import PopularFilms from './components/pages/Films/PopularFilms/PopularFilms';
@@ -16,12 +16,21 @@ import PersonalSeriesItem from './components/pages/Main/PersonalSeries/PersonalS
 import UpcomingPremiersItem from './components/pages/Main/UpcomingPremires/UpcomingPremiersItem';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { addFavoriteMovies } from './store/actions/MovieActionCreator';
-import { getFavoriteMovie } from './http/favoritesMovie';
+import { getBestMovies, getPersonalSeries, getUpcomingPremiers,  getPopularMovies, getPersonalMovies } from './store/actions/MovieActionCreator';
 import SearchPage from './components/pages/SearchPage/SearchPage';
+import AllFilms from './components/pages/Films/AllFilms/AllFilms';
+import { getTvShows } from './store/actions/TvShowActionCreator';
 
 function App() {
   const dispatch = useAppDispatch()
+  useEffect(()=> {
+    dispatch(getBestMovies(1))
+    dispatch(getPopularMovies(1))
+    dispatch(getPersonalMovies())
+    dispatch(getPersonalSeries())
+    dispatch(getUpcomingPremiers())
+    dispatch(getTvShows(1))
+  }, [])
   const {user} = useAppSelector(state=> state.user)
   const {favoriteMovies} = useAppSelector(state => state.movies)
   
@@ -51,6 +60,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path="/films/bestmovies" element={<BestMovies />} />
+        </Routes>
+        <Routes>
+          <Route path="/films/allfilms" element={<AllFilms/>} />
         </Routes>
 
         {/* Login and Registration */}

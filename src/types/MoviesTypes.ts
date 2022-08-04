@@ -5,6 +5,7 @@ export interface IMovieState{
     personalMovies: IMovie[];
     personalSeries: IMovie[];
     upcomingPremiers: IMovie[];
+    currentMovie: IMovie;
 }
 export type IMovie = {
     id: number;
