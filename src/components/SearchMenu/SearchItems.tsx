@@ -14,6 +14,7 @@ interface SearchItemsProps {
 
 
 const SearchItems: FC<SearchItemsProps> = ({ id, img, name, vote_average, runtime, release_date, type }) => {
+    console.log(img)
     return (
                 <div className={styles.item}>
                     <div className={styles.left}>

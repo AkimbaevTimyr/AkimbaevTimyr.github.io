@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getBestMovies, getPersonalSeries, getUpcomingPremiers, getPopularMovies, getPersonalMovies, addFavoriteMovies, deleteMovie, getMoviesById, } from "../actions/MovieActionCreator";
+import { getBestMovies, getPersonalSeries, getUpcomingPremiers, getPopularMovies, getPersonalMovies, getFavoriteMovies, deleteMovie, getMoviesById, getSimularMoviesById, setSearchMovies, getAllMovies, sortingMoviesByRating, } from "../actions/MovieActionCreator";
 import { IMovieState } from "../../types/MoviesTypes";
 
 
@@ -19,6 +19,9 @@ const initialState: IMovieState = {
         vote_average: 1,
         poster_path: "",
     },
+    simularMovies: [],
+    searchMovies: [],
+    allMovies: [],
 }
 
 const moviesSlice = createSlice({
@@ -37,7 +40,6 @@ const moviesSlice = createSlice({
         },
         [getPersonalSeries.fulfilled.type]: (state, action) => {
             state.personalSeries = action.payload;
-            console.log(state.personalSeries)
         },
         [getUpcomingPremiers.fulfilled.type]: (state, action) => {
             state.upcomingPremiers = action.payload;
@@ -45,7 +47,7 @@ const moviesSlice = createSlice({
         [deleteMovie.fulfilled.type]: (state, action) => {
             state.favoriteMovies = state.favoriteMovies.filter(el => el.id !== action.payload)
         },
-        [addFavoriteMovies.fulfilled.type]: (state, action) => {
+        [getFavoriteMovies.fulfilled.type]: (state, action) => {
             state.favoriteMovies = action.payload;
         },
         // [getAllMovies.fulfilled.type] : (state, action) =>{
@@ -53,8 +55,19 @@ const moviesSlice = createSlice({
         // } 
         [getMoviesById.fulfilled.type] : (state, action) =>{
             state.currentMovie = action.payload
+        },
+        [getSimularMoviesById.fulfilled.type] : (state, action) =>{
+            state.simularMovies = action.payload
+        },
+        [setSearchMovies.fulfilled.type]: (state, action) =>{
+            state.searchMovies = action.payload
+        },
+        [getAllMovies.fulfilled.type] : (state, action) => {
+            state.allMovies = action.payload;
+        },
+        [sortingMoviesByRating.fulfilled.type] : (state, action) => {
+            state.allMovies = action.payload
         }
-
     }
 })
 

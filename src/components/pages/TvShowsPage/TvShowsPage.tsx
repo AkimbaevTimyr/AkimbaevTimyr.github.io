@@ -5,12 +5,15 @@ import { addFavorites, deleteFavoriteMovie } from '../../../http/favoritesMovie'
 import { useAppSelector } from '../../../hooks/redux'
 import Loading from '../../Loading/loading'
 import './style.css'
+import FilmItem from '../../FilmItem/FilmItem'
+import Description from '../../Description/Description'
+import About from '../../About/About'
 
 const TvShowsPage: FC = () => {
     let { id } = useParams()
     const [movieKey, setMovieKey] = useState<string>('')
     const { user } = useAppSelector(state => state.user)
-    const { favoriteMovies } = useAppSelector(state => state.movies)
+    const { favoriteMovies, simularMovies } = useAppSelector(state => state.movies)
     const {currentTvShow} = useAppSelector(state => state.tvShows)
     const { budget, tagline, production_countries, runtime,  poster_path, name, overview, vote_average, genres, first_air_date, original_name } = currentTvShow;
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
@@ -20,13 +23,9 @@ const TvShowsPage: FC = () => {
         const findItem = favoriteMovies.find((el: any) => el.id == id ? setButtonCondition(true) : '')
     }, [])
 
-
     const addFavoriteMovie = async () => {
         setButtonCondition(true)
-        const movie = {
-            email: user.email, id, poster_path, vote_average, title: name, release_date: first_air_date, overview, favorite: true, type:'сериал'
-        }
-        await addFavorites(movie)
+        await addFavorites(user.email, 'сериал', currentTvShow)
     }
     const deleteFavorites = async (id: any) => {
         setButtonCondition(false)
@@ -55,7 +54,7 @@ const TvShowsPage: FC = () => {
                             </div>
                             {buttonCondition === true ? (<div onClick={() => deleteFavorites(id)} className="button_watch_later">
                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                                Буду смотреть
+                                Удалить
                             </div>) : (<div onClick={() => addFavoriteMovie()} className="button_watch_later">
                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
                                     stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
@@ -64,40 +63,23 @@ const TvShowsPage: FC = () => {
                                 Буду смотреть
                             </div>)}
                         </div>
-                        <div className="about">
-                            <h2>О сериале</h2>
-                            <ul className="about_list">
-                                <li className="list_item">
-                                    <span>Страны: </span>
-                                    <span>{production_countries?.map((el: any) => el.name + ", ") ||'—' }</span>
-                                </li>
-                                <li className="list_item">
-                                    <span>Жанр: </span>
-                                    <span>{genres?.map((el: any) => el.name + ", ")}</span>
-                                </li>
-                                <li className="list_item">
-                                    <span>Слоган: </span>
-                                    <span>{tagline || '—'}</span>
-                                </li>
-                                <li className="list_item">
-                                    <span>Бюджет: </span>
-                                    <span>{budget != undefined ? `$ ${budget?.toLocaleString('ru-RU')}` : '—' }</span>
-                                </li>
-                                <li className="list_item">
-                                    <span>Время: </span>
-                                    <span>{runtime != undefined ? `${runtime} мин.` : '—'}</span>
-                                </li>
-                                <li className="list_item">
-                                    <span>Премьера в мире: </span>
-                                    <span>{first_air_date?.toLocaleString('ru-RU', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                                </li>
-                            </ul>
-                        </div>
+                        <About productionCountries={production_countries} genres={genres} tagline={tagline} budget={budget} runtime={runtime} releaseDate={first_air_date}/>
                     </div>
                 </div>
-                <div className="item_descr">
-                    <h2 className="item_subheader">Описание</h2>
-                    {overview}
+                <Description description={overview}/>
+                <br />
+                <div className='simular_movies_header'>
+                    {simularMovies && 'Похожее кино'}
+                </div>
+                <div className="simular_movies">
+                    {/* <SimularMovies />
+                    <SimularMovies />
+                    <SimularMovies />
+                    <SimularMovies />
+                    <SimularMovies /> */}
+                    {simularMovies?.slice(0,4).map((el: any) => (
+                         <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="фильм" />
+                    ))}
                 </div>
         </div>
     </div>

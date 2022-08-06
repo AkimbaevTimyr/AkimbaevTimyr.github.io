@@ -14,15 +14,16 @@ import TvShowsPage from './components/pages/TvShowsPage/TvShowsPage';
 import PersonalFilmsItems from './components/pages/Main/PersonalFilms/PersonalFilmsItems';
 import PersonalSeriesItem from './components/pages/Main/PersonalSeries/PersonalSeriesItem';
 import UpcomingPremiersItem from './components/pages/Main/UpcomingPremires/UpcomingPremiersItem';
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { getBestMovies, getPersonalSeries, getUpcomingPremiers,  getPopularMovies, getPersonalMovies } from './store/actions/MovieActionCreator';
+import { getBestMovies, getPersonalSeries, getUpcomingPremiers,  getPopularMovies, getPersonalMovies, getFavoriteMovies, getAllMovies } from './store/actions/MovieActionCreator';
 import SearchPage from './components/pages/SearchPage/SearchPage';
 import AllFilms from './components/pages/Films/AllFilms/AllFilms';
 import { getTvShows } from './store/actions/TvShowActionCreator';
 
 function App() {
   const dispatch = useAppDispatch()
+  const {user} = useAppSelector(state=> state.user)
   useEffect(()=> {
     dispatch(getBestMovies(1))
     dispatch(getPopularMovies(1))
@@ -30,9 +31,9 @@ function App() {
     dispatch(getPersonalSeries())
     dispatch(getUpcomingPremiers())
     dispatch(getTvShows(1))
+    dispatch(getFavoriteMovies(user.email))
+    dispatch(getAllMovies(1))
   }, [])
-  const {user} = useAppSelector(state=> state.user)
-  const {favoriteMovies} = useAppSelector(state => state.movies)
   
   return (
     <div className='container'>

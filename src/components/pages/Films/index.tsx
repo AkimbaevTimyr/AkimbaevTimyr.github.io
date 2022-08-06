@@ -1,8 +1,8 @@
 import {FC} from 'react'
-import FilmsComponents from '../../FilmsComponents'
 import bestMoviesImg from '../../../images/250bestmovies.png'
 import popularFilmsImg from '../../../images/popularfilms.png'
 import movies from '../../../images/movies.png'
+import FilmsComponents from '../../FilmsComponents'
 const Films: FC  = () => {
   return (
     <div className='items-center'>

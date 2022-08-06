@@ -16,7 +16,6 @@ const Login: FC = () => {
     e.preventDefault()
     signInWithEmailAndPassword(authentication, email, password)
       .then((userCredential) => {
-        console.log(userCredential)
         let {email} = userCredential.user;
         dispatch(addUser({email}))
         getFavoriteMovie(String(email))

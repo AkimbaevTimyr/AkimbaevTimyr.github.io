@@ -2,9 +2,17 @@
     background-color: rgb(244,244,244);
 }
 
+.items{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* margin: 30px 0px 0px 100px; */
+    margin-top: -100px;
+}
+
 .movies{
     width: 1300px;
-    height: 91vh;
+    height: 100%;
     background-color: #ffffff;
     margin: 0 auto;
     padding: 30px 0px 0px 30px;
@@ -34,9 +42,12 @@
     margin-right: 150px;
 }
 
+.right{
+    width: 1050px;
+}
+
 .body{
     display: flex;
-    justify-content: space-between;
 }
 
 .rating_header{
@@ -87,4 +98,23 @@
 
 .right{
     width: 1050px;
+}
+
+.loading{
+    margin-top: -150px;
+}
+
+.select{
+    width: 260px;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.left_header{
+    font-size: 16px;
+    font-family: "Fira sans", sans-serif;
+    color: rgb(31, 31, 31);
+    font-weight: 600;
 }

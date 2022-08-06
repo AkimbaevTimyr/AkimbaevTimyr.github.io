@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import MoviesItem from '../../MoviesItem'
 import FilmItem from '../../FilmItem/FilmItem'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
+import { setSearchMovies } from '../../../store/actions/MovieActionCreator'
 
 const SearchPage = () => {
     const [text, setText] = useState<string>('')
-    const [movies, setMovies] = useState<[]>([])
+    const dispatch = useAppDispatch()
+    const { searchMovies } = useAppSelector(state => state.movies)
     const handleClick = async (e: any) => {
         e.preventDefault()
-        let { data } = await axios.get<any>(`https://api.themoviedb.org/3/search/multi?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US&query=${text}&page=1&include_adult=false`)
-        setMovies(data.results)
+        dispatch(setSearchMovies(text))
         return ''
     }
+    
     return (
         <div className=''>
             <div className="w-96 m-auto " >
@@ -23,7 +25,7 @@ const SearchPage = () => {
                 </form>
             </div>
             <div className='items'>
-                {movies && movies.map((el: any) => (
+                {searchMovies && searchMovies.map((el: any) => (
                      <FilmItem  id={el.id} img={el.poster_path} title={el.original_name || el.title} vote_average={el.vote_average} release_date={el.first_air_date || el.release_date} type={el.media_type == 'movie' ? 'фильм' : 'сериал'}/>
                 ))}
             </div>

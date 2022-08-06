@@ -5,26 +5,27 @@ import Loading from '../../Loading/loading'
 import { useAppSelector } from '../../../hooks/redux'
 import { addFavorites, deleteFavoriteMovie } from '../../../http/favoritesMovie'
 import './style.css'
-import SimularMovies from '../../SimuralMovies/SimularMovies'
+import FilmItem from '../../FilmItem/FilmItem'
+import About from '../../About/About'
+import Description from '../../Description/Description'
 
 const MoviePage: FC = () => {
     let { id } = useParams()
     const [movieKey, setMovieKey] = useState<string>('')
     const { user } = useAppSelector(state => state.user)
-    const { favoriteMovies, currentMovie} = useAppSelector(state => state.movies)
+    const { favoriteMovies, currentMovie, simularMovies} = useAppSelector(state => state.movies)
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
+    // const d = JSON.parse<any>(localStorage.getItem('currentMovie'))
+    // console.log(d)
     const { poster_path, title, overview, vote_average, genres, release_date, original_name, original_title, tagline, production_countries, budget, runtime } = currentMovie;
     useEffect(() => {
          axios.get<any>(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US`).then((data: any) => setMovieKey(data.data.results[0].key))
-        const findItem = favoriteMovies.find((el: any) => el.id === id ? setButtonCondition(true) : '')
+        const findItem = favoriteMovies.find((el: any) => el.id == id ? setButtonCondition(true) : '')
     }, [])
     
     const addFavoriteMovie = async () => {
         setButtonCondition(true)
-        const movie = {
-            email: user.email, id, poster_path, vote_average, title, release_date, overview, favorite: true, type: 'фильм'
-        }
-        await addFavorites(movie)
+        await addFavorites(user.email, 'фильм', currentMovie)
     }
     const deleteFavorites = async (id: any) => {
         setButtonCondition(false)
@@ -37,7 +38,7 @@ const MoviePage: FC = () => {
                     <div className="itemImg">
                         {poster_path == undefined ? (<img src='https://st.kp.yandex.net/images/film_big/4781063.jpg' className="itemImg" />) : (
                             <><img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`} alt="" className="itemImg" />
-                                <p className="rating">8.8</p></>
+                                <p className="rating">{vote_average?.toFixed(1)}</p></>
                         )}
                     </div>
                     <div className="item_about">
@@ -58,57 +59,24 @@ const MoviePage: FC = () => {
                                     stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
-                                Буду смотреть
+                                Удалить
                             </div>) : (<div onClick={() => addFavoriteMovie()} className="button_watch_later">
                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                                 Буду смотреть
                             </div>)}
                         </div>
-                        <div className="about">
-                            <h2>О фильме</h2>
-                            <ul className="about_list">
-                                <li className="list_item">
-                                    <span>Страны: </span>
-                                    <span>{production_countries?.map((el: any) => el.name + ", ")}</span>
-                                </li>
-                                <li className="list_item">
-                                    <span>Жанр: </span>
-                                    <span>{genres?.map((el: any) => el.name + ", ")}</span>
-                                </li>
-                                <li className="list_item">
-                                    <span>Слоган: </span>
-                                    <span>{tagline || '—'}</span>
-                                </li>
-                                <li className="list_item">
-                                    <span>Бюджет: </span>
-                                    <span>$ {budget?.toLocaleString('ru-RU')}</span>
-                                </li>
-                                <li className="list_item">
-                                    <span>Время: </span>
-                                    <span>{runtime} мин.</span>
-                                </li>
-                                <li className="list_item">
-                                    <span>Премьера в мире: </span>
-                                    <span>{release_date?.toLocaleString('ru-RU', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                                </li>
-                            </ul>
-                        </div>
+                        <About productionCountries={production_countries} genres={genres} tagline={tagline} budget={budget} runtime={runtime} releaseDate={release_date}/>
                     </div>
                 </div>
-                <div className="item_descr">
-                    <h2 className="item_subheader">Описание</h2>
-                    {overview}
-                </div>
+                <Description description={overview}/>
                 <br />
-                <div>
-                    Похожее кино
+                <div className='simular_movies_header'>
+                    {simularMovies && 'Похожее кино'}
                 </div>
                 <div className="simular_movies">
-                    <SimularMovies />
-                    <SimularMovies />
-                    <SimularMovies />
-                    <SimularMovies />
-                    <SimularMovies />
+                    {simularMovies?.slice(0,4).map((el: any) => (
+                         <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="фильм" />
+                    ))}
                 </div>
             </div>
         </div>
