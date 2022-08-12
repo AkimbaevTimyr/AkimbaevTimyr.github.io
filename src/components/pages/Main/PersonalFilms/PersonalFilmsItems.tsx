@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { Link } from 'react-router-dom'
 import { useAppSelector } from '../../../../hooks/redux'
 import { IMovie } from '../../../../types/MoviesTypes'
 import FilmItem from '../../../FilmItem/FilmItem'
@@ -12,7 +11,12 @@ import styles from '../style.module.css'
 const PersonalFilmsItems: FC = () => {
     const { personalMovies } = useAppSelector(state => state.movies)
     return (
-         <div className='container'>
+        <div>       
+            <div className={styles.back}>
+                <svg className={styles.svg} stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                Назад
+            </div> 
+            <div className={styles.container}>
          {personalMovies.length === 0 ? <Loading /> : (<>
              <div className={styles.items}>
                  {personalMovies.map((el: IMovie) => (
@@ -21,6 +25,7 @@ const PersonalFilmsItems: FC = () => {
              </div>
          </>
          )}
+     </div>
      </div>
     )
 }

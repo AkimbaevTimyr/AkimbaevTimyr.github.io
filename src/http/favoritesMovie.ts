@@ -11,11 +11,18 @@ export const addFavorites = async (email: string, type: string, movie: any) =>{
 }
 
 export const deleteFavoriteMovie = async (id: number) =>{
-    console.log(id)
     const ordersRef = collection(db, "favorites")
-    const q = query(ordersRef, where("id", "==", id))
-    const data = (await getDocs(q)).docs
-    console.log(data)
+    const d = query(ordersRef, where("id", "==", Number(id)));
+    const data = (await getDocs(d)).docs
+
+    // const data = querySnapshot.docs.map(doc => doc.data())
+    // console.log(querySnapshot.docs.map((el: any)=> console.log(el)))
+    // const q = query(ordersRef, where("id", "==", id))
+    // console.log(await getDocs(q))
+    
+    // const q = query(ordersRef, where("id", "==", id))
+    // console.log(getDocs(q).then(data => console.log(data)))
+    // const data = (await getDocs(q)).docs
     await deleteDoc(doc(db, "favorites", data[0].id))
 }
 

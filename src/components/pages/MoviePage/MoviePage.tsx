@@ -15,9 +15,8 @@ const MoviePage: FC = () => {
     const { user } = useAppSelector(state => state.user)
     const { favoriteMovies, currentMovie, simularMovies} = useAppSelector(state => state.movies)
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
-    // const d = JSON.parse<any>(localStorage.getItem('currentMovie'))
-    // console.log(d)
     const { poster_path, title, overview, vote_average, genres, release_date, original_name, original_title, tagline, production_countries, budget, runtime } = currentMovie;
+    
     useEffect(() => {
          axios.get<any>(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US`).then((data: any) => setMovieKey(data.data.results[0].key))
         const findItem = favoriteMovies.find((el: any) => el.id == id ? setButtonCondition(true) : '')

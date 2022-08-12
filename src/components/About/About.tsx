@@ -5,7 +5,7 @@ interface AboutProps{
   productionCountries: string[];
   genres: string[];
   tagline: string;
-  budget: number;
+  budget: number | string;
   runtime: number;
   releaseDate: Date;
 }

@@ -1,5 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { authentication } from "../../firebase-config";
+import { getFavoriteMovie } from "../../http/favoritesMovie";
 import { IUser } from "../../types/UserTypes";
+import { getFavoriteMovies } from "./MovieActionCreator";
+
 
 export const addUser = createAsyncThunk(
     'user/addUser',
@@ -13,8 +18,33 @@ export const addUser = createAsyncThunk(
 )
 
 
-export const exit = createAsyncThunk(
-    'user/exit',
+
+// export const exit = createAsyncThunk(
+//     'user/exit',
+//     async(isAuth: boolean, thunkAPI) =>{
+//         try{
+//             return isAuth
+//         }catch(e){
+
+//         }
+//     }
+// )
+export const checkToken = createAsyncThunk(
+    "user/checkToken",
+    async(args: any[], thunkAPI) => {
+        const [token = '', email = ''] = args;
+        try{
+            if(token?.length != 0){
+                thunkAPI.dispatch(setIsAuth(true))
+                thunkAPI.dispatch(getFavoriteMovies(email))
+            }
+        }catch(e){
+
+        }
+    }
+)
+export const setIsAuth = createAsyncThunk(
+    "user/setIsAuth",
     async(isAuth: boolean, thunkAPI) =>{
         try{
             return isAuth
@@ -23,3 +53,22 @@ export const exit = createAsyncThunk(
         }
     }
 )
+
+
+
+export const login = createAsyncThunk(
+    "user/login",
+    async(user: IUser, thunkAPI) => {
+        try{
+            thunkAPI.dispatch(addUser(user))
+            thunkAPI.dispatch(setIsAuth(true))
+            thunkAPI.dispatch(getFavoriteMovies(user.email))
+            console.log(user.email)
+            localStorage.setItem('token', user.token)
+            localStorage.setItem('email', user.email)
+        }catch(e){
+     
+        }
+    }
+)
+

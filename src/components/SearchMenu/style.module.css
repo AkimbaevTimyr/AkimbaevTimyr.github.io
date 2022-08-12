@@ -3,14 +3,18 @@
     display: flex;
     justify-content: space-between;
     text-align: center;
-    width: 320px;
+    width: 335px;
     cursor: pointer;
     margin-bottom: 10px;
+    border-radius: 3px;
+    padding: 10px;
 }
 
-.search_item:hover{
-    opacity: 0.7;
-}
+.item:hover{
+    background-color: rgb(31, 31, 31);
+    transition:  transform 250ms linear;
+ }
+ 
 
 .left{
     display: flex;

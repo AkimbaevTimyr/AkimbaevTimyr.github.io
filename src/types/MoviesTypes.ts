@@ -1,3 +1,5 @@
+import { ITvShows } from "./TvShowTypes";
+
 export interface IMovieState{
     bestMovies: IMovie[];
     popularMovies: IMovie[];
@@ -9,6 +11,8 @@ export interface IMovieState{
     simularMovies: IMovie[];
     searchMovies: IMovie[];
     allMovies: IMovie[];
+    isLoading: boolean;
+    simularTvShows: ITvShows[];
 }
 export type IMovie = {
     id: number;

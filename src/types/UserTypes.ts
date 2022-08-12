@@ -1,8 +1,10 @@
 export interface UserState {
-    isAuth: boolean;
+    isAuth: boolean | null;
     user: IUser;
 }
 
 export type IUser = {
-    email: string | null;
+    email: string;
+    token: string;
+    id: number | null;
 }

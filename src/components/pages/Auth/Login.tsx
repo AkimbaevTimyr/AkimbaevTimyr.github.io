@@ -1,39 +1,36 @@
-import React, {useState, FC} from 'react'
-import { authentication } from '../../../firebase-config';
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import React, {useState, FC, FormEvent} from 'react'
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../hooks/redux';
-import { addUser } from '../../../store/actions/UserActionCreator';
+import { useNavigate} from 'react-router-dom';
+import { authentication } from '../../../firebase-config';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { getFavoriteMovie } from '../../../http/favoritesMovie';
+import {  login } from '../../../store/actions/UserActionCreator';
 
 const Login: FC = () => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const dispatch = useAppDispatch()
-  const login = (e: any) => {
-    e.preventDefault()
-    signInWithEmailAndPassword(authentication, email, password)
-      .then((userCredential) => {
-        let {email} = userCredential.user;
-        dispatch(addUser({email}))
-        getFavoriteMovie(String(email))
+
+  const handleSumbit = (e: any) => {
+      signInWithEmailAndPassword(authentication, email, password)
+      .then((userCredential: any) => {
+        const {user} = userCredential;
+        dispatch(login({
+          email: user.email,
+          token: user.accessToken,
+          id: user.id
+        }))
         navigate('/')
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorCode)
-        console.log(errorMessage)
-      });
+      }).catch(() => alert("Не верный логин или пароль"))
   }
   return (
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
         <div className="max-w-lg mx-auto text-center">
           <h1 className="text-2xl font-bold sm:text-3xl">Войти!</h1>
         </div>
-        <form onSubmit={(e)=> login(e)} className="max-w-md mx-auto mt-8 mb-0 space-y-4">
+        <form className="max-w-md mx-auto mt-8 mb-0 space-y-4">
           <div>
             <label  className="sr-only">Email</label>
             <div className="relative">
@@ -100,7 +97,8 @@ const Login: FC = () => {
               <Link to='/registration' className="underline" >Зарегистрируйся</Link>
             </p>
             <button
-              type="submit"
+              onClick={(e) => handleSumbit(e)}
+              type="button"
               className="inline-block px-5 py-3 ml-3 text-sm font-medium text-white bg-blue-500 rounded-lg"
             >
               Войти

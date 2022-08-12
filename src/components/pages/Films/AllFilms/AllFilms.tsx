@@ -1,42 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
-import { getAllMovies, sortingMoviesByRating } from '../../../../store/actions/MovieActionCreator'
+import { getAllMovies, sortingMovies, } from '../../../../store/actions/MovieActionCreator'
 import { IMovie } from '../../../../types/MoviesTypes'
 import FilmItem from '../../../FilmItem/FilmItem'
 import Loading from '../../../Loading/loading'
 import Pagination from '../../../pagination.tsx/pagination'
+import LeftSide from './LeftSide/LeftSide'
 import styles from './style.module.css'
 
 const AllFilms = () => {
-
+    
     const { allMovies } = useAppSelector(state => state.movies)
     const dispatch = useAppDispatch()
 
     const [filmPage, setFilmPage] = useState<number>(1)
-
-    const [rating1, setRating1] = useState<number>(1)
-    const [rating2, setRating2] = useState<number>(10)
-
-    const [year1, setyear1] = useState<number>(1960)
-    const [year2, setyear2] = useState<number>(2025)
-
-    const [selectValue, setSelectValue] = useState<string>('Рейтингу')
-
-
+    const data: any = localStorage.getItem('rating')?.split(',')
+    console.log(data)
     const changePage = async (page: number) => {
-        dispatch(getAllMovies(page))
+        dispatch(sortingMovies([page, data[0], data[1], data[2]]))
         setFilmPage(page)
     }
-
-    const sortByRating = () => {
-        dispatch(sortingMoviesByRating([rating1, rating2, filmPage]))
-    }
-
-
-    // useEffect(() => {
-    //     getFilteredMovies(rating1, rating2, year1, year2, 1).then((data) => console.log(data))
-    // } ,[])
-
 
     return (
         <div className={styles.container}>
@@ -46,40 +29,7 @@ const AllFilms = () => {
                     <h2>Подборка фильмов всего мира</h2>
                 </div>
                 <div className={styles.body}>
-                    <div className={styles.left}>
-                        <h2 className={styles.left_header}>Сортирока по:</h2>
-                        <select className={styles.select} onChange={(e) => setSelectValue(e.target.value)} name="hello">
-                            <option>Рейтингу</option>
-                            <option>Жанру</option>
-                        </select>
-                        {selectValue == 'Рейтингу' ? <><h2 className={styles.rating_header}>Рейтинг</h2>
-                            <div className={styles.rating_inputs}>
-                                <div className={styles.input_rating}>
-                                    <p>От</p>
-                                    <input onChange={e => setRating1(Number(e.target.value))} type="number" min="1" max="10" step="1" value={rating1 || ""} />
-                                </div>
-                                <div className={styles.input_rating}>
-                                    <p>До</p>
-                                    <input onChange={e => setRating2(Number(e.target.value))} type="number" min="1" max="10" step="1" value={rating2 || ""} />
-                                </div>
-                            </div><div className={styles.buttons}>
-                                <button onClick={() => sortByRating()} className={styles.button_1}>Применить</button>
-                            </div></> : ''}
-                        {selectValue == 'Жанру' ? <><h2 className={styles.rating_header}>Жанр</h2>
-                            <div className={styles.rating_inputs}>
-                                <div className={styles.input_rating}>
-                                    <p>От</p>
-                                    <input type="number" min="1960" max="2025" step="1" />
-                                </div>
-                                <div className={styles.input_rating}>
-                                    <p>До</p>
-                                    <input type="number" min="1960" max="2025" step="1" />
-                                </div>
-                            </div>
-                            <div className={styles.buttons}>
-                                <button onClick={() => sortByRating()} className={styles.button_1}>Применить</button>
-                            </div></> : ''}
-                    </div>
+                    <LeftSide filmPage={filmPage}  />
                     <div className={styles.right}>
                         {allMovies?.length === 0 ? <div className={styles.loading}><Loading /></div> : (<>
                             <div className={styles.items}>

@@ -7,7 +7,6 @@ import styles from '../style.module.css'
 
 const UpcomingPremiers = () => {
   const { upcomingPremiers } = useAppSelector(state => state.movies)
-  console.log(upcomingPremiers)
   return (
     <div className={styles.films}>
       <div className={styles.header_block}>

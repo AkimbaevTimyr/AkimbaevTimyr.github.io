@@ -1,33 +1,26 @@
-import React, {useState, FC} from 'react'
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import React, {useState, FC,} from 'react'
 import { Link } from 'react-router-dom'
-import { authentication } from '../../../firebase-config';
-import { createUserWithEmailAndPassword} from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
+import { authentication } from '../../../firebase-config';
 
 const Registration: FC = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const navigate = useNavigate()
-    const registration = (e: any) =>{
+    const handleSumbit = (e: any) =>{
         e.preventDefault()
         createUserWithEmailAndPassword(authentication, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                navigate('/')
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorCode)
-                console.log(errorMessage)
-            });
+        .then((userCredential) => {
+            navigate('/login')
+        }).catch((error) => { alert('Неправельный пользователь')});
     }
     return (
         <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
             <div className="max-w-lg mx-auto text-center">
                 <h1 className="text-2xl font-bold sm:text-3xl">Зарегистрироваться!</h1>
             </div>
-            <form onSubmit={(e)=> registration(e)} className="max-w-md mx-auto mt-8 mb-0 space-y-4">
+            <form  className="max-w-md mx-auto mt-8 mb-0 space-y-4">
                 <div>
                     <label className="sr-only">Email</label>
                     <div className="relative">
@@ -96,6 +89,7 @@ const Registration: FC = () => {
                         <Link to='/login' className="underline" >Войди</Link>
                     </p>
                     <button
+                        onClick={(e)=> handleSumbit(e)}
                         type="submit"
                         className="inline-block px-5 py-3 ml-3 text-sm font-medium text-white bg-blue-500 rounded-lg"
                     >

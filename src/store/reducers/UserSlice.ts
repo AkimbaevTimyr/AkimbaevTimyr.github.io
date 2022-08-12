@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IUser, UserState } from "../../types/UserTypes";
-import { addUser, exit } from "../actions/UserActionCreator";
+import { addUser, setIsAuth } from "../actions/UserActionCreator";
 
 
 const initialState: UserState = {
     isAuth: false,
     user: {
         email: '',
+        token: '',
+        id: null
     },
 }
 
@@ -19,10 +21,11 @@ const userSlice = createSlice({
             state.user = action.payload;
             state.isAuth = true;
         },
-        [exit.fulfilled.type]: (state, action) =>{
-            state.user = {email: ""};
-            state.isAuth = action.payload;
-        }
+        [setIsAuth.fulfilled.type]: (state, action) =>{
+            console.log(action.payload)
+            state.isAuth = action.payload
+        },
+       
     }
 })
 

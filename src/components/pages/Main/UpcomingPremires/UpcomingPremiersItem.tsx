@@ -9,7 +9,7 @@ import styles from '../style.module.css'
 function UpcomingPremiersItem() {
   const { upcomingPremiers } = useAppSelector(state => state.movies)
   return (
-    <div className={styles.items}>
+    <div className={styles.container}>
       {upcomingPremiers.length === 0 ? <Loading /> : (<>
         <div className={styles.items}>
           {upcomingPremiers.map((el: IMovie) => (

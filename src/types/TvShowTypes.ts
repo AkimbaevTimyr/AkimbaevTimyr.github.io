@@ -4,7 +4,8 @@ export interface ITvShowsState {
 }
 export type ITvShows = {
     id: number ;
-    original_name: string;
+    name: string;
+    original_name?: string;
     backdrop_path: string;
     release_date: string;
     overview: string;

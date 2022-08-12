@@ -7,6 +7,7 @@ const initialState: ITvShowsState = {
     popularTvShows: [],
     currentTvShow: {
         id: 1,
+        name: "",
         original_name: "",
         backdrop_path: "",
         release_date: "",

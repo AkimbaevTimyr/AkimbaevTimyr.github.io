@@ -15,7 +15,7 @@ const TvShowsPage: FC = () => {
     const { user } = useAppSelector(state => state.user)
     const { favoriteMovies, simularMovies } = useAppSelector(state => state.movies)
     const {currentTvShow} = useAppSelector(state => state.tvShows)
-    const { budget, tagline, production_countries, runtime,  poster_path, name, overview, vote_average, genres, first_air_date, original_name } = currentTvShow;
+    const { tagline, production_countries, runtime,  poster_path, name, overview, vote_average, genres, first_air_date, original_name } = currentTvShow;
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
 
     useEffect(() => {
@@ -63,7 +63,7 @@ const TvShowsPage: FC = () => {
                                 Буду смотреть
                             </div>)}
                         </div>
-                        <About productionCountries={production_countries} genres={genres} tagline={tagline} budget={budget} runtime={runtime} releaseDate={first_air_date}/>
+                        <About productionCountries={production_countries} genres={genres} tagline={tagline} budget={''} runtime={runtime} releaseDate={first_air_date}/>
                     </div>
                 </div>
                 <Description description={overview}/>

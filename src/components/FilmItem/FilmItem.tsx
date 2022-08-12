@@ -3,12 +3,12 @@ import styles from "./style.module.css"
 import {Link} from 'react-router-dom'
 import { getTvShowsById } from '../../store/actions/TvShowActionCreator';
 import { useAppDispatch } from '../../hooks/redux';
-import { getMoviesById, getSimularMoviesById } from '../../store/actions/MovieActionCreator';
+import { getMoviesById, setSimularTvShowsById, setSimularMoviesById } from '../../store/actions/MovieActionCreator';
 
 interface FilmItemProps {
     id: number;
     img: string | null;
-    title: string;
+    title: string | undefined;
     vote_average: number;
     release_date: string;
     type: string;
@@ -19,10 +19,10 @@ const FilmItem: FC<FilmItemProps> = ({id,img, title, vote_average, release_date,
     const click = () =>{
         if(type == 'фильм'){
             dispatch(getMoviesById(id))
-            dispatch(getSimularMoviesById(id))
+            dispatch(setSimularMoviesById (id))
         }else{
             dispatch(getTvShowsById(id))
-            dispatch(getSimularMoviesById(id))
+            dispatch(setSimularTvShowsById(id))
         }
     }
   return (

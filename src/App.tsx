@@ -14,25 +14,23 @@ import TvShowsPage from './components/pages/TvShowsPage/TvShowsPage';
 import PersonalFilmsItems from './components/pages/Main/PersonalFilms/PersonalFilmsItems';
 import PersonalSeriesItem from './components/pages/Main/PersonalSeries/PersonalSeriesItem';
 import UpcomingPremiersItem from './components/pages/Main/UpcomingPremires/UpcomingPremiersItem';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect,  } from 'react';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
-import { getBestMovies, getPersonalSeries, getUpcomingPremiers,  getPopularMovies, getPersonalMovies, getFavoriteMovies, getAllMovies } from './store/actions/MovieActionCreator';
+import {  getAll } from './store/actions/MovieActionCreator';
 import SearchPage from './components/pages/SearchPage/SearchPage';
 import AllFilms from './components/pages/Films/AllFilms/AllFilms';
-import { getTvShows } from './store/actions/TvShowActionCreator';
+import { checkToken } from './store/actions/UserActionCreator';
 
 function App() {
   const dispatch = useAppDispatch()
   const {user} = useAppSelector(state=> state.user)
+  const token = localStorage.getItem('token')
+  const email = localStorage.getItem('email')
   useEffect(()=> {
-    dispatch(getBestMovies(1))
-    dispatch(getPopularMovies(1))
-    dispatch(getPersonalMovies())
-    dispatch(getPersonalSeries())
-    dispatch(getUpcomingPremiers())
-    dispatch(getTvShows(1))
-    dispatch(getFavoriteMovies(user.email))
-    dispatch(getAllMovies(1))
+    setTimeout(() => {
+      dispatch(getAll(user.email))
+      dispatch(checkToken([token, email]))
+    }, 1000)
   }, [])
   
   return (

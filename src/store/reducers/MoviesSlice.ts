@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getBestMovies, getPersonalSeries, getUpcomingPremiers, getPopularMovies, getPersonalMovies, getFavoriteMovies, deleteMovie, getMoviesById, getSimularMoviesById, setSearchMovies, getAllMovies, sortingMoviesByRating, } from "../actions/MovieActionCreator";
+import { getBestMovies, getPersonalSeries, getUpcomingPremiers, getPopularMovies, getPersonalMovies, getFavoriteMovies, deleteMovie, getMoviesById,  setSearchMovies, getAllMovies, sortingMovies, setIsLoading,  setSimularTvShowsById, setSimularMoviesById, } from "../actions/MovieActionCreator";
 import { IMovieState } from "../../types/MoviesTypes";
 
 
@@ -20,8 +20,11 @@ const initialState: IMovieState = {
         poster_path: "",
     },
     simularMovies: [],
+    simularTvShows: [],
     searchMovies: [],
     allMovies: [],
+    isLoading: true,
+    
 }
 
 const moviesSlice = createSlice({
@@ -56,8 +59,11 @@ const moviesSlice = createSlice({
         [getMoviesById.fulfilled.type] : (state, action) =>{
             state.currentMovie = action.payload
         },
-        [getSimularMoviesById.fulfilled.type] : (state, action) =>{
+        [setSimularMoviesById.fulfilled.type] : (state, action) =>{
             state.simularMovies = action.payload
+        },
+        [setSimularTvShowsById.fulfilled.type] : (state, action) =>{
+            state.simularTvShows = action.payload
         },
         [setSearchMovies.fulfilled.type]: (state, action) =>{
             state.searchMovies = action.payload
@@ -65,8 +71,11 @@ const moviesSlice = createSlice({
         [getAllMovies.fulfilled.type] : (state, action) => {
             state.allMovies = action.payload;
         },
-        [sortingMoviesByRating.fulfilled.type] : (state, action) => {
+        [sortingMovies.fulfilled.type] : (state, action) =>{
             state.allMovies = action.payload
+        },
+        [setIsLoading.fulfilled.type] : (state, action) =>{
+            state.isLoading = action.payload
         }
     }
 })

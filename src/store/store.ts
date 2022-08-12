@@ -1,9 +1,8 @@
 import { combineReducers, configureStore, } from "@reduxjs/toolkit";
-import { setupListeners } from '@reduxjs/toolkit/query'
-import { movieApi } from "../services/MovieService";
 import moviesReducer from './reducers/MoviesSlice'
 import tvShowsReducer from './reducers/TvShowsSlice'
 import userReducer from './reducers/UserSlice'
+import { movieApi } from "../Service/Service";
 
 export const rootReducer = combineReducers<any>({
     movies: moviesReducer,
@@ -16,11 +15,10 @@ export const rootReducer = combineReducers<any>({
 export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
-        // middleware: (getDefaultMiddleware) => 
-        //     getDefaultMiddleware().concat(movieApi.middleware),
+        // middleware: (getDefaultMiddleware) =>  getDefaultMiddleware().concat(movieApi.middleware),
 })}
 
 
 export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof setupStore>;
+export type AppStore = ReturnType<typeof setupStore>; 
 export type AppDispatch = AppStore['dispatch']
