@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC } from 'react'
+import React, { useEffect, useState, FC, Fragment } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Loading from '../../Loading/loading'
@@ -9,6 +9,7 @@ import FilmItem from '../../FilmItem/FilmItem'
 import About from '../../About/About'
 import Description from '../../Description/Description'
 import { addFavoriteMovie, deleteMovieById } from '../../../store/actions/MovieActionCreator'
+import { convertTimestampToDate } from '../../../helpers/convertTimestampToDate/convertTimestampToDate'
 
 const MoviePage: FC = () => {
     let { id } = useParams()
@@ -32,6 +33,16 @@ const MoviePage: FC = () => {
         setButtonCondition(false)
         dispatch(deleteMovieById(id))
     }
+
+    const items = [
+        {caption: 'Страны', value: production_countries?.map((el: any, index: any) => <Fragment>{el.name + ', '}</Fragment>) },
+        {caption: "Жанр", value: genres?.map((el: any) => <Fragment>{el.name + ', '}</Fragment>) },
+        {caption: 'Слоган', value: tagline || '—'},
+        {caption: 'Бюджет', value: `$ ${budget}`|| '—' },
+        {caption: 'Время', value: `${runtime} мин.`},
+        {caption: 'Премьера в мире', value: convertTimestampToDate(release_date)},
+    ]
+
     return (
         <div className='movieContainer'>
             <div className="moviePage" >
@@ -66,7 +77,8 @@ const MoviePage: FC = () => {
                                 Буду смотреть
                             </div>)}
                         </div>
-                        <About productionCountries={production_countries} genres={genres} tagline={tagline} budget={budget} runtime={runtime} releaseDate={release_date}/>
+                        <h2 className="about_movie">О фильме</h2>
+                        <About items={items}/>
                     </div>
                 </div>
                 <Description description={overview}/>

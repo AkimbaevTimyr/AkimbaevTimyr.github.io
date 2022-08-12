@@ -25,7 +25,6 @@ const FilmItem: FC<FilmItemProps> = ({id,img, title, vote_average, release_date,
             dispatch(setSimularTvShowsById(id))
         }
     }
-    console.log(img)
   return (
     <div className={styles.item}>
         <div onClick={()=> click()} className={styles.img}>

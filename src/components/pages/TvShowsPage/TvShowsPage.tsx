@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC } from 'react'
+import React, { useEffect, useState, FC, Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { addFavorites, deleteFavoriteMovie } from '../../../http/favoritesMovie'
@@ -9,6 +9,7 @@ import FilmItem from '../../FilmItem/FilmItem'
 import Description from '../../Description/Description'
 import About from '../../About/About'
 import { addFavoriteMovie, deleteMovieById } from '../../../store/actions/MovieActionCreator'
+import { convertTimestampToDate } from '../../../helpers/convertTimestampToDate/convertTimestampToDate'
 
 const TvShowsPage: FC = () => {
     const dispatch = useAppDispatch()
@@ -17,7 +18,7 @@ const TvShowsPage: FC = () => {
     const { user } = useAppSelector(state => state.user)
     const { favoriteMovies, simularMovies } = useAppSelector(state => state.movies)
     const {currentTvShow} = useAppSelector(state => state.tvShows)
-    const { tagline, production_countries, runtime,  poster_path, name, overview, vote_average, genres, first_air_date, original_name } = currentTvShow;
+    const { budget, tagline, production_countries, runtime,  poster_path, name, overview, vote_average, genres, first_air_date, original_name } = currentTvShow;
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
 
     useEffect(() => {
@@ -33,6 +34,16 @@ const TvShowsPage: FC = () => {
         setButtonCondition(false)
         dispatch(deleteMovieById(id))
     }
+
+    const items = [
+        {caption: 'Страны', value: production_countries?.map((el: any) => <Fragment>{el.name + ', '}</Fragment>) },
+        {caption: "Жанр", value: genres?.map((el: any) => <Fragment>{el.name + ', '}</Fragment>) },
+        {caption: 'Слоган', value: tagline || '—'},
+        {caption: 'Бюджет', value: budget || '—' },
+        {caption: 'Время', value: '—'},
+        {caption: 'Премьера в мире', value: convertTimestampToDate(first_air_date)},
+    ]
+
     return (
         <div className='movieContainer'>
             <div className="moviePage" >
@@ -65,7 +76,7 @@ const TvShowsPage: FC = () => {
                                 Буду смотреть
                             </div>)}
                         </div>
-                        <About productionCountries={production_countries} genres={genres} tagline={tagline} budget={''} runtime={runtime} releaseDate={first_air_date}/>
+                        <About items={items}/>
                     </div>
                 </div>
                 <Description description={overview}/>

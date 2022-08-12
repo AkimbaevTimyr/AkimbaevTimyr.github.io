@@ -7,6 +7,7 @@
     background: rgb(28, 30, 50);
 }
 .navBar{
+    width: 100%;
     background-color: rgb(31, 31, 31);
     height: 60px;
     display: block;
@@ -101,4 +102,25 @@
 
 .signIn:hover{
     color: white;
+}
+
+
+@media (max-width: 390px) {
+    .navBar{
+        height: 60px;
+    }
+    .container{
+        max-width: 300px;
+        margin-left: 0px;
+    }
+    .left{
+        display: none;
+    }
+    .search_input{
+        width: 200px;
+        margin-top: 3px;
+    }
+    .signIn{
+        margin-top: -30px;
+    }
 }
