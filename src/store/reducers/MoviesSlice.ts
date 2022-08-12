@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getBestMovies, getPersonalSeries, getUpcomingPremiers, getPopularMovies, getPersonalMovies, getFavoriteMovies, deleteMovie, getMoviesById,  setSearchMovies, getAllMovies, sortingMovies, setIsLoading,  setSimularTvShowsById, setSimularMoviesById, } from "../actions/MovieActionCreator";
+import { getBestMovies, getPersonalSeries, getUpcomingPremiers, getPopularMovies, getPersonalMovies, getFavoriteMovies,  getMoviesById,  setSearchMovies, getAllMovies, sortingMovies, setIsLoading,  setSimularTvShowsById, setSimularMoviesById, } from "../actions/MovieActionCreator";
 import { IMovieState } from "../../types/MoviesTypes";
 
 
@@ -46,9 +46,6 @@ const moviesSlice = createSlice({
         },
         [getUpcomingPremiers.fulfilled.type]: (state, action) => {
             state.upcomingPremiers = action.payload;
-        },
-        [deleteMovie.fulfilled.type]: (state, action) => {
-            state.favoriteMovies = state.favoriteMovies.filter(el => el.id !== action.payload)
         },
         [getFavoriteMovies.fulfilled.type]: (state, action) => {
             state.favoriteMovies = action.payload;

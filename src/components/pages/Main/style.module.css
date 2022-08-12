@@ -1,8 +1,10 @@
+.main{
+}
 .items {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 30px 0px 0px 100px;
+    margin: 30px 0px 0px 55px;
 }
 .container{
     display: flex;
@@ -20,7 +22,7 @@
 
 .header {
     font-size: 34px;
-    margin-left: 150px;
+    margin-left: 125px;
     font-weight: 500;
 }
 
@@ -30,7 +32,7 @@
 }
 
 .watch_button {
-    margin-right: 80px;
+    margin-right: 100px;
     font-weight: 500;
     background-color: rgb(31, 41, 55);
     color: white;

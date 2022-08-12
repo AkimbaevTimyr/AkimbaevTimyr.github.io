@@ -1,7 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
 import { IFavoriteMovie, IMovie } from '../../types/MoviesTypes'
 import axios from 'axios'
-import { getDocs, collection } from 'firebase/firestore'
+import { getDocs, collection, query, deleteDoc, where, doc, addDoc } from 'firebase/firestore'
 import { db } from '../../firebase-config'
 
 export const getAll = createAsyncThunk(
@@ -15,7 +15,7 @@ export const getAll = createAsyncThunk(
                 thunkAPI.dispatch(getPersonalSeries())
                 thunkAPI.dispatch(getUpcomingPremiers())
                 thunkAPI.dispatch(getTvShows(1))
-                thunkAPI.dispatch(getFavoriteMovies(email))
+                // thunkAPI.dispatch(getFavoriteMovies(email))
                 thunkAPI.dispatch(getAllMovies([1, genre]))
                 thunkAPI.dispatch(setIsLoading(false))
         }catch(e){
@@ -160,16 +160,6 @@ export const addFavoriteMovies = createAsyncThunk(
     }
 )
 
-export const deleteMovie = createAsyncThunk(
-    "movie/deleteFavoriteMovie",
-    async(id: number, thunkAPI) =>{
-        try{
-            return id
-        }catch(e){
-
-        }
-    }
-)
 
 export const sortingMoviesByRating = createAsyncThunk(
     "movies/sortingMoviesByRating",
@@ -247,3 +237,31 @@ export const setSimularTvShowsById = createAsyncThunk(
     }
 )
 
+
+
+export const deleteMovieById = createAsyncThunk(
+    "movies/deleteMovieById",
+    async(id: string | undefined, thunkAPI) =>{
+        try{
+            const ordersRef = collection(db, "favorites")
+            const d = query(ordersRef, where("id", "==", Number(id)));
+            const data = (await getDocs(d)).docs
+            await deleteDoc(doc(db, "favorites", data[0].id))
+        }catch(e){
+
+        }
+    }
+)
+
+export const addFavoriteMovie = createAsyncThunk(
+    "movies/addFavoriteMovies",
+    async(args: any[], thunkAPI) =>{
+        try{
+            const [email, type, movie] = args;
+            let {id, name, poster_path, vote_average, title, release_date, overview, first_air_date } = movie
+            const docRef = await addDoc(collection(db, "favorites"), {email: email, id, poster_path, vote_average, title: title || name, release_date: release_date || first_air_date, overview, favorite: true, type})
+        }catch(e){
+
+        }
+    }
+)

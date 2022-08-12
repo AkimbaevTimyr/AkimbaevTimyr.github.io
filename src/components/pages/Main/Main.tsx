@@ -4,7 +4,7 @@ import Loading from '../../Loading/loading'
 import PersonalFilms from './PersonalFilms/PersonalFilms'
 import PersonalSeries from './PersonalSeries/PersonalSeries'
 import UpcomingPremiers from './UpcomingPremires/UpcomingPremiers'
-
+import styles from './style.module.css'
 
 const Main: FC = () => {
   const {isLoading} = useAppSelector(state => state.movies)
@@ -12,7 +12,7 @@ const Main: FC = () => {
     return <Loading />
   }
   return (
-   <div>
+   <div className={styles.main}>
     <PersonalFilms />
     <PersonalSeries />
     <UpcomingPremiers />

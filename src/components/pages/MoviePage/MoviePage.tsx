@@ -2,15 +2,17 @@ import React, { useEffect, useState, FC } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Loading from '../../Loading/loading'
-import { useAppSelector } from '../../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { addFavorites, deleteFavoriteMovie } from '../../../http/favoritesMovie'
 import './style.css'
 import FilmItem from '../../FilmItem/FilmItem'
 import About from '../../About/About'
 import Description from '../../Description/Description'
+import { addFavoriteMovie, deleteMovieById } from '../../../store/actions/MovieActionCreator'
 
 const MoviePage: FC = () => {
     let { id } = useParams()
+    const dispatch = useAppDispatch()
     const [movieKey, setMovieKey] = useState<string>('')
     const { user } = useAppSelector(state => state.user)
     const { favoriteMovies, currentMovie, simularMovies} = useAppSelector(state => state.movies)
@@ -22,13 +24,13 @@ const MoviePage: FC = () => {
         const findItem = favoriteMovies.find((el: any) => el.id == id ? setButtonCondition(true) : '')
     }, [])
     
-    const addFavoriteMovie = async () => {
+    const addFavorite = async () => {
         setButtonCondition(true)
-        await addFavorites(user.email, 'фильм', currentMovie)
+        dispatch(addFavoriteMovie([user.email, 'фильм', currentMovie]))
     }
-    const deleteFavorites = async (id: any) => {
+    const deleteFavorites = async (id: string | undefined) => {
         setButtonCondition(false)
-        await deleteFavoriteMovie(id)
+        dispatch(deleteMovieById(id))
     }
     return (
         <div className='movieContainer'>
@@ -59,7 +61,7 @@ const MoviePage: FC = () => {
                                     <polyline points="20 6 9 17 4 12"></polyline>
                                 </svg>
                                 Удалить
-                            </div>) : (<div onClick={() => addFavoriteMovie()} className="button_watch_later">
+                            </div>) : (<div onClick={() => addFavorite()} className="button_watch_later">
                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                                 Буду смотреть
                             </div>)}

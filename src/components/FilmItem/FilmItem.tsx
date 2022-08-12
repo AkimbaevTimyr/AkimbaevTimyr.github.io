@@ -25,11 +25,12 @@ const FilmItem: FC<FilmItemProps> = ({id,img, title, vote_average, release_date,
             dispatch(setSimularTvShowsById(id))
         }
     }
+    console.log(img)
   return (
     <div className={styles.item}>
         <div onClick={()=> click()} className={styles.img}>
             {img == undefined || null || img.length == 0? (<img src='https://st.kp.yandex.net/images/film_big/4781063.jpg'/>) : (<Link  to={type == 'фильм' ? `/movie/${id}` : `/tv/${id}`}>
-                    <img
+                    <img  loading="lazy"
                         src={`https://image.tmdb.org/t/p/w220_and_h330_face/${img}`}
                     />
                 </Link>)}

@@ -2,14 +2,16 @@ import React, { useEffect, useState, FC } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { addFavorites, deleteFavoriteMovie } from '../../../http/favoritesMovie'
-import { useAppSelector } from '../../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import Loading from '../../Loading/loading'
 import './style.css'
 import FilmItem from '../../FilmItem/FilmItem'
 import Description from '../../Description/Description'
 import About from '../../About/About'
+import { addFavoriteMovie, deleteMovieById } from '../../../store/actions/MovieActionCreator'
 
 const TvShowsPage: FC = () => {
+    const dispatch = useAppDispatch()
     let { id } = useParams()
     const [movieKey, setMovieKey] = useState<string>('')
     const { user } = useAppSelector(state => state.user)
@@ -23,13 +25,13 @@ const TvShowsPage: FC = () => {
         const findItem = favoriteMovies.find((el: any) => el.id == id ? setButtonCondition(true) : '')
     }, [])
 
-    const addFavoriteMovie = async () => {
+    const addFavorite = async () => {
         setButtonCondition(true)
-        await addFavorites(user.email, 'сериал', currentTvShow)
+        dispatch(addFavoriteMovie([user.email, 'сериал', currentTvShow]))
     }
-    const deleteFavorites = async (id: any) => {
+    const deleteFavorite = async (id: string | undefined) => {
         setButtonCondition(false)
-        await deleteFavoriteMovie(id)
+        dispatch(deleteMovieById(id))
     }
     return (
         <div className='movieContainer'>
@@ -52,10 +54,10 @@ const TvShowsPage: FC = () => {
                                     Смотреть
                                 </a>
                             </div>
-                            {buttonCondition === true ? (<div onClick={() => deleteFavorites(id)} className="button_watch_later">
+                            {buttonCondition === true ? (<div onClick={() => deleteFavorite(id)} className="button_watch_later">
                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                                 Удалить
-                            </div>) : (<div onClick={() => addFavoriteMovie()} className="button_watch_later">
+                            </div>) : (<div onClick={() => addFavorite()} className="button_watch_later">
                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
                                     stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <polyline points="20 6 9 17 4 12"></polyline>
