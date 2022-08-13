@@ -1,4 +1,3 @@
-import './App.css';
 import Main from './components/pages/Main/Main';
 import NavBar from './components/NavBar/NavBar';
 import { Routes, Route} from 'react-router-dom'
@@ -20,6 +19,7 @@ import {  getAll } from './store/actions/MovieActionCreator';
 import SearchPage from './components/pages/SearchPage/SearchPage';
 import AllFilms from './components/pages/Films/AllFilms/AllFilms';
 import { checkToken } from './store/actions/UserActionCreator';
+import styles from './App.module.css'
 
 function App() {
   const dispatch = useAppDispatch()
@@ -34,8 +34,9 @@ function App() {
   }, [])
   
   return (
-    <div className='container'>
+    <div >
         <NavBar />
+      <div className={styles.container}>
         {/* Navigation Routes */}
         <Routes>
           <Route path='/' element={<Main />} />
@@ -90,6 +91,7 @@ function App() {
         <Routes>
           <Route  path='upcoming-premiers' element={<UpcomingPremiersItem />}/>
         </Routes>
+      </div>
     </div>
   );
 }
