@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
 import { useAppDispatch } from '../../hooks/redux';
-import { getMoviesById, setSimularMoviesById, setSimularTvShowsById } from '../../store/actions/MovieActionCreator';
+import { setSimularMoviesById, setSimularTvShowsById } from '../../store/actions/MovieActionCreator';
 import { getTvShowsById } from '../../store/actions/TvShowActionCreator';
 import styles from './style.module.css'
 
@@ -19,15 +19,11 @@ interface SearchItemsProps {
 
 
 const SearchItems: FC<SearchItemsProps> = ({ id, img, name, vote_average, runtime, release_date, type }) => {
-    const dispatch = useAppDispatch()
+    const dispatch: any = useAppDispatch()
     const click = () =>{
-        if(type == 'movie'){
-            dispatch(getMoviesById(id))
-            dispatch(setSimularMoviesById(id))
-        }else{
+       
             dispatch(getTvShowsById(id))
             dispatch(setSimularTvShowsById(id))
-        }
     }
     return (
         <>

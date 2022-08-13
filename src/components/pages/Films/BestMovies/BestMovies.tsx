@@ -8,7 +8,7 @@ import styles from './style.module.css'
 import { getBestMovies, sortingMoviesByRating } from '../../../../store/actions/MovieActionCreator'
 
 const BestMovies: FC = () => {
-    const dispatch = useAppDispatch()
+    const dispatch: any = useAppDispatch()
     const [rating1, setRating1] = useState<number>(1)
     const [rating2, setRating2] = useState<number>(10)
 

@@ -9,7 +9,7 @@ import {  login } from '../../../store/actions/UserActionCreator';
 
 const Login: FC = () => {
   const navigate = useNavigate()
-  const dispatch = useAppDispatch()
+  const dispatch: any = useAppDispatch()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 

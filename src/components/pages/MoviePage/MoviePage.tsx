@@ -1,33 +1,35 @@
 import React, { useEffect, useState, FC, Fragment } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import axios from 'axios'
-import Loading from '../../Loading/loading'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
-import { addFavorites, deleteFavoriteMovie } from '../../../http/favoritesMovie'
 import './style.css'
 import FilmItem from '../../FilmItem/FilmItem'
 import About from '../../About/About'
 import Description from '../../Description/Description'
 import { addFavoriteMovie, deleteMovieById } from '../../../store/actions/MovieActionCreator'
 import { convertTimestampToDate } from '../../../helpers/convertTimestampToDate/convertTimestampToDate'
+import { useGetMoviesByIdQuery } from '../../../services/MovieService'
+import Loading from '../../Loading/loading'
+import SimularMovies from '../../SimularMovies/SimularMovies'
 
 const MoviePage: FC = () => {
     let { id } = useParams()
-    const dispatch = useAppDispatch()
+    const { data, isLoading, isError } =  useGetMoviesByIdQuery(Number(id))
+    const dispatch: any = useAppDispatch()
     const [movieKey, setMovieKey] = useState<string>('')
     const { user } = useAppSelector(state => state.user)
-    const { favoriteMovies, currentMovie, simularMovies} = useAppSelector(state => state.movies)
+    const { favoriteMovies, simularMovies } = useAppSelector(state => state.movies)
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
-    const { poster_path, title, overview, vote_average, genres, release_date, original_name, original_title, tagline, production_countries, budget, runtime } = currentMovie;
-    
+    const { poster_path = undefined, title = undefined, overview = undefined, vote_average = undefined, genres = undefined, release_date = undefined, original_name = undefined, original_title = undefined, tagline = undefined, production_countries = undefined, budget = undefined, runtime = undefined } = { ...data };
+
     useEffect(() => {
-         axios.get<any>(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US`).then((data: any) => setMovieKey(data.data.results[0].key))
+        axios.get<any>(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US`).then((data: any) => setMovieKey(data.data.results[0].key))
         const findItem = favoriteMovies.find((el: any) => el.id == id ? setButtonCondition(true) : '')
     }, [])
-    
+
     const addFavorite = async () => {
         setButtonCondition(true)
-        dispatch(addFavoriteMovie([user.email, 'фильм', currentMovie]))
+        dispatch(addFavoriteMovie([user.email, 'фильм', data]))
     }
     const deleteFavorites = async (id: string | undefined) => {
         setButtonCondition(false)
@@ -35,17 +37,17 @@ const MoviePage: FC = () => {
     }
 
     const items = [
-        {caption: 'Страны', value: production_countries?.map((el: any, index: any) => <Fragment>{el.name + ', '}</Fragment>) },
-        {caption: "Жанр", value: genres?.map((el: any) => <Fragment>{el.name + ', '}</Fragment>) },
-        {caption: 'Слоган', value: tagline || '—'},
-        {caption: 'Бюджет', value: `$ ${budget}`|| '—' },
-        {caption: 'Время', value: `${runtime} мин.`},
-        {caption: 'Премьера в мире', value: convertTimestampToDate(release_date)},
+        { caption: 'Страны', value: production_countries?.map((el: any, index: any) => <Fragment>{el.name + ', '}</Fragment>) },
+        { caption: "Жанр", value: genres?.map((el: any) => <Fragment>{el.name + ', '}</Fragment>) },
+        { caption: 'Слоган', value: tagline || '—' },
+        { caption: 'Бюджет', value: `$ ${budget}` || '—' },
+        { caption: 'Время', value: `${runtime} мин.` },
+        { caption: 'Премьера в мире', value: convertTimestampToDate(release_date) },
     ]
 
     return (
         <div className='movieContainer'>
-            <div className="moviePage" >
+            {isLoading === true ?  <Loading /> : (<div className="moviePage" >
                 <div className='movie'>
                     <div className="itemImg">
                         {poster_path == undefined ? (<img src='https://st.kp.yandex.net/images/film_big/4781063.jpg' className="itemImg" />) : (
@@ -78,20 +80,20 @@ const MoviePage: FC = () => {
                             </div>)}
                         </div>
                         <h2 className="about_movie">О фильме</h2>
-                        <About items={items}/>
+                        <About items={items} />
                     </div>
                 </div>
-                <Description description={overview}/>
+                <Description description={overview} />
                 <br />
                 <div className='simular_movies_header'>
                     {simularMovies && 'Похожее кино'}
                 </div>
                 <div className="simular_movies">
-                    {simularMovies?.slice(0,4).map((el: any) => (
-                         <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="фильм" />
-                    ))}
+                    
+                    <SimularMovies id={id} />
                 </div>
-            </div>
+            </div>)}
+
         </div>
     )
 }
@@ -100,46 +102,3 @@ export default MoviePage
 
 
 
-{/* {poster_path  === undefined ? (<Loading />) : (<div className="flex relative justify-center w-1/2 max-w-screen-xl px-4 py-8 mx-auto">
-            <div className='mr-5'>
-                <img
-                    className=" w-36 rounded-xl"
-                   
-                />
-            </div>
-            <div className=''>
-                <div className='flex justify-between text-2xl font-bold'>
-                    <h1>{title}
-                </h1>
-                <div className='cursor-pointer' title={buttonCondition === false ?  'Добавить в избранное':   'Удалить из избранного'}>
-                    {buttonCondition === true ? 
-                        (<svg xmlns="http://www.w3.org/2000/svg" onClick={()=>  deleteFavorites(id)} className="h-8 w-8 ml-14 mt-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>):( <svg xmlns="http://www.w3.org/2000/svg" onClick={()=> addFavoriteMovie()} className="h-8 w-8 ml-14 mt-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>)
-                    }
-                </div>
-                </div>
-                <div className="flex mt-2 -ml-0.5">
-                    <p className='ml-1'>{vote_average.toFixed(1)}</p>
-                    <svg
-                        className="w-5 h-5 text-yellow-400 mt-0.5"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                    >
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                </div>
-                <div>
-                    Дата выхода: {release_date}
-                </div>
-                <div className='flex'>
-                    Жанр: {genres === undefined ? "" : (genres.map((el: any) => <p>{el.name},</p>))}
-                </div>
-                <div className="w-96">
-                    <p>
-                        {overview}
-                    </p>
-                </div>
-            </div>
-        </div>)} */}

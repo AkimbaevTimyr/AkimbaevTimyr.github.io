@@ -63,18 +63,6 @@
     position: relative;
 }
 
-.search_menu {
-    z-index: 2;
-    position: absolute;
-    margin-top: 10;
-    width: 350px;
-    height: 500px;
-    background-color: #333;
-    scroll-behavior: auto;
-    overflow-y: scroll;
-    border-radius: 10px;
-}
-
 .search_input {
     position: relative;
     width: 350px;
@@ -84,8 +72,20 @@
     padding: 10px;
     color: white;
     outline: none;
-
 }
+
+.search_menu {
+    z-index: 2;
+    position: absolute;
+    width: 350px;
+    height: 500px;
+    background-color: #333;
+    scroll-behavior: auto;
+    overflow-y: scroll;
+    border-radius: 10px;
+}
+
+
 
 .empty{
     color: white;

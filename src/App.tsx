@@ -20,9 +20,10 @@ import SearchPage from './components/pages/SearchPage/SearchPage';
 import AllFilms from './components/pages/Films/AllFilms/AllFilms';
 import { checkToken } from './store/actions/UserActionCreator';
 import styles from './App.module.css'
+import { AppDispatch } from './store/store';
 
 function App() {
-  const dispatch = useAppDispatch()
+  const dispatch: any = useAppDispatch()
   const {user} = useAppSelector(state=> state.user)
   const token = localStorage.getItem('token')
   const email = localStorage.getItem('email')

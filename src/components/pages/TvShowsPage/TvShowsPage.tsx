@@ -12,7 +12,7 @@ import { addFavoriteMovie, deleteMovieById } from '../../../store/actions/MovieA
 import { convertTimestampToDate } from '../../../helpers/convertTimestampToDate/convertTimestampToDate'
 
 const TvShowsPage: FC = () => {
-    const dispatch = useAppDispatch()
+    const dispatch: any = useAppDispatch()
     let { id } = useParams()
     const [movieKey, setMovieKey] = useState<string>('')
     const { user } = useAppSelector(state => state.user)

@@ -6,7 +6,7 @@ import { setSearchMovies } from '../../../store/actions/MovieActionCreator'
 
 const SearchPage = () => {
     const [text, setText] = useState<string>('')
-    const dispatch = useAppDispatch()
+    const dispatch: any = useAppDispatch()
     const { searchMovies } = useAppSelector(state => state.movies)
     const handleClick = async (e: any) => {
         e.preventDefault()

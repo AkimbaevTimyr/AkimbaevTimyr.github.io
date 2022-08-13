@@ -7,7 +7,7 @@ export interface IMovieState{
     personalMovies: IMovie[];
     personalSeries: IMovie[];
     upcomingPremiers: IMovie[];
-    currentMovie: IMovie;
+    currentMovie: {};
     simularMovies: IMovie[];
     searchMovies: IMovie[];
     allMovies: IMovie[];
@@ -22,6 +22,10 @@ export type IMovie = {
     overview: string;
     vote_average: number;
     poster_path: string | null;
+    genres: IGenres[];
+    tagline: string;
+    production_countries: IProductionCountries[];
+    original_name: string;
 }
 
 export type IFavoriteMovie = {
@@ -35,3 +39,12 @@ export type IFavoriteMovie = {
     favorite: boolean;
 }
 
+export type IGenres = {
+    id: number;
+    name: string;
+}
+
+export type IProductionCountries = {
+    iso_3166_1: string;
+    name: string;
+}

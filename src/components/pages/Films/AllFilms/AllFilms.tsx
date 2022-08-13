@@ -11,7 +11,7 @@ import styles from './style.module.css'
 const AllFilms = () => {
     
     const { allMovies } = useAppSelector(state => state.movies)
-    const dispatch = useAppDispatch()
+    const dispatch: any = useAppDispatch()
 
     const [filmPage, setFilmPage] = useState<number>(1)
     const data: any = localStorage.getItem('rating')?.split(',')

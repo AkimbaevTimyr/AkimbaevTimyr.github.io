@@ -98,17 +98,17 @@ export const getAllMovies = createAsyncThunk(
     }
 )
 
-export const getMoviesById = createAsyncThunk(
-    "movie/getMoviesById",
-    async(id: number, thunkAPI) => {
-        try{
-            let { data } = await axios.get<any>(`https://api.themoviedb.org/3/movie/${id}?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU`)
-            return data
-        }catch(e){
+// export const getMoviesById = createAsyncThunk(
+//     "movie/getMoviesById",
+//     async(id: number, thunkAPI) => {
+//         try{
+//             let { data } = await axios.get<any>(`https://api.themoviedb.org/3/movie/${id}?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU`)
+//             return data
+//         }catch(e){
 
-        }
-    }
-)
+//         }
+//     }
+// )
 
 export const setSimularMoviesById = createAsyncThunk(
     "movies/setSimularMoviesById",
@@ -163,7 +163,7 @@ export const addFavoriteMovies = createAsyncThunk(
 
 export const sortingMoviesByRating = createAsyncThunk(
     "movies/sortingMoviesByRating",
-    async(data: any) => {
+    async(data: any, thunkAPI) => {
         let  [first = 10, second = 1,firstYear = 1960, secondYear = 2025, page = 1 ] = data;
         try{
             let {data} = await axios.get<any>(`https://api..org/3/discover/movie?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU&sort_by=vote_average.asc&page=${page}&release_date.gte=${firstYear}&release_date.lte=${secondYear}&vote_average.gte=${first}&vote_average.lte=${second}&with_watch_monetization_types=flatrate`)
@@ -258,7 +258,7 @@ export const addFavoriteMovie = createAsyncThunk(
     async(args: any[], thunkAPI) =>{
         try{
             const [email, type, movie] = args;
-            let {id, name, poster_path, vote_average, title, release_date, overview, first_air_date } = movie
+            let {id, name, poster_path, vote_average, title, release_date, overview, first_air_date } = movie;
             const docRef = await addDoc(collection(db, "favorites"), {email: email, id, poster_path, vote_average, title: title || name, release_date: release_date || first_air_date, overview, favorite: true, type})
         }catch(e){
 

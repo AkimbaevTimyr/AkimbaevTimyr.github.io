@@ -13,7 +13,7 @@ const LeftSide: FC<LeftSideProps> = ({ filmPage }) => {
         const g: string | null = localStorage.getItem('genre')
         setGenre(Number(g))
     }, [])
-    const dispatch = useAppDispatch()
+    const dispatch: any = useAppDispatch()
     const genres: any = {
         'Драма': 18,
         "Боевик": 28,

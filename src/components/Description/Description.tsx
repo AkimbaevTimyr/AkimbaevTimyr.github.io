@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 import styles from './style.module.css'
 
 interface DescriptionProps {
-    description: string;
+    description: string | undefined;
 }
 
 const Description: FC<DescriptionProps> = ({description}) => {

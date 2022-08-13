@@ -7,7 +7,7 @@ import FilmItem from '../../../FilmItem/FilmItem'
 import "./style.css"
 import { getPopularMovies } from '../../../../store/actions/MovieActionCreator'
 const PopularFilms: FC = () => {
-  const dispatch = useAppDispatch()
+  const dispatch: any = useAppDispatch()
   const changePage = (page: number) => {
     dispatch(getPopularMovies(page))
   }

@@ -7,7 +7,7 @@ import './style.css'
 const WatchList: FC = () => {
   const {user} = useAppSelector(state => state.user)
   const {favoriteMovies} = useAppSelector(state => state.movies)
-  const dispatch = useAppDispatch()
+  const dispatch: any = useAppDispatch()
   useEffect(()=>{
     dispatch(getFavoriteMovies(user.email))
   },[])
