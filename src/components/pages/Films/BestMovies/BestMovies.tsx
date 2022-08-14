@@ -9,24 +9,18 @@ import { getBestMovies, sortingMoviesByRating } from '../../../../store/actions/
 
 const BestMovies: FC = () => {
     const dispatch: any = useAppDispatch()
-    const [rating1, setRating1] = useState<number>(1)
-    const [rating2, setRating2] = useState<number>(10)
-
-    const [year1, setyear1] = useState<number>(1960)
-    const [year2, setyear2] = useState<number>(2025)
     const { bestMovies } = useAppSelector(state => state.movies)
 
     const changePage = async (page: number) => {
         dispatch(getBestMovies(page))
     }
 
-
     return (
         <>
         {bestMovies.length === 0 ? <Loading /> : (<>
           <div className='items'>
             {bestMovies.map((el: IMovie) => (
-               <FilmItem  key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="фильм"/>
+               <FilmItem  key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="movie"/>
             ))}
           </div> <Pagination changePage={(page: number) => changePage(page)} />
         </>

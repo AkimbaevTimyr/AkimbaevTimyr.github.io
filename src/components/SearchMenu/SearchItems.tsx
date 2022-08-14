@@ -20,15 +20,10 @@ interface SearchItemsProps {
 
 const SearchItems: FC<SearchItemsProps> = ({ id, img, name, vote_average, runtime, release_date, type }) => {
     const dispatch: any = useAppDispatch()
-    const click = () =>{
-       
-            dispatch(getTvShowsById(id))
-            dispatch(setSimularTvShowsById(id))
-    }
     return (
         <>
-        <Link to={type == 'movie' ? `/movie/${id}` : `tv/${id}`}>
-                <div className={styles.item} onClick={()=> click()}>
+        <Link to={`/${type}/${id}`}>
+                <div className={styles.item} >
                         <div className={styles.left}>
                             <div className={styles.img}>
                                 {img == undefined ? ( (<img src='https://st.kp.yandex.net/images/film_big/4781063.jpg'/>) 

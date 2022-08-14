@@ -70,6 +70,9 @@ const moviesSlice = createSlice({
         },
         [setIsLoading.fulfilled.type] : (state, action) =>{
             state.isLoading = action.payload
+        },
+        [getFavoriteMovies.fulfilled.type] : (state, action) =>{
+            state.favoriteMovies = action.payload
         }
     }
 })

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import  {  useState } from 'react'
 import FilmItem from '../../FilmItem/FilmItem'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { setSearchMovies } from '../../../store/actions/MovieActionCreator'
@@ -34,14 +33,3 @@ const SearchPage = () => {
 }
 
 export default SearchPage
-
-{/* <div id="dropdown" className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top" style={{position: "absolute", inset: "auto auto 0px 0px",  margin: "0px", transform: "translate3d(377.6px, 626.4px, 0px)"}}>
-                    <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
-                        <li>
-                            <button type="button" className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Фильмы</button>
-                        </li>
-                        <li>
-                            <button type="button" className="inline-flex py-2 px-4 w-full hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Сериалы</button>
-                        </li>
-                    </ul>
-                </div> */}

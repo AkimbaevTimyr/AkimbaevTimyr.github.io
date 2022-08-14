@@ -6,7 +6,7 @@ import { db } from '../../firebase-config'
 
 export const getAll = createAsyncThunk(
     "movies/getAllMovies",
-    async(email: string, thunkAPI) =>{
+    async(email: string | null, thunkAPI) =>{
         const genre = localStorage.getItem('genre')
         try{
                 thunkAPI.dispatch(getBestMovies(1))
@@ -15,7 +15,7 @@ export const getAll = createAsyncThunk(
                 thunkAPI.dispatch(getPersonalSeries())
                 thunkAPI.dispatch(getUpcomingPremiers())
                 thunkAPI.dispatch(getTvShows(1))
-                // thunkAPI.dispatch(getFavoriteMovies(email))
+                thunkAPI.dispatch(getFavoriteMovies(email))
                 thunkAPI.dispatch(getAllMovies([1, genre]))
                 thunkAPI.dispatch(setIsLoading(false))
         }catch(e){
@@ -124,11 +124,11 @@ export const setSimularMoviesById = createAsyncThunk(
 
 export const getFavoriteMovies = createAsyncThunk(
     "movies/getFavoriteMovies",
-    async(email: string, thunkAPI) => {
+    async(email: string | null, thunkAPI) => {
         try{
             const querySnapshot = await getDocs(collection(db, "favorites"));
-            const data = querySnapshot.docs.map(doc => doc.data())
-            return data.filter(el => el.email === email)
+            const data = querySnapshot.docs.map(doc => doc.data()).filter(el => el.email === email)
+            return data
         }catch(e){
 
         }
@@ -213,17 +213,6 @@ export const getTvShows = createAsyncThunk(
     }
 )
 
-export const getTvShowsById = createAsyncThunk(
-    "tvshows/getTvShowsById",
-    async(id: number, thunkAPI) => {
-        try{
-            let { data } = await axios.get<any>(`https://api.themoviedb.org/3/tv/${id}?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU`)
-            return data
-        }catch(e){
-
-        }
-    }
-)
 
 export const setSimularTvShowsById = createAsyncThunk(
     "movies/setSimularTvShowsById",

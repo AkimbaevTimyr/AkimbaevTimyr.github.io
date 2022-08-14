@@ -20,7 +20,6 @@ import SearchPage from './components/pages/SearchPage/SearchPage';
 import AllFilms from './components/pages/Films/AllFilms/AllFilms';
 import { checkToken } from './store/actions/UserActionCreator';
 import styles from './App.module.css'
-import { AppDispatch } from './store/store';
 
 function App() {
   const dispatch: any = useAppDispatch()
@@ -29,7 +28,7 @@ function App() {
   const email = localStorage.getItem('email')
   useEffect(()=> {
     setTimeout(() => {
-      dispatch(getAll(user.email))
+      dispatch(getAll(email))
       dispatch(checkToken([token, email]))
     }, 1000)
   }, [])

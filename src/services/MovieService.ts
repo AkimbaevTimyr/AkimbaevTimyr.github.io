@@ -8,11 +8,14 @@ export const movieApi = createApi({
         getMoviesById: builder.query<IMovie, any>({
             query: (id: number) => `/movie/${id}?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU`,
         }),
-        getSimularMoviesById: builder.query<any, any>({
-            query: (id: number) => `/movie/${id}/similar?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US&page=1`
+        getSimular: builder.query<any, any>({
+            query: ({id, name}) => `/${name}/${id}/similar?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US&page=1`
+        }),
+        getTvShowsById: builder.query<any, any>({
+            query: (id: number) => `/tv/${id}?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU`
         })
     }),
 })
 
-export const {useGetMoviesByIdQuery, useGetSimularMoviesByIdQuery } = movieApi;
+export const {useGetMoviesByIdQuery, useGetSimularQuery, useGetTvShowsByIdQuery} = movieApi;
 

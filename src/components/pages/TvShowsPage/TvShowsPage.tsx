@@ -1,24 +1,25 @@
 import React, { useEffect, useState, FC, Fragment } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-import { addFavorites, deleteFavoriteMovie } from '../../../http/favoritesMovie'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
-import Loading from '../../Loading/loading'
 import './style.css'
-import FilmItem from '../../FilmItem/FilmItem'
 import Description from '../../Description/Description'
 import About from '../../About/About'
 import { addFavoriteMovie, deleteMovieById } from '../../../store/actions/MovieActionCreator'
 import { convertTimestampToDate } from '../../../helpers/convertTimestampToDate/convertTimestampToDate'
+import SimularMovies from '../../SimularMovies/SimularMovies'
+import { useGetTvShowsByIdQuery } from '../../../services/MovieService'
+import Loading from '../../Loading/loading'
 
 const TvShowsPage: FC = () => {
     const dispatch: any = useAppDispatch()
     let { id } = useParams()
+    const {data, isLoading, isError} = useGetTvShowsByIdQuery(Number(id))
     const [movieKey, setMovieKey] = useState<string>('')
     const { user } = useAppSelector(state => state.user)
-    const { favoriteMovies, simularMovies } = useAppSelector(state => state.movies)
-    const {currentTvShow} = useAppSelector(state => state.tvShows)
-    const { budget, tagline, production_countries, runtime,  poster_path, name, overview, vote_average, genres, first_air_date, original_name } = currentTvShow;
+    const { favoriteMovies,  } = useAppSelector(state => state.movies)
+    const { poster_path = undefined, name = undefined, overview = undefined, vote_average = undefined, genres = undefined, first_air_date = undefined, original_name = undefined, original_title = undefined, tagline = undefined, production_countries = undefined, budget = undefined, runtime = undefined } = { ...data };
+
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
 
     useEffect(() => {
@@ -28,7 +29,7 @@ const TvShowsPage: FC = () => {
 
     const addFavorite = async () => {
         setButtonCondition(true)
-        dispatch(addFavoriteMovie([user.email, 'сериал', currentTvShow]))
+        dispatch(addFavoriteMovie([user.email, 'tv', {...data}]))
     }
     const deleteFavorite = async (id: string | undefined) => {
         setButtonCondition(false)
@@ -39,22 +40,22 @@ const TvShowsPage: FC = () => {
         {caption: 'Страны', value: production_countries?.map((el: any) => <Fragment>{el.name + ', '}</Fragment>) },
         {caption: "Жанр", value: genres?.map((el: any) => <Fragment>{el.name + ', '}</Fragment>) },
         {caption: 'Слоган', value: tagline || '—'},
-        {caption: 'Бюджет', value: budget || '—' },
+        {caption: 'Бюджет', value: '—' },
         {caption: 'Время', value: '—'},
         {caption: 'Премьера в мире', value: convertTimestampToDate(first_air_date)},
     ]
 
     return (
         <div className='movieContainer'>
-            <div className="moviePage" >
+            {isLoading === true ? <Loading /> : (<div className="moviePage" >
                 <div className="movie">
                     <div className="itemImg">
                         <img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`} alt="" className="itemImg" />
-                        <p className="rating">8.8</p>
+                        <p className="rating">{vote_average?.toFixed(1)}</p>
                     </div>
                     <div className="item_about">
                         <h2 className="item_header">{name}</h2>
-                        <h2 className="item_subheader">{ original_name}</h2>
+                        <h2 className="item_subheader">{original_name}</h2>
                         <div className="item_buttons">
                             <div className="button_watch">
                                 <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
@@ -81,20 +82,10 @@ const TvShowsPage: FC = () => {
                 </div>
                 <Description description={overview}/>
                 <br />
-                <div className='simular_movies_header'>
-                    {simularMovies && 'Похожее кино'}
-                </div>
                 <div className="simular_movies">
-                    {/* <SimularMovies />
-                    <SimularMovies />
-                    <SimularMovies />
-                    <SimularMovies />
-                    <SimularMovies /> */}
-                    {simularMovies?.slice(0,4).map((el: any) => (
-                         <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="фильм" />
-                    ))}
+                    <SimularMovies id={id} header='Похожие сериалы' name="tv"/>
                 </div>
-        </div>
+        </div>)}
     </div>
     )
 }

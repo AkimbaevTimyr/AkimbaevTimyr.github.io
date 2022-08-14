@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useNavigate} from 'react-router-dom';
 import { authentication } from '../../../firebase-config';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { getFavoriteMovie } from '../../../http/favoritesMovie';
 import {  login } from '../../../store/actions/UserActionCreator';
 
 const Login: FC = () => {

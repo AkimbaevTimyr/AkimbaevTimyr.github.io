@@ -1,22 +1,25 @@
-import { constants } from 'buffer'
-import React, { FC } from 'react'
-import { useGetSimularMoviesByIdQuery } from '../../services/MovieService'
+import  { FC } from 'react'
+import {  useGetSimularQuery } from '../../services/MovieService'
 import FilmItem from '../FilmItem/FilmItem'
 import styles from './style.module.css'
 
 interface SimularMoviesProps {
-    id: string | undefined
+    id: string | undefined;
+    header: string;
+    name: string;
 }
 
-const SimularMovies: FC<SimularMoviesProps> = ({id}) => {
-    const { data, isLoading, isError } = useGetSimularMoviesByIdQuery(Number(id))
-    console.log(data)
+const SimularMovies: FC<SimularMoviesProps> = ({id, header, name}) => {
+    const { data, isLoading, isError } =  useGetSimularQuery({id: Number(id), name})
     return (
-        <div className={styles.simularMovies}>
-            {data?.results.slice(0, 4).map((el: any) => (
-                <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="фильм" />
-            ))}
-
+        <div>
+            {{...data}.length != 0 ? ( <><div className={styles.header}>
+                {header}
+            </div><div className={styles.simularMovies}>
+                    {data?.results.slice(0, 4).map((el: any) => (
+                        <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title || el.name} vote_average={el.vote_average} release_date={el.release_date || el.first_air_date} type={name}/>
+                    ))}
+                </div></>) : ''}
         </div>
     )
 }

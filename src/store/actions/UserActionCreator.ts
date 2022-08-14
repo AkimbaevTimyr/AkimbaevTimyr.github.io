@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { authentication } from "../../firebase-config";
-import { getFavoriteMovie } from "../../http/favoritesMovie";
 import { IUser } from "../../types/UserTypes";
 import { getFavoriteMovies } from "./MovieActionCreator";
 

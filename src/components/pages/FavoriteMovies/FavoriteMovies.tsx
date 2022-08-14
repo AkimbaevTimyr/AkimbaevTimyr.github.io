@@ -5,11 +5,11 @@ import FilmItem from '../../FilmItem/FilmItem'
 import Loading from '../../Loading/loading'
 import './style.css'
 const WatchList: FC = () => {
-  const {user} = useAppSelector(state => state.user)
+  const email = localStorage.getItem('email')
   const {favoriteMovies} = useAppSelector(state => state.movies)
   const dispatch: any = useAppDispatch()
   useEffect(()=>{
-    dispatch(getFavoriteMovies(user.email))
+    dispatch(getFavoriteMovies(email))
   },[])
   return (
     <div className='items'>

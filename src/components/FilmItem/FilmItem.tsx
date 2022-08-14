@@ -3,7 +3,8 @@ import styles from "./style.module.css"
 import {Link} from 'react-router-dom'
 import { getTvShowsById } from '../../store/actions/TvShowActionCreator';
 import { useAppDispatch } from '../../hooks/redux';
-import { setSimularTvShowsById, setSimularMoviesById } from '../../store/actions/MovieActionCreator';
+import { setSimularTvShowsById,} from '../../store/actions/MovieActionCreator';
+import {convertMovieType} from '../../helpers/convertMovieType/convertMovieType'
 
 interface FilmItemProps {
     id: number;
@@ -15,16 +16,10 @@ interface FilmItemProps {
 }
 
 const FilmItem: FC<FilmItemProps> = ({id,img, title, vote_average, release_date, type}) => {
-    const dispatch: any = useAppDispatch()
-    const click = () =>{
-       
-            dispatch(getTvShowsById(id))
-            dispatch(setSimularTvShowsById(id))
-    }
   return (
     <div className={styles.item}>
-        <div onClick={()=> click()} className={styles.img}>
-            {img == undefined || null || img.length == 0? (<img src='https://st.kp.yandex.net/images/film_big/4781063.jpg'/>) : (<Link  to={type == 'фильм' ? `/movie/${id}` : `/tv/${id}`}>
+        <div  className={styles.img}>
+            {img == undefined || null || img.length == 0? (<img src='https://st.kp.yandex.net/images/film_big/4781063.jpg'/>) : (<Link  to={`/${type}/${id}`}>
                     <img  loading="lazy"
                         src={`https://image.tmdb.org/t/p/w220_and_h330_face/${img}`}
                     />
@@ -36,7 +31,7 @@ const FilmItem: FC<FilmItemProps> = ({id,img, title, vote_average, release_date,
                 {title || '—'}
             </div>
             <div className={styles.year}>
-                {release_date?.substring(0,4) || '—'}, {type}
+                {release_date?.substring(0,4) || '—'}, {convertMovieType(type)}
             </div>
         </div>
     </div>    

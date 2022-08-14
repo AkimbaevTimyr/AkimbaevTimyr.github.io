@@ -15,10 +15,10 @@ import SimularMovies from '../../SimularMovies/SimularMovies'
 const MoviePage: FC = () => {
     let { id } = useParams()
     const { data, isLoading, isError } =  useGetMoviesByIdQuery(Number(id))
+    const email = localStorage.getItem('email')
     const dispatch: any = useAppDispatch()
     const [movieKey, setMovieKey] = useState<string>('')
-    const { user } = useAppSelector(state => state.user)
-    const { favoriteMovies, simularMovies } = useAppSelector(state => state.movies)
+    const { favoriteMovies,  } = useAppSelector(state => state.movies)
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
     const { poster_path = undefined, title = undefined, overview = undefined, vote_average = undefined, genres = undefined, release_date = undefined, original_name = undefined, original_title = undefined, tagline = undefined, production_countries = undefined, budget = undefined, runtime = undefined } = { ...data };
 
@@ -29,7 +29,7 @@ const MoviePage: FC = () => {
 
     const addFavorite = async () => {
         setButtonCondition(true)
-        dispatch(addFavoriteMovie([user.email, 'фильм', data]))
+        dispatch(addFavoriteMovie([email, 'movie', data]))
     }
     const deleteFavorites = async (id: string | undefined) => {
         setButtonCondition(false)
@@ -85,12 +85,8 @@ const MoviePage: FC = () => {
                 </div>
                 <Description description={overview} />
                 <br />
-                <div className='simular_movies_header'>
-                    {simularMovies && 'Похожее кино'}
-                </div>
                 <div className="simular_movies">
-                    
-                    <SimularMovies id={id} />
+                    <SimularMovies id={id} header='Похожие фильмы' name="movie"/>
                 </div>
             </div>)}
 

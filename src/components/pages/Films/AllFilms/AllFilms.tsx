@@ -15,7 +15,7 @@ const AllFilms = () => {
 
     const [filmPage, setFilmPage] = useState<number>(1)
     const data: any = localStorage.getItem('rating')?.split(',')
-    console.log(data)
+    
     const changePage = async (page: number) => {
         dispatch(sortingMovies([page, data[0], data[1], data[2]]))
         setFilmPage(page)
@@ -34,7 +34,7 @@ const AllFilms = () => {
                         {allMovies?.length === 0 ? <div className={styles.loading}><Loading /></div> : (<>
                             <div className={styles.items}>
                                 {allMovies?.map((el: IMovie) => (
-                                    <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="фильм" />
+                                    <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="movie" />
                                 ))}
                             </div> <Pagination changePage={(page: number) => changePage(page)} />
                         </>)}
