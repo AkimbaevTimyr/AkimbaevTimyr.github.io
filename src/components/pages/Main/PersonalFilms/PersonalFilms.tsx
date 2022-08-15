@@ -10,7 +10,7 @@ const PersonalFilms: FC = () => {
     return (
         <div className={styles.films}>
             <br/>
-            <div className={styles.header_block}>
+            <div className={styles.headerBlock}>
                 <h2 className={styles.header}>
                     Фильмы для вас
                 </h2>

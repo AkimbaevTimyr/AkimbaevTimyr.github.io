@@ -15,7 +15,7 @@
     flex-wrap: wrap;
 }
 
-.header_block {
+.headerBlock {
     width: 1300px;
     display: flex;
     align-items: center;
@@ -68,18 +68,20 @@
    .films{
     width: 100%;
    }
-   .header_block{
-        width: 390px;
-        margin-left: 40px;
+   .headerBlock{
+        width: 100%;
+        margin-left: 0px;
+        display: flex;
+        padding: 15px;
    }
    .items{
-    margin-left: 120px;
+    margin-left: 40px;
    }
    .header{
     font-size: 26px;
    }
     .nav{
-        width: 430px;
+        width: 100%;
         position: fixed;
         bottom: 0;
         left: 0;

@@ -10,7 +10,7 @@ const UpcomingPremiers = () => {
   const { upcomingPremiers } = useAppSelector(state => state.movies)
   return (
     <div className={styles.films}>
-      <div className={styles.header_block}>
+      <div className={styles.headerBlock}>
         <h2 className={styles.header}>
           Премьеры для вас
         </h2>
