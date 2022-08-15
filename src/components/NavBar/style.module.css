@@ -115,19 +115,23 @@
 @media (max-width: 390px) {
     .navBar{
         height: 60px;
+        width: 430px;
     }
     .container{
-        max-width: 300px;
+        width: 100%;
         margin-left: 0px;
+        padding: 10px;
     }
     .left{
         display: none;
     }
     .search_input{
         width: 200px;
-        margin-top: 3px;
+    }
+    .search{
+        margin-top: -4px;
     }
     .signIn{
-        margin-top: -30px;
+        margin-top: 1px;
     }
 }

@@ -29,7 +29,6 @@ const PersonalFilms: FC = () => {
                     </Link>)
                 ))}
             </div>
-
         </div>
     )
 }
