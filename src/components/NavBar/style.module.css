@@ -111,23 +111,17 @@
     color: white;
 }
 
-
-@media (max-width: 390px) {
+@media screen and (max-width: 1300px){
     .navBar{
         height: 60px;
-        width: 390px;
+        width: 1300px;
+        background-color: rgb(31, 31, 31);
     }
     .container{
         width: 100%;
         margin-left: 0px;
+        margin-right: 0px;
         padding: 10px;
-        margin-left: 0px;
-    }
-    .left{
-        display: none;
-    }
-    .search_input{
-        width: 200px;
     }
     .search{
         margin-top: -4px;
@@ -135,12 +129,39 @@
     .signIn{
         margin-top: 1px;
     }
+
 }
 
 
 
 
-@media(max-width: 768px){
+
+
+@media screen and (max-width: 1000px){
+    .navBar{
+        height: 60px;
+        width: 1000px;
+        background-color: rgb(31, 31, 31);
+    }
+    .container{
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding: 10px;
+    }
+    .search{
+        margin-top: -4px;
+    }
+    .signIn{
+        margin-top: 1px;
+    }
+
+}
+
+
+
+
+@media screen and (max-width: 768px){
     .navBar{
         height: 60px;
         width: 768px;
@@ -163,19 +184,22 @@
     }
 }
 
-
-
-@media(max-width: 1000px){
+@media screen and (max-width: 390px) {
     .navBar{
         height: 60px;
-        width: 1000px;
-        background-color: rgb(31, 31, 31);
+        width: 100%;
     }
     .container{
         width: 100%;
         margin-left: 0px;
-        margin-right: 0px;
         padding: 10px;
+        margin-left: 0px;
+    }
+    .left{
+        display: none;
+    }
+    .search_input{
+        width: 200px;
     }
     .search{
         margin-top: -4px;
@@ -183,26 +207,4 @@
     .signIn{
         margin-top: 1px;
     }
-
-}
-
-@media(max-width: 1300px){
-    .navBar{
-        height: 60px;
-        width: 1300px;
-        background-color: rgb(31, 31, 31);
-    }
-    .container{
-        width: 100%;
-        margin-left: 0px;
-        margin-right: 0px;
-        padding: 10px;
-    }
-    .search{
-        margin-top: -4px;
-    }
-    .signIn{
-        margin-top: 1px;
-    }
-
 }

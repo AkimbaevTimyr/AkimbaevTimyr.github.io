@@ -60,44 +60,38 @@
     display: none;
 }
 
-
-@media (max-width: 390px) {
-   .main{
-        width: 390px;
-   }
-   .films{
-    width: 100%;
-   }
-   .headerBlock{
-        width: 99%;
-        margin-left: 0px;
-        display: flex;
-        padding: 30px;
-   }
-   .items{
-    margin-left: 40px;
-   }
-   .header{
-    font-size: 26px;
-   }
-    .nav{
+@media screen and (max-width: 1300px) {
+    .main{
+        width: 1300px;
+    }
+    .films{
         width: 100%;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: space-between;
-        height: 60px;
-        background-color: rgb(31, 31, 31);
-        padding: 10px;
-    }  
-    .navItem{
-        color: white;
+    }
+    .headerBlock{
+        width: 84%;
+        margin-left: 90px;
+        margin-right: 0px;
+    }
+  
+}
+
+@media screen and (max-width: 1000px) {
+    .main{
+        width: 1000px;
+    }
+    .films{
+        width: 100%;
+    }
+    .headerBlock{
+        width: 87%;
+        margin-left: 50px;
+        margin-right: 0px;
     }
 }
 
-@media (max-width: 768px) {
+
+
+@media  screen and (max-width: 768px) {
     .main{
         width: 770px;
     }
@@ -127,31 +121,39 @@
 }
 
 
-@media (max-width: 1000px) {
-    .main{
-        width: 1000px;
-    }
-    .films{
-        width: 100%;
-    }
-    .headerBlock{
-        width: 87%;
-        margin-left: 50px;
-        margin-right: 0px;
-    }
-}
 
-@media (max-width: 1300px) {
+@media screen and (max-width: 390px) {
     .main{
-        width: 1300px;
+         width: 390px;
     }
     .films{
-        width: 100%;
+         width: 100%;
     }
     .headerBlock{
-        width: 84%;
-        margin-left: 90px;
-        margin-right: 0px;
+         width: 100%;
+         margin-left: 0px;
+         display: flex;
+         padding: 30px;
     }
-  
-}
+    .items{
+     margin-left: 40px;
+    }
+    .header{
+     font-size: 26px;
+    }
+     .nav{
+         width: 100%;
+         position: fixed;
+         bottom: 0;
+         left: 0;
+         right: 0;
+         display: flex;
+         justify-content: space-between;
+         height: 60px;
+         background-color: rgb(31, 31, 31);
+         padding: 10px;
+     }  
+     .navItem{
+         color: white;
+     }
+ }
