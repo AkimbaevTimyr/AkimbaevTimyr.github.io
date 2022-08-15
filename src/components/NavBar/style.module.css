@@ -118,9 +118,10 @@
         width: 390px;
     }
     .container{
-        width: 99%;
+        width: 100%;
         margin-left: 0px;
         padding: 10px;
+        margin-left: 0px;
     }
     .left{
         display: none;
@@ -135,3 +136,41 @@
         margin-top: 1px;
     }
 }
+
+@media(max-width: 1000px){
+    .navBar{
+        height: 60px;
+        width: 1000px;
+        background-color: rgb(31, 31, 31);
+    }
+    .container{
+        width: 100%;
+    }
+
+}
+
+
+@media(max-width: 768px){
+    .navBar{
+        height: 60px;
+        width: 768px;
+        background-color: rgb(31, 31, 31);
+    }
+    .container{
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding: 10px;
+    }
+    .left{
+        display: none;
+    }
+    .search{
+        margin-top: -4px;
+    }
+    .signIn{
+        margin-top: 1px;
+    }
+}
+
+
