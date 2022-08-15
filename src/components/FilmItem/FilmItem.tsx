@@ -20,7 +20,7 @@ const FilmItem: FC<FilmItemProps> = ({id,img, title, vote_average, release_date,
     <div className={styles.item}>
         <div  className={styles.img}>
             {img == undefined || null || img.length == 0? (<img src='https://st.kp.yandex.net/images/film_big/4781063.jpg'/>) : (<Link  to={`/${type}/${id}`}>
-                    <img  loading="lazy"
+                    <img  
                         src={`https://image.tmdb.org/t/p/w220_and_h330_face/${img}`}
                     />
                 </Link>)}

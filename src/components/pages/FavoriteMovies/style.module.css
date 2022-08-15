@@ -10,6 +10,12 @@
 }
 
 
+@media (max-width: 768px){
+    .items{
+        margin-left:  80px;
+    }
+}
+
 @media (max-width: 390px) {
     .items{
         margin-left: 40px;

@@ -50,3 +50,21 @@ img:hover{
     padding: 5px;
     border-radius: 5px;
 }
+
+@media (max-width: 1300px){
+    .item{
+        width: 200px;
+    }
+}
+
+@media (max-width: 1000px){
+    .item{
+        width: 150px;
+    }
+}
+
+@media (max-width: 768px){
+    .item{
+        width: 150px;
+    }
+}

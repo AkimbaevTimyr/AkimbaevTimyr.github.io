@@ -98,3 +98,31 @@
     font-weight: 600;
 }
 
+
+@media (max-width: 1300px){
+    .items{
+        width: 100%;
+        margin: 30px 0px 0px 50px;
+    }
+}
+
+@media (max-width: 1000px){
+    .items{
+        width: 100%;
+        margin: 30px 0px 0px 50px;
+    }
+}
+
+@media (max-width: 768px){
+    .items{
+        width: 100%;
+        margin: 30px 0px 0px 0px;
+    }
+}
+
+@media (max-width: 390px){
+    .items{
+        width: 100%;
+        margin: 30px 0px 0px 5px;
+    }
+}

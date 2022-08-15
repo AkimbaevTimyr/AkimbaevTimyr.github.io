@@ -5,7 +5,8 @@ import Pagination from '../../../pagination.tsx/pagination'
 import Loading from '../../../Loading/loading'
 import FilmItem from '../../../FilmItem/FilmItem'
 import styles from './style.module.css'
-import { getBestMovies, sortingMoviesByRating } from '../../../../store/actions/MovieActionCreator'
+import { getBestMovies} from '../../../../store/actions/MovieActionCreator'
+import Navigation from '../../../Navigation/Navigation'
 
 const BestMovies: FC = () => {
     const dispatch: any = useAppDispatch()
@@ -18,11 +19,13 @@ const BestMovies: FC = () => {
     return (
         <>
         {bestMovies.length === 0 ? <Loading /> : (<>
-          <div className='items'>
+          <div className={styles.items}>
             {bestMovies.map((el: IMovie) => (
                <FilmItem  key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="movie"/>
             ))}
           </div> <Pagination changePage={(page: number) => changePage(page)} />
+          <br/>
+          <br/>
         </>
         )}
       </>

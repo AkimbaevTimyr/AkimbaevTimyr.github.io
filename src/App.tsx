@@ -20,6 +20,7 @@ import SearchPage from './components/pages/SearchPage/SearchPage';
 import AllFilms from './components/pages/Films/AllFilms/AllFilms';
 import { checkToken } from './store/actions/UserActionCreator';
 import styles from './App.module.css'
+import Navigation from './components/Navigation/Navigation';
 
 function App() {
   const dispatch: any = useAppDispatch()
@@ -92,6 +93,7 @@ function App() {
           <Route  path='upcoming-premiers' element={<UpcomingPremiersItem />}/>
         </Routes>
       </div>
+      <Navigation />
     </div>
   );
 }
