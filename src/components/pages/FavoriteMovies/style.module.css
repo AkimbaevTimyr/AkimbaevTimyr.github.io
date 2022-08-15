@@ -10,3 +10,8 @@
 }
 
 
+@media (max-width: 390px) {
+    .items{
+        margin-left: 40px;
+    }
+}
