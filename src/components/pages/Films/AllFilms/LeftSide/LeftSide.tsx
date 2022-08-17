@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../../../../hooks/redux'
 import { sortingMovies } from '../../../../../store/actions/MovieActionCreator'
 import styles from '../style.module.css'
 import {Option} from '../../../../../types/Types'
+import { useSettings } from '../../../../../helpers/settings/settings'
 
 interface LeftSideProps {
     filmPage: number
@@ -14,21 +15,7 @@ const LeftSide: FC<LeftSideProps> = ({ filmPage }) => {
         setGenre(Number(g))
     }, [])
     const dispatch: any = useAppDispatch()
-    const genres: any = {
-        'Драма': 18,
-        "Боевик": 28,
-        "Приключение": 12,
-        "Ужасы": 27,
-        "Триллер": 53
-    }
-    const options: Option[] = [
-        {id: 18, name:  "Драма"},
-        {id: 28, name:  "Боевик"},
-        {id: 12, name:  "Приключение"},
-        {id: 27, name:  "Ужасы"},
-        {id: 53, name:  "Триллер"},
-    ]
-
+    const {options, genres} = useSettings()
     const [rating1, setRating1] = useState<number>(1)
     const [rating2, setRating2] = useState<number>(10)
     const [genresType, setGenresType] = useState<string>('Драма')

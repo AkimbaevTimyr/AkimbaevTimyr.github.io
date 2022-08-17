@@ -47,7 +47,7 @@ const MoviePage: FC = () => {
 
     return (
         <div className='movieContainer'>
-            {isLoading === true ?  <Loading /> : (<div className="moviePage" >
+            {isLoading === true ?  <div className='loading'><Loading /></div> : (<div className="moviePage" >
                 <div className='movie'>
                     <div className="itemImg">
                         {poster_path == undefined ? (<img src='https://st.kp.yandex.net/images/film_big/4781063.jpg' className="itemImg" />) : (

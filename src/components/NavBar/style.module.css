@@ -110,7 +110,7 @@
 .signIn:hover{
     color: white;
 }
-
+/* 
 @media screen and (max-width: 1300px){
     .navBar{
         height: 60px;
@@ -207,4 +207,4 @@
     .signIn{
         margin-top: 1px;
     }
-}
+} */

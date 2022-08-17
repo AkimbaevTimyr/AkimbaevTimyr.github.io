@@ -62,7 +62,6 @@ export const login = createAsyncThunk(
             thunkAPI.dispatch(addUser(user))
             thunkAPI.dispatch(setIsAuth(true))
             thunkAPI.dispatch(getFavoriteMovies(user.email))
-            console.log(user.email)
             localStorage.setItem('token', user.token)
             localStorage.setItem('email', user.email)
         }catch(e){

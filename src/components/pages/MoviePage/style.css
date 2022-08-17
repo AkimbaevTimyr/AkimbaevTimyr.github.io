@@ -1,5 +1,6 @@
 .movieContainer{
     background-color: rgb(244,244,244);
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
 }
@@ -148,12 +149,11 @@ img{
 }
 
 
-
-
-
 .about_movie{
     font-size: 28px;
     color: rgba(31, 31, 31);
     font-weight: 700;
     margin-top: 10px;
 }
+
+.loading{}

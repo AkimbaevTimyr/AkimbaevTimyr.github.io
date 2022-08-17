@@ -6,7 +6,6 @@ import Loading from '../../../Loading/loading'
 import FilmItem from '../../../FilmItem/FilmItem'
 import styles from './style.module.css'
 import { getBestMovies} from '../../../../store/actions/MovieActionCreator'
-import Navigation from '../../../Navigation/Navigation'
 
 const BestMovies: FC = () => {
     const dispatch: any = useAppDispatch()

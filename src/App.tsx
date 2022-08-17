@@ -24,7 +24,6 @@ import Navigation from './components/Navigation/Navigation';
 
 function App() {
   const dispatch: any = useAppDispatch()
-  const {user} = useAppSelector(state=> state.user)
   const token = localStorage.getItem('token')
   const email = localStorage.getItem('email')
   useEffect(()=> {

@@ -5,8 +5,6 @@ import PersonalFilms from './PersonalFilms/PersonalFilms'
 import PersonalSeries from './PersonalSeries/PersonalSeries'
 import UpcomingPremiers from './UpcomingPremires/UpcomingPremiers'
 import styles from './style.module.css'
-import { Link } from 'react-router-dom'
-import Navigation from '../../Navigation/Navigation'
 
 const Main: FC = () => {
   const {isLoading} = useAppSelector(state => state.movies)
@@ -19,7 +17,7 @@ const Main: FC = () => {
     <PersonalFilms />
     <PersonalSeries />
     <UpcomingPremiers />
-   </div>
+    </div>
   )
 }
 
