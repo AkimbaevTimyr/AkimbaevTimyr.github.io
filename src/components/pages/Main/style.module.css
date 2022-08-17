@@ -57,33 +57,18 @@
     transform: translate(-5px);
 }
 
-
-/* 
-@media screen and (max-width: 1300px) {
-    .main{
-        width: 1300px;
-    }
-    .films{
-        width: 100%;
-    }
+/* @media screen and (max-width: 1300px) {
     .headerBlock{
-        width: 84%;
+        width: 830px;
         margin-left: 90px;
         margin-right: 0px;
     }
   
-}
+} 
 
 @media screen and (max-width: 1000px) {
-    .main{
-        width: 1000px;
-    }
-    .films{
-        width: 100%;
-    }
     .headerBlock{
-        width: 87%;
-        margin-left: 50px;
+        width: 700px;
         margin-right: 0px;
     }
 }
@@ -91,68 +76,38 @@
 
 
 @media  screen and (max-width: 768px) {
-    .main{
-        width: 770px;
-    }
-    .films{
-        width: 768;
-    }
     .headerBlock{
-        width: 84%;
+        width: 500px;
+        margin-right: 0px;
+    }
+}
+
+@media  screen and (max-width: 650px) {
+    .headerBlock{
+        width: 470px;
         margin-left: 50px;
         margin-right: 0px;
     }
-    .nav{
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: space-between;
-        height: 60px;
-        background-color: rgb(31, 31, 31);
-        padding: 10px 20px;
-    }  
-    .navItem{
-        color: white;
+    .header{
+        margin-right: 10px;
+        font-size: 24px;
+        margin-left: 60px;
     }
 }
 
 
 
+
+
 @media screen and (max-width: 390px) {
-    .main{
-        width: 100%;
-    }
-    .films{
-        width: 100%;
-    }
     .headerBlock{
-        width: 100%;
+        width: 390px;
         margin-left: 0px;
         display: flex;
         padding: 30px;
     }
-    .items{
-     margin-left: 40px;
-    }
     .header{
      font-size: 26px;
     }
-     .nav{
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        display: flex;
-        justify-content: space-between;
-        height: 60px;
-        background-color: rgb(31, 31, 31);
-        padding: 10px;
-     }  
-     .navItem{
-        color: white;
-     }
- } */
+    
+ }  */

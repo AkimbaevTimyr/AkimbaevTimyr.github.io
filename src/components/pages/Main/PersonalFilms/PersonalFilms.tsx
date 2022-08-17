@@ -10,7 +10,7 @@ const PersonalFilms: FC = () => {
     return (
         <div className={styles.films}>
             <br/>
-            <div className={styles.headerBlock}>
+            <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between">
                 <h2 className={styles.header}>
                     Фильмы для вас
                 </h2>
