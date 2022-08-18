@@ -13,10 +13,10 @@ const WatchList: FC = () => {
     dispatch(getFavoriteMovies(email))
   },[])
   return (
-    <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-center flew-wrap mt-5">
-      {favoriteMovies.length == 0 ? <Loading /> : (favoriteMovies.map((el: any) =>(
-        <FilmItem  key={el.id} id={el.id} img={el.poster_path} title={el.original_name || el.title} vote_average={el.vote_average} release_date={el.first_air_date || el.release_date} type={el.type}/>
-      )))}
+    <div className={styles.items}>
+        {favoriteMovies.length == 0 ? <Loading /> : (favoriteMovies.map((el: any) =>(
+          <FilmItem  key={el.id} id={el.id} img={el.poster_path} title={el.original_name || el.title} vote_average={el.vote_average} release_date={el.first_air_date || el.release_date} type={el.type}/>
+        )))}
     </div>
   )
 }

@@ -51,11 +51,11 @@ const FilmItem: FC<FilmItemProps> = ({ id, img, title, vote_average, release_dat
 //         </div>
 //     </div>
 // </div>
-        <div className="block  w-52 mb-5 ml-3" >
+        <div className="w-52 mb-5 ml-3" >
             <div className='relative hover:scale-x-105 hover:scale-y-105 transition-all'>
                 <Link to={`/${type}/${id}`}>
                 <img
-                    className="object-cover w-48 h-full "
+                    className="object-cover w-48 "
                     src={`https://image.tmdb.org/t/p/w220_and_h330_face/${img}`}
                     alt=""
                 />
@@ -64,12 +64,18 @@ const FilmItem: FC<FilmItemProps> = ({ id, img, title, vote_average, release_dat
                 {vote_average.toFixed(1)}
             </span>
             </div>
-                
-            <h5 className="mt-4 text-xl font-bold text-gray-900">{title}</h5>
-
+            <h5 className="mt-5  text-xl font-bold text-gray-900">{title}</h5>
             <p className="max-w-sm mt-2 text-gray-700">
             {release_date?.substring(0,4) || '—'}, {convertMovieType(type)}
             </p>
+            {/* <div className={styles.descr}>
+         <div className={styles.header}>
+                 {title || '—'}
+             </div>
+             <div className={styles.year}>
+                 {release_date?.substring(0,4) || '—'}, {convertMovieType(type)}
+            </div>
+         </div> */}
         </div >
   )
 }
