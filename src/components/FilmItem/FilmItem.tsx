@@ -13,6 +13,9 @@ interface FilmItemProps {
 }
 
 const FilmItem: FC<FilmItemProps> = ({ id, img, title, vote_average, release_date, type }) => {
+    if(!img){
+        return <img src='https://st.kp.yandex.net/images/film_big/4781063.jpg'/>
+    }
     return (
 //     <div className={styles.item}>
 //         <div  className={styles.img}>
