@@ -20,11 +20,8 @@ const TvShows = () => {
             <FilmItem key={el.id} id={el.id} img={el.poster_path}  title={el.original_name} vote_average={el.vote_average} release_date={el.first_air_date} type="tv" />
           ))}
         </div> <Pagination changePage={(page: number) => changePage(page)} />
-        <br/><br/><br/>
       </>
       )}
-       
-      <Navigation />
     </>
   )
 }
