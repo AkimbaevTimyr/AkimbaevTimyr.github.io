@@ -156,4 +156,6 @@ img{
     margin-top: 10px;
 }
 
-.loading{}
+.loading{
+    margin-left: 1000px;
+}

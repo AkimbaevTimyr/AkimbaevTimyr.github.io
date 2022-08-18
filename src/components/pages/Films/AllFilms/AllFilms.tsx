@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
-import { getAllMovies, sortingMovies, } from '../../../../store/actions/MovieActionCreator'
+import {  sortingMovies, } from '../../../../store/actions/MovieActionCreator'
 import { IMovie } from '../../../../types/MoviesTypes'
 import FilmItem from '../../../FilmItem/FilmItem'
 import Loading from '../../../Loading/loading'
@@ -22,7 +22,7 @@ const AllFilms = () => {
     }
 
     return (
-        <div className={styles.container}>
+        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between">
             <div className={styles.movies}>
                 <div className={styles.header}>
                     <h1>Все фильмы</h1>

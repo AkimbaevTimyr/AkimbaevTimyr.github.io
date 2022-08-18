@@ -61,7 +61,7 @@ const FilmItem: FC<FilmItemProps> = ({ id, img, title, vote_average, release_dat
                 />
                 </Link>
                 <span className="absolute ml-3 top-4 rounded-full px-3 py-1.5 bg-green-700 text-white font-medium text-xs">
-                4.3
+                {vote_average.toFixed(1)}
             </span>
             </div>
                 
