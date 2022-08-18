@@ -1,5 +1,4 @@
 {
-  "homepage": "https://akimbaevtimyr.github.io/moviesite.github.io/",
   "name": "movie",
   "version": "0.1.0",
   "private": true,
@@ -18,7 +17,6 @@
     "dayjs": "^1.11.4",
     "firebase": "^9.8.4",
     "flowbite": "^1.4.7",
-    "gh-pages": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
@@ -30,11 +28,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "build": "react-scripts build && cp build/index.html build/404.html"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
