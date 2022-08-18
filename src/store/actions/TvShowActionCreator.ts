@@ -1,5 +1,4 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
-import { ITvShows } from '../../types/TvShowTypes'
 import axios from 'axios'
 
 

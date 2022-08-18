@@ -13,7 +13,6 @@ const Pagination: FC<PaginationProps> = ({ changePage}) => {
         setPage(page - 1)
         changePage(page-1)
     }
-    console.log(page)
     return (
         <div className="flex items-center justify-center space-x-3 mt-5">
             <button onClick={()=> handleClickPrevios()} disabled={page === 1 ? true : false} className="inline-flex items-center justify-center w-8 h-8 border border-gray-100 rounded">

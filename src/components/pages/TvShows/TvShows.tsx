@@ -1,5 +1,5 @@
 import { getTvShows } from '../../../store/actions/TvShowActionCreator'
-import { useAppSelector } from '../../../hooks/redux'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import Loading from '../../Loading/loading'
 import { ITvShows } from '../../../types/TvShowTypes'
 import Pagination from '../../pagination.tsx/pagination'
@@ -8,8 +8,9 @@ import FilmItem from '../../FilmItem/FilmItem'
 import Navigation from '../../Navigation/Navigation'
 
 const TvShows = () => {
+  const dispatch: any = useAppDispatch()
   const changePage = async (page: number) => {
-    getTvShows(page)
+    dispatch(getTvShows(page))
   }
   const { popularTvShows } = useAppSelector(state => state.tvShows)
   return (
