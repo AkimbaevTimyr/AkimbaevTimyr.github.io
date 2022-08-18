@@ -118,3 +118,19 @@
     color: rgb(31, 31, 31);
     font-weight: 600;
 }
+
+@media (max-width: 612px){
+    .body{
+        display: block;
+    }
+    .items{
+        margin-top: 50px;
+        margin-left: -30px;
+    }
+    .left{
+        margin-left: 90px;
+    }
+    .header{
+        margin-left: 90px;
+    }
+}
