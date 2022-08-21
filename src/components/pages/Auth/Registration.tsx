@@ -8,11 +8,11 @@ const Registration: FC = () => {
     const navigate = useNavigate()
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
-    const handleSumbit = (e: any) =>{
+    const handleSumbit = (e: React.MouseEvent<HTMLButtonElement>) =>{
         e.preventDefault()
         createUserWithEmailAndPassword(authentication, email, password)
         .then((userCredential) => {
-            navigate('/login')
+            navigate('/moviesite/login')
         }).catch((error) => { alert('Неправельный пользователь')});
     }
     return (
@@ -86,7 +86,7 @@ const Registration: FC = () => {
                 <div className="flex items-center justify-between">
                     <p className="text-sm text-gray-500">
                         Есть аккаунт?
-                        <Link to='/login' className="underline" >Войди</Link>
+                        <Link to='/moviesite/registration' className="underline" >Войди</Link>
                     </p>
                     <button
                         onClick={(e)=> handleSumbit(e)}

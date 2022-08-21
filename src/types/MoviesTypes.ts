@@ -28,15 +28,21 @@ export type IMovie = {
     original_name: string;
 }
 
-export type IFavoriteMovie = {
+export type IFilmItemMovie = {
     email: string;
     id: number;
-    original_name: string;
-    first_air_date: string;
-    overview: string;
+    original_name?: string;
+    title?: string;
+    first_air_date?: string | undefined;
+    release_date?: string | undefined;
     vote_average: number;
     poster_path: string | null;
-    favorite: boolean;
+    type: string;
+    media_type?: string | undefined;
+    name? : string | undefined;
+}
+export interface IFavoriteMovie extends IFilmItemMovie{
+
 }
 
 export type IGenres = {
@@ -48,3 +54,5 @@ export type IProductionCountries = {
     iso_3166_1: string;
     name: string;
 }
+
+

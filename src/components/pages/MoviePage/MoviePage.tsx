@@ -23,7 +23,7 @@ const MoviePage: FC = () => {
 
     useEffect(() => {
         axios.get<any>(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US`).then((data: any) => setMovieKey(data.data.results[0].key))
-        const findItem = favoriteMovies.find((el: any) => el.id == id ? setButtonCondition(true) : '')
+        const findItem = favoriteMovies.find((el: any ) => el.id == id ? setButtonCondition(true) : '')
     }, [])
 
     const addFavorite = async () => {

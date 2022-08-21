@@ -7,9 +7,9 @@ import FilmsComponents from '../../FilmsComponents'
 const Films: FC  = () => {
   return (
     <div className='items-center'>
-        <FilmsComponents img={movies} title="Все фильмы" subtitle='Все фильмы' link='/films/allfilms' />
-        <FilmsComponents img={bestMoviesImg} title="Лучшие фильмы" subtitle='Лучшие фильмы' link="/films/bestmovies"/>
-        <FilmsComponents img={popularFilmsImg} title="Популярные фильмы" subtitle='Популярные фильмы' link="/films/popular"/>
+        <FilmsComponents img={movies} title="Все фильмы" subtitle='Все фильмы' link='/moviesite/films/allfilms' />
+        <FilmsComponents img={bestMoviesImg} title="Лучшие фильмы" subtitle='Лучшие фильмы' link="/moviesite/films/bestmovies"/>
+        <FilmsComponents img={popularFilmsImg} title="Популярные фильмы" subtitle='Популярные фильмы' link="/moviesite/films/popular"/>
     </div>
   )
 }

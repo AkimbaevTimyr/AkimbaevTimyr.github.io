@@ -14,7 +14,7 @@ const PersonalSeriesItem: FC = () => {
              {personalSeries.length === 0 ? <Loading /> : (<>
              <div className={styles.items}>
                  {personalSeries.map((el: ITvShows) => (
-                     <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.name} vote_average={el.vote_average} release_date={el.first_air_date} type="сериал"/>
+                     <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.name} vote_average={el.vote_average} release_date={el.first_air_date} type="tv"/>
                  ))}
              </div>
          </>)}

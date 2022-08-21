@@ -18,10 +18,10 @@ export function useSettings(){
         {id: 53, name:  "Триллер"},
     ]
     const navigation = [
-        { name: 'Главная', href: '/', },
-        { name: 'Избранное', href: '/watchlist', },
-        { name: 'Фильмы', href: '/films', },
-        { name: 'Сериалы', href: '/tvshows', },
+        { name: 'Главная', href: '/moviesite', },
+        { name: 'Избранное', href: '/moviesite/watchlist', },
+        { name: 'Фильмы', href: '/moviesite/films', },
+        { name: 'Сериалы', href: '/moviesite/tvshows', },
     ]
     
     return {

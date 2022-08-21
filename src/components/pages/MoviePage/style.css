@@ -1,6 +1,6 @@
 .movieContainer{
     background-color: rgb(244,244,244);
-    height: 100%;
+    height: 150vh;
     display: flex;
     flex-wrap: wrap;
 }
@@ -158,4 +158,41 @@ img{
 
 .loading{
     margin-left: 1000px;
+}
+
+
+@media(max-width: 735px){
+    .movie{
+        display: block;
+    }
+    .item_header{
+        width: auto;
+    }
+    .item_about{
+        margin-left: 0px;
+    }
+}
+
+
+@media (max-width: 630px){
+    .item_header{
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 530px){
+    .item_header{
+        font-size: 20px;
+        margin-top: 10px;
+    }
+    img{
+        width: 250;
+    }
+}
+
+@media (max-width: 390px){
+    .button_watch_later{
+        font-size: 12px;
+        padding: 5px;
+    }
 }

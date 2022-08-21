@@ -12,7 +12,7 @@ const Login: FC = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
-  const handleSumbit = (e: any) => {
+  const handleCLick = (e: React.MouseEvent<HTMLButtonElement>) => {
       signInWithEmailAndPassword(authentication, email, password)
       .then((userCredential: any) => {
         const {user} = userCredential;
@@ -21,7 +21,7 @@ const Login: FC = () => {
           token: user.accessToken,
           id: user.id
         }))
-        navigate('/')
+        navigate('/moviesite/login')
       }).catch(() => alert("Не верный логин или пароль"))
   }
   return (
@@ -96,7 +96,7 @@ const Login: FC = () => {
               <Link to='/registration' className="underline" >Зарегистрируйся</Link>
             </p>
             <button
-              onClick={(e) => handleSumbit(e)}
+              onClick={(e) => handleCLick(e)}
               type="button"
               className="inline-block px-5 py-3 ml-3 text-sm font-medium text-white bg-blue-500 rounded-lg"
             >

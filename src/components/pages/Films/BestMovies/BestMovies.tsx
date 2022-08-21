@@ -14,7 +14,6 @@ const BestMovies: FC = () => {
     const changePage = async (page: number) => {
         dispatch(getBestMovies(page))
     }
-
     return (
         <>
         {bestMovies.length === 0 ? <Loading /> : (<>

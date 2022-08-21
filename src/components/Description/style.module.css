@@ -9,3 +9,29 @@
     font-weight: 300;
     color: rgba(0, 0, 0, 0.5);
 }
+
+
+
+@media(max-width: 826px){
+    .desc{
+        width: 700px;
+    }
+}
+
+@media (max-width: 736px){
+    .desc{
+        width: 600px;
+    }
+}
+
+@media (max-width: 662px){
+   .desc{
+    width: 400px;
+   }
+}
+
+@media (max-width: 432px){
+    .desc{
+     width: 250px;
+    }
+ }

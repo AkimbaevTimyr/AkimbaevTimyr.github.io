@@ -13,7 +13,7 @@ function UpcomingPremiersItem() {
       {upcomingPremiers.length === 0 ? <Loading /> : (<>
         <div className={styles.items}>
           {upcomingPremiers.map((el: IMovie) => (
-            <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="фильм" />
+            <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="movie" />
           ))}
         </div>
       </>)}

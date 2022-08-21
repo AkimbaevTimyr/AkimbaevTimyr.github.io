@@ -39,57 +39,57 @@ function App() {
       <div className={styles.container}>
         {/* Navigation Routes */}
         <Routes>
-          <Route path='/' element={<Main />} />
+          <Route path='/moviesite' element={<Main />} />
         </Routes>
         <Routes>
-          <Route path='/films' element={<Films />} />
+          <Route path='/moviesite/films' element={<Films />} />
         </Routes>
         <Routes>
-          <Route path='/watchlist' element={<WatchList />} />
+          <Route path='/moviesite/watchlist' element={<WatchList />} />
         </Routes>
         <Routes>
-          <Route path='/tvshows' element={<TvShows />} />
+          <Route path='/moviesite/tvshows' element={<TvShows />} />
         </Routes>
         <Routes>
-          <Route path='/search-page' element={<SearchPage />}/>
+          <Route path='/moviesite/search-page' element={<SearchPage />}/>
         </Routes>
 
         {/* Films Routes */}
         <Routes>
-          <Route path="/films/popular" element={<PopularFilms />} />
+          <Route path="/moviesite/films/popular" element={<PopularFilms />} />
         </Routes>
         <Routes>
-          <Route path="/films/bestmovies" element={<BestMovies />} />
+          <Route path="/moviesite/films/bestmovies" element={<BestMovies />} />
         </Routes>
         <Routes>
-          <Route path="/films/allfilms" element={<AllFilms/>} />
+          <Route path="/moviesite/films/allfilms" element={<AllFilms/>} />
         </Routes>
 
         {/* Login and Registration */}
         <Routes>
-          <Route path='/login' element={<Login />}/>
+          <Route path='/moviesite/login' element={<Login />}/>
         </Routes>
         <Routes>
-          <Route path='/registration' element={<Registration />}/>
+          <Route path='/moviesite/registration' element={<Registration />}/>
         </Routes>
 
         {/* Movie Page */}
         <Routes>
-          <Route path="movie/:id" element={<MoviePage />}/>
+          <Route path="/moviesite/movie/:id" element={<MoviePage />}/>
         </Routes>
         <Routes>
-          <Route path="tv/:id" element={<TvShowsPage />}/>
+          <Route path="/moviesite/tv/:id" element={<TvShowsPage />}/>
         </Routes>
 
         {/* Personal Series,Movies,Premiers */}
         <Routes>
-          <Route  path='personal-films' element={<PersonalFilmsItems />}/>
+          <Route  path='/moviesite/personal-films' element={<PersonalFilmsItems />}/>
         </Routes>
         <Routes>
-          <Route  path='personal-series' element={<PersonalSeriesItem />}/>
+          <Route  path='/moviesite/personal-series' element={<PersonalSeriesItem />}/>
         </Routes>
         <Routes>
-          <Route  path='upcoming-premiers' element={<UpcomingPremiersItem />}/>
+          <Route  path='/moviesite/upcoming-premiers' element={<UpcomingPremiersItem />}/>
         </Routes>
       </div>
       <Navigation />
