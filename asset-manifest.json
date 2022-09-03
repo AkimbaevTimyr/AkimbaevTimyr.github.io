@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/moviesite/static/css/main.0b21e238.css",
-    "main.js": "/moviesite/static/js/main.380f5f2c.js",
+    "main.css": "/moviesite/static/css/main.3a7a033e.css",
+    "main.js": "/moviesite/static/js/main.53fe275f.js",
     "static/media/popularfilms.png": "/moviesite/static/media/popularfilms.abd0ff87a34c3d378cf3.png",
     "static/media/movies.png": "/moviesite/static/media/movies.edbc93ac96628ff0370b.png",
     "static/media/250bestmovies.png": "/moviesite/static/media/250bestmovies.a4d636d41f47979a7a2e.png",
     "index.html": "/moviesite/index.html",
-    "main.0b21e238.css.map": "/moviesite/static/css/main.0b21e238.css.map",
-    "main.380f5f2c.js.map": "/moviesite/static/js/main.380f5f2c.js.map"
+    "main.3a7a033e.css.map": "/moviesite/static/css/main.3a7a033e.css.map",
+    "main.53fe275f.js.map": "/moviesite/static/js/main.53fe275f.js.map"
   },
   "entrypoints": [
-    "static/css/main.0b21e238.css",
-    "static/js/main.380f5f2c.js"
+    "static/css/main.3a7a033e.css",
+    "static/js/main.53fe275f.js"
   ]
 }
