@@ -3,11 +3,13 @@ import { IFavoriteMovie, IMovie } from '../../types/MoviesTypes'
 import axios from 'axios'
 import { getDocs, collection, query, deleteDoc, where, doc, addDoc } from 'firebase/firestore'
 import { db } from '../../firebase-config'
+import { getUser } from '../../helpers/getUser/getUser'
 
 export const getAll = createAsyncThunk(
     "movies/getAllMovies",
-    async(email: string | null, thunkAPI) =>{
+    async(_, thunkAPI) =>{
         const genre = localStorage.getItem('genre')
+        const {email} = getUser()
         try{
                 thunkAPI.dispatch(getBestMovies(1))
                 thunkAPI.dispatch(getPopularMovies(1))
@@ -77,7 +79,7 @@ export const getUpcomingPremiers = createAsyncThunk(
     "movies/getUpcomingPremiers",
     async(_, thunkAPI) =>{
         try{
-            let { data } = await axios.get<any>('https://api.themoviedb.org/3/movie/upcoming?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US&page=1');
+            let { data } = await axios.get<any>('https://api.themoviedb.org/3/movie/upcoming?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU&page=1');
             return data.results
         }catch(e){
 
@@ -98,23 +100,12 @@ export const getAllMovies = createAsyncThunk(
     }
 )
 
-// export const getMoviesById = createAsyncThunk(
-//     "movie/getMoviesById",
-//     async(id: number, thunkAPI) => {
-//         try{
-//             let { data } = await axios.get<any>(`https://api.themoviedb.org/3/movie/${id}?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU`)
-//             return data
-//         }catch(e){
-
-//         }
-//     }
-// )
 
 export const setSimularMoviesById = createAsyncThunk(
     "movies/setSimularMoviesById",
     async(id: number, thunkAPI) =>{
         try{
-            let {data} = await axios.get<any>(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US&page=1`)
+            let {data} = await axios.get<any>(`https://api.themoviedb.org/3/movie/${id}/similar?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU&page=1`)
             return data.results
         }catch(e){
             
@@ -126,6 +117,7 @@ export const getFavoriteMovies = createAsyncThunk(
     "movies/getFavoriteMovies",
     async(email: string | null, thunkAPI) => {
         try{
+            console.log(email)
             const querySnapshot = await getDocs(collection(db, "favorites"));
             const data = querySnapshot.docs.map(doc => doc.data()).filter(el => el.email === email)
             return data
@@ -139,15 +131,13 @@ export const setSearchMovies = createAsyncThunk(
     "movies/searchMovies",
     async(text: string, thunkAPI) => {
         try{
-            let { data } = await axios.get<any>(`https://api.themoviedb.org/3/search/multi?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US&query=${text}&page=1&include_adult=false`)
+            let { data } = await axios.get<any>(`https://api.themoviedb.org/3/search/multi?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU&query=${text}&page=1&include_adult=false`)
             return data.results
         }catch(e){
 
         }
     }
 )
-
-
 
 export const addFavoriteMovies = createAsyncThunk(
     "movie/addFavoriteMovie",
@@ -179,8 +169,7 @@ export const sortingMovies = createAsyncThunk(
     async(args: any, thunkAPI) => {
         try{
             const [page, first, second, genresId] = args;
-            let {data} = await axios.get<any>(`https://api.themoviedb.org/3/discover/movie?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US&sort_by=vote_average.asc&page=${page}&vote_average.gte=${first}&vote_average.lte=${second}&with_genres=${genresId}&with_watch_monetization_types=flatrate`)
-            console.log(data.results)
+            let {data} = await axios.get<any>(`https://api.themoviedb.org/3/discover/movie?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU&sort_by=vote_average.asc&page=${page}&vote_average.gte=${first}&vote_average.lte=${second}&with_genres=${genresId}&with_watch_monetization_types=flatrate`)
             return data.results
         }catch(e){
 
@@ -199,8 +188,6 @@ export const setIsLoading = createAsyncThunk(
     }
 )
 
-// tvShows
-
 export const getTvShows = createAsyncThunk(
     "tvshows/getTvShows",
     async(page: number, thunkAPI) =>{
@@ -213,7 +200,6 @@ export const getTvShows = createAsyncThunk(
     }
 )
 
-
 export const setSimularTvShowsById = createAsyncThunk(
     "movies/setSimularTvShowsById",
     async(id: number, thunkAPI) =>{
@@ -225,8 +211,6 @@ export const setSimularTvShowsById = createAsyncThunk(
         }
     }
 )
-
-
 
 export const deleteMovieById = createAsyncThunk(
     "movies/deleteMovieById",

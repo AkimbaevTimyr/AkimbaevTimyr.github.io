@@ -1,6 +1,6 @@
-import React, { useEffect, FC } from 'react'
+import  {  FC } from 'react'
 import { useAppSelector } from '../../../hooks/redux'
-import Loading from '../../Loading/loading'
+import Loading from '../../shared/Loading/Loading'
 import PersonalFilms from './PersonalFilms/PersonalFilms'
 import PersonalSeries from './PersonalSeries/PersonalSeries'
 import UpcomingPremiers from './UpcomingPremires/UpcomingPremiers'
@@ -11,7 +11,6 @@ const Main: FC = () => {
   if(isLoading){
     return <Loading />
   }
-  
   return (
    <div className={styles.main}>
     <PersonalFilms />

@@ -1,48 +1,23 @@
-import React, { FC, useEffect, useState, useRef, useLayoutEffect } from 'react'
+import React, { FC, useEffect,   } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/redux'
 import { setIsAuth } from '../../store/actions/UserActionCreator'
-import styles from './style.module.css'
-import axios from 'axios'
 import { useSettings } from '../../helpers/settings/settings'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
-
-
-function classNames(...classes: any) {
-    return classes.filter(Boolean).join(' ')
-}
+import {  MenuIcon, XIcon } from '@heroicons/react/outline'
+import { setUser } from '../../helpers/setUser/setUser'
 
 const NavBar: FC = () => {
     const { navigation } = useSettings()
-    const inputRef = useRef<HTMLHeadingElement>(null)
-    useEffect(() => {
-        document.addEventListener('click', (e: any) => {
-            if (inputRef.current != null) {
-                inputRef.current.style.display = 'none';
-            }
-        })
-    }, [])
-    const [searchValue, setSearchValue] = useState<string>('')
     const { isAuth } = useAppSelector(state => state.user)
     const dispatch: any = useAppDispatch()
-    const [movies, setMovies] = useState<[]>([])
     const navigate = useNavigate()
-
-    const click = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault()
-        setSearchValue(e.target.value)
-        let { data } = await axios.get<any>(`https://api.themoviedb.org/3/search/multi?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US&query=${searchValue}&page=1&include_adult=false`)
-        setMovies(data.results)
-    }
-
     const handleExit = () => {
         dispatch(setIsAuth(false))
-        localStorage.setItem('token', '')
+        setUser("", "")
         navigate('/login')
     }
-
 
     return (
         <Disclosure as="nav" className="bg-neutral-900 ">
@@ -63,6 +38,7 @@ const NavBar: FC = () => {
                             </div>
                             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex-shrink-0 flex items-center">
+                                    <Link to="/">
                                     <img
                                         className="block lg:hidden h-8 w-auto"
                                         src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
@@ -73,6 +49,7 @@ const NavBar: FC = () => {
                                         src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
                                         alt="Workflow"
                                     />
+                                    </Link>
                                 </div>
                                 <div className="hidden sm:block sm:ml-6">
                                     <div className="flex space-x-4 mt-1">
@@ -80,11 +57,6 @@ const NavBar: FC = () => {
                                             <Link
                                                 key={item.name}
                                                 to={item.href}
-                                                //   className={classNames(
-                                                //     item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                                //     'px-3 py-2 rounded-md text-sm font-medium'
-                                                //   )}
-                                                //   aria-current={item.current ? 'page' : undefined}
                                                 className="text-white hover:scale-x-105 hover:scale-y-105"
                                             >
                                                 {item.name}
@@ -94,30 +66,9 @@ const NavBar: FC = () => {
                                 </div>
                             </div>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                                {/* <div className={styles.right}>
-                                    <div className={styles.search}>
-                                        <input placeholder='Поиск...' value={searchValue || ""} className={styles.search_input} onChange={e => click(e)} />
-                                        <Link to="/search-page">
-                                            <button title='Поиск по фильмам' type="submit" className="  top-0 right-0 p-2.5 text-sm font-medium text-white "><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
-                                        </Link>
-                                        <div className='mt-1'>
-                                            {searchValue.length === 0 ? '' :
-                                                <div ref={inputRef} className={styles.search_menu}>
-                                                    <div id='items' className={styles.search_items}>
-                                                        {movies.length == 0 ? <div className={styles.empty}>По вашему запросу ничего не найдено</div> :
-                                                            movies.map((el: any) => (
-                                                                <SearchItems key={el.id} id={el.id} img={el.poster_path || el.babackdrop_path || el.profile_path} name={el.title || el.name} vote_average={el.vote_average} runtime={el.runtime} release_date={el.release_date || el.first_air_date} type={el.media_type} />
-                                                            ))}
-                                                    </div>
-                                                </div>
-                                            }
-                                        </div>
-                                    </div>
-                                </div> */}
-                        <Link to="/moviesite/search-page">
+                        <Link to="/search-page">
                             <button title='Поиск по фильмам' type="submit" className="  top-0 right-0 p-2.5 text-sm font-medium text-white "><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></button>
                         </Link>
-
                                 <Menu as="div" className="ml-3 relative">
                                     <div>
                                         <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
@@ -161,7 +112,6 @@ const NavBar: FC = () => {
                             </div>
                         </div>
                     </div>
-
                     <Disclosure.Panel className="sm:hidden">
                         <div className="px-2 pt-2 pb-3 space-y-1">
                             {navigation.map((item) => (
@@ -170,11 +120,6 @@ const NavBar: FC = () => {
                                     as="a"
 
                                     className="text-white ml-1"
-                                // className={classNames(
-                                //   item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                                //   'block px-3 py-2 rounded-md text-base font-medium'
-                                // )}
-                                // aria-current={item.current ? 'page' : undefined}
                                 >
                                     <Link to={item.href}>
                                         {item.name}

@@ -3,21 +3,23 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import './style.css'
-import Description from '../../Description/Description'
-import About from '../../About/About'
+import Description from '../../shared/Description/Description'
+import About from '../About/About'
 import { addFavoriteMovie, deleteMovieById } from '../../../store/actions/MovieActionCreator'
 import { convertTimestampToDate } from '../../../helpers/convertTimestampToDate/convertTimestampToDate'
-import SimularMovies from '../../SimularMovies/SimularMovies'
+import SimularMovies from '../../shared/SimularMovies/SimularMovies'
 import { useGetTvShowsByIdQuery } from '../../../services/MovieService'
-import Loading from '../../Loading/loading'
+import Loading from '../../shared/Loading/Loading'
+import { getUser } from '../../../helpers/getUser/getUser'
+import Image from '../../shared/Image/Image'
 
 const TvShowsPage: FC = () => {
     const dispatch: any = useAppDispatch()
     let { id } = useParams()
-    const {data, isLoading, isError} = useGetTvShowsByIdQuery(Number(id))
+    const { email } = getUser()
+    const { data, isLoading, isError } = useGetTvShowsByIdQuery(Number(id))
     const [movieKey, setMovieKey] = useState<string>('')
-    const { user } = useAppSelector(state => state.user)
-    const { favoriteMovies,  } = useAppSelector(state => state.movies)
+    const { favoriteMovies, } = useAppSelector(state => state.movies)
     const { poster_path = undefined, name = undefined, overview = undefined, vote_average = undefined, genres = undefined, first_air_date = undefined, original_name = undefined, original_title = undefined, tagline = undefined, production_countries = undefined, budget = undefined, runtime = undefined } = { ...data };
 
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
@@ -29,7 +31,7 @@ const TvShowsPage: FC = () => {
 
     const addFavorite = async () => {
         setButtonCondition(true)
-        dispatch(addFavoriteMovie([user.email, 'tv', {...data}]))
+        dispatch(addFavoriteMovie([email, 'tv', { ...data }]))
     }
     const deleteFavorite = async (id: string | undefined) => {
         setButtonCondition(false)
@@ -37,21 +39,24 @@ const TvShowsPage: FC = () => {
     }
 
     const items = [
-        {caption: 'Страны', value: production_countries?.map((el: any) => <Fragment>{el.name + ', '}</Fragment>) },
-        {caption: "Жанр", value: genres?.map((el: any) => <Fragment>{el.name + ', '}</Fragment>) },
-        {caption: 'Слоган', value: tagline || '—'},
-        {caption: 'Бюджет', value: '—' },
-        {caption: 'Время', value: '—'},
-        {caption: 'Премьера в мире', value: convertTimestampToDate(first_air_date)},
+        { caption: 'Страны', value: production_countries?.map((el: any) => <Fragment>{el.name + ', '}</Fragment>) },
+        { caption: "Жанр", value: genres?.map((el: any) => <Fragment>{el.name + ', '}</Fragment>) },
+        { caption: 'Слоган', value: tagline || '—' },
+        { caption: 'Бюджет', value: '—' },
+        { caption: 'Время', value: '—' },
+        { caption: 'Премьера в мире', value: convertTimestampToDate(first_air_date) },
     ]
 
     return (
         <div className='movieContainer'>
-            {isLoading === true ? <Loading /> : (<div className="moviePage" >
+            {isLoading === true ? <div className='loading'> <Loading /> </div> : (<div className="moviePage" >
                 <div className="movie">
-                    <div className="itemImg">
-                        <img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`} alt="" className="itemImg" />
-                        <p className="rating">{vote_average?.toFixed(1)}</p>
+                    <div className="item_img">
+                        <Image src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`}
+                            className="object-cover w-80" />
+                        <span className="absolute ml-3 top-4 rounded-full px-3 py-1.5 bg-green-700 text-white font-medium text-xs">
+                            {vote_average?.toFixed(1)}
+                        </span>
                     </div>
                     <div className="item_about">
                         <h2 className="item_header">{name}</h2>
@@ -77,16 +82,16 @@ const TvShowsPage: FC = () => {
                                 Буду смотреть
                             </div>)}
                         </div>
-                        <About items={items}/>
+                        <About items={items} />
                     </div>
                 </div>
-                <Description description={overview}/>
+                <Description description={overview} />
                 <br />
                 <div className="simular_movies">
-                    <SimularMovies id={id} header='Похожие сериалы' name="tv"/>
+                    <SimularMovies id={id} header='Похожие сериалы' name="tv" />
                 </div>
-        </div>)}
-    </div>
+            </div>)}
+        </div>
     )
 }
 

@@ -1,19 +1,17 @@
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, {useState, FC,} from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-import { authentication } from '../../../firebase-config';
+import { useAppDispatch } from '../../../hooks/redux';
+import { register } from '../../../store/actions/UserActionCreator';
 
 const Registration: FC = () => {
+    const dispatch: any = useAppDispatch()
     const navigate = useNavigate()
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const handleSumbit = (e: React.MouseEvent<HTMLButtonElement>) =>{
         e.preventDefault()
-        createUserWithEmailAndPassword(authentication, email, password)
-        .then((userCredential) => {
-            navigate('/moviesite/login')
-        }).catch((error) => { alert('Неправельный пользователь')});
+        dispatch(register({navigate, email, password}))
     }
     return (
         <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">

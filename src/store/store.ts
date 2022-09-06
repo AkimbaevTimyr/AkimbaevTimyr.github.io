@@ -11,14 +11,6 @@ export const rootReducer = combineReducers<any>({
     [movieApi.reducerPath]: movieApi.reducer,
 })
 
-
-// export const setupStore = () => {
-//     return configureStore({
-//         reducer: rootReducer,
-//         middleware: (getDefaultMiddleware: any) =>  getDefaultMiddleware().concat(movieApi.middleware),
-// })}
-
-
 export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
@@ -29,10 +21,6 @@ export const setupStore = () => {
             serializableCheck: false,
           }),
 })}
-
-
-
-
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>; 

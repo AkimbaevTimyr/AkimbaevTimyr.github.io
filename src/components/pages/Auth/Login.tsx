@@ -1,9 +1,7 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import React, {useState, FC, FormEvent} from 'react'
+import React, {useState, FC, } from 'react'
 import { Link } from 'react-router-dom';
 import { useNavigate} from 'react-router-dom';
-import { authentication } from '../../../firebase-config';
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, } from '../../../hooks/redux';
 import {  login } from '../../../store/actions/UserActionCreator';
 
 const Login: FC = () => {
@@ -11,18 +9,8 @@ const Login: FC = () => {
   const dispatch: any = useAppDispatch()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-
   const handleCLick = (e: React.MouseEvent<HTMLButtonElement>) => {
-      signInWithEmailAndPassword(authentication, email, password)
-      .then((userCredential: any) => {
-        const {user} = userCredential;
-        dispatch(login({
-          email: user.email,
-          token: user.accessToken,
-          id: user.id
-        }))
-        navigate('/moviesite/login')
-      }).catch(() => alert("Не верный логин или пароль"))
+      dispatch(login({navigate, email, password}))
   }
   return (
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">

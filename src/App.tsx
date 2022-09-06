@@ -14,82 +14,53 @@ import PersonalFilmsItems from './components/pages/Main/PersonalFilms/PersonalFi
 import PersonalSeriesItem from './components/pages/Main/PersonalSeries/PersonalSeriesItem';
 import UpcomingPremiersItem from './components/pages/Main/UpcomingPremires/UpcomingPremiersItem';
 import { useEffect,  } from 'react';
-import { useAppDispatch, useAppSelector } from './hooks/redux';
+import { useAppDispatch, } from './hooks/redux';
 import {  getAll } from './store/actions/MovieActionCreator';
 import SearchPage from './components/pages/SearchPage/SearchPage';
 import AllFilms from './components/pages/Films/AllFilms/AllFilms';
 import { checkToken } from './store/actions/UserActionCreator';
-import styles from './App.module.css'
-import Navigation from './components/Navigation/Navigation';
+import Navigation from './components/shared/Navigation/Navigation';
+import NotFound from './components/shared/NotFound/NotFound';
 
 function App() {
   const dispatch: any = useAppDispatch()
-  const token = localStorage.getItem('token')
-  const email = localStorage.getItem('email')
   useEffect(()=> {
     setTimeout(() => {
-      dispatch(getAll(email))
-      dispatch(checkToken([token, email]))
-    }, 1000)
+      dispatch(getAll())
+      dispatch(checkToken())
+    }, 2000)
   }, [])
   
   return (
     <div >
         <NavBar />
-      <div className={styles.container}>
+      <div >
         {/* Navigation Routes */}
         <Routes>
-          <Route path='/moviesite' element={<Main />} />
-        </Routes>
-        <Routes>
-          <Route path='/moviesite/films' element={<Films />} />
-        </Routes>
-        <Routes>
-          <Route path='/moviesite/watchlist' element={<WatchList />} />
-        </Routes>
-        <Routes>
-          <Route path='/moviesite/tvshows' element={<TvShows />} />
-        </Routes>
-        <Routes>
-          <Route path='/moviesite/search-page' element={<SearchPage />}/>
-        </Routes>
+          <Route path='*' element={<NotFound />}/>
+          <Route path='/' element={<Main />} />
+          <Route path='/films' element={<Films />} />
+          <Route path='/watchlist' element={<WatchList />} />
+          <Route path='/tvshows' element={<TvShows />} />
+          <Route path='/search-page' element={<SearchPage />}/>
 
         {/* Films Routes */}
-        <Routes>
-          <Route path="/moviesite/films/popular" element={<PopularFilms />} />
-        </Routes>
-        <Routes>
-          <Route path="/moviesite/films/bestmovies" element={<BestMovies />} />
-        </Routes>
-        <Routes>
-          <Route path="/moviesite/films/allfilms" element={<AllFilms/>} />
-        </Routes>
+          <Route path="/films/popular" element={<PopularFilms />} />
+          <Route path="/films/bestmovies" element={<BestMovies />} />
+          <Route path="/films/allfilms" element={<AllFilms/>} />
 
         {/* Login and Registration */}
-        <Routes>
-          <Route path='/moviesite/login' element={<Login />}/>
-        </Routes>
-        <Routes>
-          <Route path='/moviesite/registration' element={<Registration />}/>
-        </Routes>
+          <Route path='/login' element={<Login />}/>
+          <Route path='/registration' element={<Registration />}/>
 
         {/* Movie Page */}
-        <Routes>
-          <Route path="/moviesite/movie/:id" element={<MoviePage />}/>
-        </Routes>
-        <Routes>
-          <Route path="/moviesite/tv/:id" element={<TvShowsPage />}/>
-        </Routes>
+          <Route path="/movie/:id" element={<MoviePage />}/>
+          <Route path="/tv/:id" element={<TvShowsPage />}/>
 
         {/* Personal Series,Movies,Premiers */}
-        <Routes>
-          <Route  path='/moviesite/personal-films' element={<PersonalFilmsItems />}/>
-        </Routes>
-        <Routes>
-          <Route  path='/moviesite/personal-series' element={<PersonalSeriesItem />}/>
-        </Routes>
-        <Routes>
-          <Route  path='/moviesite/upcoming-premiers' element={<UpcomingPremiersItem />}/>
+          <Route  path='/personal-films' element={<PersonalFilmsItems />}/>
+          <Route  path='/personal-series' element={<PersonalSeriesItem />}/>
+          <Route  path='/upcoming-premiers' element={<UpcomingPremiersItem />}/>
         </Routes>
       </div>
       <Navigation />

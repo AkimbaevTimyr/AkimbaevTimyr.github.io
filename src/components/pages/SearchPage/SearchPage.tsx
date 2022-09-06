@@ -1,5 +1,5 @@
 import  {  useState } from 'react'
-import FilmItem from '../../FilmItem/FilmItem'
+import FilmItem from '../../shared/FilmItem/FilmItem'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { setSearchMovies } from '../../../store/actions/MovieActionCreator'
 import styles from './style.module.css'

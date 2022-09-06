@@ -1,15 +1,16 @@
 import {  FC, useEffect } from 'react'
+import { getUser } from '../../../helpers/getUser/getUser'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import {getFavoriteMovies } from '../../../store/actions/MovieActionCreator'
 import { IFilmItemMovie } from '../../../types/MoviesTypes'
-import FilmItem from '../../FilmItem/FilmItem'
-import Loading from '../../Loading/loading'
+import FilmItem from '../../shared/FilmItem/FilmItem'
+import Loading from '../../shared/Loading/Loading'
 import styles from './style.module.css'
 
 const WatchList: FC = () => {
-  const email = localStorage.getItem('email')
+  const {email} = getUser()
   const {favoriteMovies} = useAppSelector(state => state.movies)
-  const dispatch: any = useAppDispatch()
+  const dispatch: any= useAppDispatch();
   useEffect(()=>{
     dispatch(getFavoriteMovies(email))
   },[])

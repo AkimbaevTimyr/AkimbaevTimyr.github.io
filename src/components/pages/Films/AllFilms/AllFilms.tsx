@@ -2,14 +2,13 @@ import { useState, } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
 import {  sortingMovies, } from '../../../../store/actions/MovieActionCreator'
 import { IMovie } from '../../../../types/MoviesTypes'
-import FilmItem from '../../../FilmItem/FilmItem'
-import Loading from '../../../Loading/loading'
-import Pagination from '../../../pagination.tsx/pagination'
+import FilmItem from '../../../shared/FilmItem/FilmItem'
+import Loading from '../../../shared/Loading/Loading'
+import Pagination from '../../../shared/Pagination.tsx/Pagination'
 import LeftSide from './LeftSide/LeftSide'
 import styles from './style.module.css'
 
 const AllFilms = () => {
-    
     const { allMovies } = useAppSelector(state => state.movies)
     const dispatch: any = useAppDispatch()
 

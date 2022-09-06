@@ -134,3 +134,22 @@
         margin-left: 90px;
     }
 }
+
+@media (max-width: 470px){
+    .body{
+        display: block;
+    }
+    .items{
+        margin-top: 50px;
+        margin-left: -30px;
+    }
+    .left{
+        margin-left: 0px;
+    }
+    .header{
+        margin-left: 30px;
+    }
+    .left_body{
+        margin-left: 30px;
+    }
+}

@@ -1,6 +1,6 @@
 .movieContainer{
     background-color: rgb(244,244,244);
-    height: 150vh;
+    height: 100%;
     display: flex;
     flex-wrap: wrap;
 }
@@ -16,14 +16,14 @@
     display: flex;
 }
 
-.itemImg{
+.item_img{
     position: relative;
 }
 
 img{
     border-radius:5px;
-    width: 300px;
 }
+
 .rating{
     display: flex;
     position: absolute;
@@ -185,14 +185,19 @@ img{
         font-size: 20px;
         margin-top: 10px;
     }
-    img{
-        width: 250;
+    .movie{
+        margin-left: 10px;
     }
 }
+
+
 
 @media (max-width: 390px){
     .button_watch_later{
         font-size: 12px;
         padding: 5px;
+    }
+    .movie{
+        margin-left: 0px;
     }
 }

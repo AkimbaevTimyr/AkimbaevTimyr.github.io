@@ -2,14 +2,16 @@ import { useEffect, useState, FC, Fragment } from 'react'
 import {  useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
+import About from '../About/About'
+import Description from '../../shared/Description/Description'
 import './style.css'
-import About from '../../About/About'
-import Description from '../../Description/Description'
 import { addFavoriteMovie, deleteMovieById } from '../../../store/actions/MovieActionCreator'
 import { convertTimestampToDate } from '../../../helpers/convertTimestampToDate/convertTimestampToDate'
 import { useGetMoviesByIdQuery } from '../../../services/MovieService'
-import Loading from '../../Loading/loading'
-import SimularMovies from '../../SimularMovies/SimularMovies'
+import Loading from '../../shared/Loading/Loading'
+import SimularMovies from '../../shared/SimularMovies/SimularMovies'
+import Reviews from '../../shared/Reviews/Reviews'
+import Image from '../../shared/Image/Image'
 
 const MoviePage: FC = () => {
     let { id } = useParams()
@@ -17,9 +19,9 @@ const MoviePage: FC = () => {
     const email = localStorage.getItem('email')
     const dispatch: any = useAppDispatch()
     const [movieKey, setMovieKey] = useState<string>('')
-    const { favoriteMovies,  } = useAppSelector(state => state.movies)
+    const { favoriteMovies  } = useAppSelector(state => state.movies)
     const [buttonCondition, setButtonCondition] = useState<boolean>(false)
-    const { poster_path = undefined, title = undefined, overview = undefined, vote_average = undefined, genres = undefined, release_date = undefined, original_name = undefined, original_title = undefined, tagline = undefined, production_countries = undefined, budget = undefined, runtime = undefined } = { ...data };
+    const { poster_path = "", title = "", overview = "", vote_average = undefined, genres = undefined, release_date = "", original_name = "", original_title = "", tagline = "", production_countries = undefined, budget = "", runtime = "" } = { ...data };
 
     useEffect(() => {
         axios.get<any>(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=en-US`).then((data: any) => setMovieKey(data.data.results[0].key))
@@ -48,11 +50,12 @@ const MoviePage: FC = () => {
         <div className='movieContainer'>
             {isLoading === true ?  <div className='loading'><Loading /></div> : (<div className="moviePage" >
                 <div className='movie'>
-                    <div className="itemImg">
-                        {poster_path == undefined ? (<img src='https://st.kp.yandex.net/images/film_big/4781063.jpg' className="itemImg" />) : (
-                            <><img src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`} alt="" className="itemImg" />
-                                <p className="rating">{vote_average?.toFixed(1)}</p></>
-                        )}
+                    <div className="item_img">
+                        <Image src={`https://image.tmdb.org/t/p/w220_and_h330_face/${poster_path}`}
+                            className="object-cover w-80" />
+                        <span className="absolute ml-3 top-4 rounded-full px-3 py-1.5 bg-green-700 text-white font-medium text-xs">
+                            {vote_average?.toFixed(1)}
+                        </span>
                     </div>
                     <div className="item_about">
                         <h2 className="item_header">{title}</h2>
@@ -87,6 +90,7 @@ const MoviePage: FC = () => {
                 <div className="simular_movies">
                     <SimularMovies id={id} header='Похожие фильмы' name="movie"/>
                 </div>
+                <Reviews id={id} type="movie"/>
             </div>)}
 
         </div>

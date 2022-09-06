@@ -1,12 +1,12 @@
 import React, { useEffect, FC } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
-import Pagination from '../../../pagination.tsx/pagination'
-import Loading from '../../../Loading/loading'
+import Pagination from '../../../shared/Pagination.tsx/Pagination'
+import Loading from '../../../shared/Loading/Loading'
 import { IMovie } from '../../../../types/MoviesTypes'
-import FilmItem from '../../../FilmItem/FilmItem'
+import FilmItem from '../../../shared/FilmItem/FilmItem'
 import { getPopularMovies } from '../../../../store/actions/MovieActionCreator'
 import styles from './style.module.css'
-import Navigation from '../../../Navigation/Navigation'
+import Navigation from '../../../shared/Navigation/Navigation'
 
 const PopularFilms: FC = () => {
   const dispatch: any = useAppDispatch()
