@@ -10,14 +10,16 @@ interface ReviewsProps {
 
 const Reviews: FC<ReviewsProps> = ({id, type}) => {
     const {data, isLoading, error} = useGetReviewsQuery({type, id})
-    console.log(data?.results)
     return (
        <div className={styles.container}>
             <div className={styles.header}>Отзывы зрителей</div>
-            {data?.results.map((el: any) => (
-                <ReviewsItem content={el.content} author={el.author} created_at={el.created_at} />
-            ))}
+            <div className={styles.reviews}>
+                {data?.results.map((el: any) => (
+                    <ReviewsItem content={el.content} author={el.author} created_at={el.created_at} />
+                ))}
+            </div>
         </div>
+
     )
 }
 

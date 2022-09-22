@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
-import { IFavoriteMovie, IMovie } from '../../types/MoviesTypes'
+import {  IMovie } from '../../types/MoviesTypes'
 import axios from 'axios'
 import { getDocs, collection, query, deleteDoc, where, doc, addDoc } from 'firebase/firestore'
 import { db } from '../../firebase-config'
@@ -141,7 +141,7 @@ export const setSearchMovies = createAsyncThunk(
 
 export const addFavoriteMovies = createAsyncThunk(
     "movie/addFavoriteMovie",
-    async(movies: IFavoriteMovie[], thunkAPI) =>{
+    async(movies: IMovie[], thunkAPI) =>{
         try{
             return movies
         }catch(e){

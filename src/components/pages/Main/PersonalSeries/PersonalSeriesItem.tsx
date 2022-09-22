@@ -4,25 +4,19 @@ import { useAppSelector } from '../../../../hooks/redux'
 import { ITvShows } from '../../../../types/TvShowTypes'
 import FilmItem from '../../../shared/FilmItem/FilmItem'
 import Loading from '../../../shared/Loading/Loading'
+import MainFilmItems from '../../../shared/MainItems/MainFilmItems/MainFilmItems'
 import styles from '../style.module.css'
+import Button from '../../../shared/Buttons/ButtonMainPage/Button'
 
 const PersonalSeriesItem: FC = () => {
     const { personalSeries } = useAppSelector(state => state.movies)
     return (
         <div className={styles.films}>
-            <div className={styles.back}>
-                <Link to="/">
-                    Назад
-                </Link>
-            </div>
+           <Button />
             <div className={styles.container}>
-                {personalSeries.length === 0 ? <Loading /> : (<>
-                    <div className={styles.items}>
-                        {personalSeries.map((el: ITvShows) => (
-                            <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.name} vote_average={el.vote_average} release_date={el.first_air_date} type="tv" />
-                        ))}
-                    </div>
-                </>)}
+                {personalSeries.length === 0 ? <Loading /> : (
+                    <MainFilmItems data={personalSeries} sliceEndNumber={personalSeries?.length} type="tv"/>
+                )}
             </div>
         </div>
     )

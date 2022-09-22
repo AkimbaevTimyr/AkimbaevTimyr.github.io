@@ -17,6 +17,8 @@ const FilmsComponents: FC<FilmsComponentsProps> = ({ img, title, subtitle, link 
                         <Image  
                             src={img}  
                             className="w-36"
+                            width={180}
+                            height={144}
                         />
                     </Link>
                     <div className="p-8 sm:col-span-2 w-56">

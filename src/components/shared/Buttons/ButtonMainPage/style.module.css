@@ -1,0 +1,12 @@
+.back{
+    display: flex;
+    align-items: center;
+    padding-top: 30px;
+    margin-left: 150px;
+    cursor: pointer;
+}
+
+.back:hover{
+    transition: opacity 124ms linear, transform 124ms linear;
+    transform: translate(-5px);
+}

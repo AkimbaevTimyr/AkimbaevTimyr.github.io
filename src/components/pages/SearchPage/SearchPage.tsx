@@ -1,9 +1,8 @@
 import  {  useState } from 'react'
-import FilmItem from '../../shared/FilmItem/FilmItem'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { setSearchMovies } from '../../../store/actions/MovieActionCreator'
 import styles from './style.module.css'
-import {  IFilmItemMovie } from '../../../types/MoviesTypes'
+import SearchResult from './SearchResult/SearchResult'
 
 const SearchPage = () => {
     const [text, setText] = useState<string>('')
@@ -24,9 +23,7 @@ const SearchPage = () => {
                 </form>
             </div>
             <div className={styles.items}>
-                {searchMovies.length != 0 ?  searchMovies.map((el:  IFilmItemMovie) => (
-                     <FilmItem  id={el.id} img={el.poster_path} title={el.original_name || el.title} vote_average={el.vote_average} release_date={el.first_air_date || el.release_date} type={el.media_type}/>
-                )) : <div>Ничего не найдено</div>}
+                <SearchResult data={searchMovies}/>
             </div>
         </div>
     )

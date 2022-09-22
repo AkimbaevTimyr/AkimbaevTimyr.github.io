@@ -20,6 +20,8 @@ const FilmItem: FC<FilmItemProps> = ({ id, img, title, vote_average, release_dat
                 <Link to={`/${type}/${id}`}>
                 <Image src={`https://image.tmdb.org/t/p/w220_and_h330_face/${img}`}  
                         className="img object-cover w-48" 
+                        width={192}
+                        height={288}
                 />
                 </Link>
                 <span className="absolute ml-3 top-4 rounded-full px-3 py-1.5 bg-green-700 text-white font-medium text-xs">

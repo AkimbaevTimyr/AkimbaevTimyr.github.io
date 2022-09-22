@@ -3,23 +3,29 @@ import ContentLoader from "react-content-loader"
 
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
     src?: string;
+    height: number;
+    width: number;
 }
 
-const MyLoader = (props: any) => (
+interface MyLoaderProps {
+    width?: number;
+    height?: number;
+}
+
+const MyLoader = ({width = 192, height = 280}: MyLoaderProps) => (
     <ContentLoader 
       speed={1}
-      width={192}
-      height={288}
+      width={width}
+      height={height}
       viewBox="0 0 293.333 440"
       backgroundColor="#f3f3f3"
       foregroundColor="#ecebeb"
-      {...props}
     >
        <rect x="1" y="4" rx="0" ry="0" width="288" height="450" /> 
     </ContentLoader>
   )
 
-export default ({  src,  ...props }: ImageProps) => {
+export default ({  src, height, width,  ...props }: ImageProps) => {
     const [loading, setLoading] = useState(false)
 
     const onLoad = useCallback(() => {
@@ -36,7 +42,7 @@ export default ({  src,  ...props }: ImageProps) => {
     }, [src, onLoad])
 
     if(!loading){
-        return <MyLoader/>
+        return <MyLoader height={height} width={width}/>
     }else{
         return <img {...props} alt={src} src={src} />
     }

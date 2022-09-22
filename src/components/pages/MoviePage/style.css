@@ -174,23 +174,15 @@ img{
 }
 
 
-@media (max-width: 630px){
-    .item_header{
-        font-size: 24px;
-    }
-}
-
 @media (max-width: 530px){
     .item_header{
-        font-size: 20px;
+        font-size: 32px;
         margin-top: 10px;
     }
     .movie{
         margin-left: 10px;
     }
 }
-
-
 
 @media (max-width: 390px){
     .button_watch_later{
