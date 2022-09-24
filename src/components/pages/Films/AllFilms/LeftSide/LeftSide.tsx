@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../../../../hooks/redux'
 import { sortingMovies } from '../../../../../store/actions/MovieActionCreator'
 import styles from '../style.module.css'
 import { Option } from '../../../../../types/Types'
-import { useSettings } from '../../../../../helpers/settings/settings'
+import { useSettings } from '../../../../../hooks/settings/settings'
 
 interface LeftSideProps {
     filmPage: number

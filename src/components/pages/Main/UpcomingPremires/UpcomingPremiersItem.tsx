@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import { useAppSelector } from '../../../../hooks/redux'
 import { IMovie } from '../../../../types/MoviesTypes'
-import Loading from '../../../shared/Loading/Loading'
+import Loading from '../../../shared/UI/Loading/Loading'
 import FilmItem from '../../../shared/FilmItem/FilmItem'
 import styles from '../style.module.css'
 import MainFilmItems from '../../../shared/MainItems/MainFilmItems/MainFilmItems'
-import Button from '../../../shared/Buttons/ButtonMainPage/Button'
+import Button from '../../../shared/UI/Buttons/ButtonMainPage/Button'
 
 function UpcomingPremiersItem() {
   const { upcomingPremiers } = useAppSelector(state => state.movies)

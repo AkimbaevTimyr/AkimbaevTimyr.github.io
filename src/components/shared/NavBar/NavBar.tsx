@@ -1,12 +1,12 @@
 import React, { FC, useEffect,   } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../hooks/redux'
-import { setIsAuth } from '../../store/actions/UserActionCreator'
-import { useSettings } from '../../helpers/settings/settings'
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
+import { setIsAuth } from '../../../store/actions/UserActionCreator'
+import { useSettings } from '../../../hooks/settings/settings'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import {  MenuIcon, XIcon } from '@heroicons/react/outline'
-import { setUser } from '../../helpers/setUser/setUser'
+import { setUser } from '../../../hooks/setUser/setUser'
 
 const NavBar: FC = () => {
     const { navigation } = useSettings()

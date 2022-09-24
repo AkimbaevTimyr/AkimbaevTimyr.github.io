@@ -1,10 +1,9 @@
 import React, {  FC, } from 'react'
 import { useParams } from 'react-router-dom'
-import './style.css'
-import { useGetTvShowsByIdQuery } from '../../../services/MovieService'
-import FilmPage from '../../shared/FilmPage/FilmPage'
+import { useGetTvShowsByIdQuery } from '../../../../services/MovieService'
+import FilmPage from '../../../shared/FilmPage/FilmPage'
 
-const TvShowsPage: FC = () => {
+const TvShow: FC = () => {
     let { id } = useParams()
     const { data, isLoading, isError } = useGetTvShowsByIdQuery(Number(id))
     const { poster_path  = "", name = "", overview = undefined, vote_average = undefined, genres = undefined, first_air_date = undefined, original_name = undefined, original_title = undefined, tagline = undefined, production_countries = undefined, budget = undefined, runtime = undefined } = { ...data };
@@ -16,6 +15,6 @@ const TvShowsPage: FC = () => {
     )
 }
 
-export default TvShowsPage
+export default TvShow
 
 

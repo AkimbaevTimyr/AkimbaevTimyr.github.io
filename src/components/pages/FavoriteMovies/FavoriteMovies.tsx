@@ -1,10 +1,10 @@
 import {  FC, useEffect } from 'react'
-import { getUser } from '../../../helpers/getUser/getUser'
+import { getUser } from '../../../hooks/getUser/getUser'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import {getFavoriteMovies } from '../../../store/actions/MovieActionCreator'
 import { IMovie } from '../../../types/MoviesTypes'
 import FilmItem from '../../shared/FilmItem/FilmItem'
-import Loading from '../../shared/Loading/Loading'
+import Loading from '../../shared/UI/Loading/Loading'
 import styles from './style.module.css'
 
 const WatchList: FC = () => {

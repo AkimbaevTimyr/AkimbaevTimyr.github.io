@@ -1,5 +1,5 @@
 import Main from './components/pages/Main/Main';
-import NavBar from './components/NavBar/NavBar';
+import NavBar from './components/shared/NavBar/NavBar';
 import { Routes, Route} from 'react-router-dom'
 import Films from './components/pages/Films';
 import WatchList from './components/pages/FavoriteMovies/FavoriteMovies';
@@ -8,15 +8,15 @@ import PopularFilms from './components/pages/Films/PopularFilms/PopularFilms';
 import BestMovies from './components/pages/Films/BestMovies/BestMovies';
 import Login from './components/pages/Auth/Login';
 import Registration from './components/pages/Auth/Registration';
-import MoviePage from './components/pages/MoviePage/MoviePage';
-import TvShowsPage from './components/pages/TvShowsPage/TvShowsPage';
+import Movie from './components/pages/Movie/Movie';
+import TvShow from './components/pages/TvShows/TvShow/TvShow';
 import PersonalFilmsItems from './components/pages/Main/PersonalFilms/PersonalFilmsItems';
 import PersonalSeriesItem from './components/pages/Main/PersonalSeries/PersonalSeriesItem';
 import UpcomingPremiersItem from './components/pages/Main/UpcomingPremires/UpcomingPremiersItem';
 import { useEffect,  } from 'react';
 import { useAppDispatch, } from './hooks/redux';
 import {  getAll } from './store/actions/MovieActionCreator';
-import SearchPage from './components/pages/SearchPage/SearchPage';
+import Search from './components/pages/Search/Search';
 import AllFilms from './components/pages/Films/AllFilms/AllFilms';
 import { checkToken } from './store/actions/UserActionCreator';
 import Navigation from './components/shared/Navigation/Navigation';
@@ -42,7 +42,7 @@ function App() {
           <Route path='/films' element={<Films />} />
           <Route path='/watchlist' element={<WatchList />} />
           <Route path='/tvshows' element={<TvShows />} />
-          <Route path='/search-page' element={<SearchPage />}/>
+          <Route path='/search-page' element={<Search />}/>
 
         {/* Films Routes */}
           <Route path="/films/popular" element={<PopularFilms />} />
@@ -54,8 +54,8 @@ function App() {
           <Route path='/registration' element={<Registration />}/>
 
         {/* Movie Page */}
-          <Route path="/movie/:id" element={<MoviePage />}/>
-          <Route path="/tv/:id" element={<TvShowsPage />}/>
+          <Route path="/movie/:id" element={<Movie />}/>
+          <Route path="/tv/:id" element={<TvShow />}/>
 
         {/* Personal Series,Movies,Premiers */}
           <Route  path='/personal-films' element={<PersonalFilmsItems />}/>

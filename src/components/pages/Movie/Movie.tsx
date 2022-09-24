@@ -1,10 +1,9 @@
 import { FC, } from 'react'
 import {  useParams } from 'react-router-dom'
-import './style.css'
 import { useGetMoviesByIdQuery } from '../../../services/MovieService'
 import FilmPage from '../../shared/FilmPage/FilmPage'
 
-const MoviePage: FC = () => {
+const Movie: FC = () => {
     let { id } = useParams()
     const { data, isLoading, isError } =  useGetMoviesByIdQuery(Number(id))
     const { poster_path = "", title = "", overview = "", vote_average = undefined, genres = undefined, release_date = "",  original_title = "", tagline = "", production_countries = undefined, budget = "", runtime = "" } = { ...data };
@@ -16,7 +15,7 @@ const MoviePage: FC = () => {
     )
 }
 
-export default MoviePage
+export default Movie
 
 
 

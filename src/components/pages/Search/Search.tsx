@@ -1,10 +1,10 @@
-import  {  useState } from 'react'
+import  React ,{  useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import { setSearchMovies } from '../../../store/actions/MovieActionCreator'
 import styles from './style.module.css'
 import SearchResult from './SearchResult/SearchResult'
 
-const SearchPage = () => {
+const Search = () => {
     const [text, setText] = useState<string>('')
     const dispatch: any = useAppDispatch()
     const { searchMovies } = useAppSelector(state => state.movies)
@@ -29,4 +29,4 @@ const SearchPage = () => {
     )
 }
 
-export default SearchPage
+export default Search

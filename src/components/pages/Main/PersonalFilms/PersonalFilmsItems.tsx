@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import { useAppSelector } from '../../../../hooks/redux'
-import Loading from '../../../shared/Loading/Loading'
+import Loading from '../../../shared/UI/Loading/Loading'
 import styles from '../style.module.css'
 import MainFilmItems from '../../../shared/MainItems/MainFilmItems/MainFilmItems'
-import Button from '../../../shared/Buttons/ButtonMainPage/Button'
+import Button from '../../../shared/UI/Buttons/ButtonMainPage/Button'
 
 const PersonalFilmsItems: FC = () => {
     const { personalMovies } = useAppSelector(state => state.movies)

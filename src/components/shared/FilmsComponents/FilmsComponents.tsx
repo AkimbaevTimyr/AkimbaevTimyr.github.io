@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
-import Image from '../shared/Image/Image'
+import Image from '../Image/Image'
 
 interface FilmsComponentsProps {
     img: string;

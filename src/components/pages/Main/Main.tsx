@@ -1,6 +1,6 @@
 import  {  FC } from 'react'
 import { useAppSelector } from '../../../hooks/redux'
-import Loading from '../../shared/Loading/Loading'
+import Loading from '../../shared/UI/Loading/Loading'
 import PersonalFilms from './PersonalFilms/PersonalFilms'
 import PersonalSeries from './PersonalSeries/PersonalSeries'
 import UpcomingPremiers from './UpcomingPremires/UpcomingPremiers'

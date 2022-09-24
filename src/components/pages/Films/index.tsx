@@ -2,7 +2,7 @@ import {FC} from 'react'
 import bestMoviesImg from '../../../images/250bestmovies.png'
 import popularFilmsImg from '../../../images/popularfilms.png'
 import movies from '../../../images/movies.png'
-import FilmsComponents from '../../filmsComponents/FilmsComponents'
+import FilmsComponents from '../../shared/FilmsComponents/FilmsComponents'
 
 const Films: FC  = () => {
   return (

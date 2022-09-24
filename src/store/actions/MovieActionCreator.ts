@@ -3,7 +3,7 @@ import {  IMovie } from '../../types/MoviesTypes'
 import axios from 'axios'
 import { getDocs, collection, query, deleteDoc, where, doc, addDoc } from 'firebase/firestore'
 import { db } from '../../firebase-config'
-import { getUser } from '../../helpers/getUser/getUser'
+import { getUser } from '../../hooks/getUser/getUser'
 
 export const getAll = createAsyncThunk(
     "movies/getAllMovies",

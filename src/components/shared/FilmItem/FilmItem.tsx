@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { convertMovieType } from '../../../helpers/convertMovieType/convertMovieType'
+import { convertMovieType } from '../../../hooks/convertMovieType/convertMovieType'
 import Image from '../Image/Image';
 import './filmItem.css'
 
