@@ -12,7 +12,7 @@ interface AboutProps{
 
 const About: FC<AboutProps> = ({items}) => {
   return (
-    <ul className='about'>
+    <ul className={styles.about}>
       {items?.map((el) => (
           <li key={el.caption} className={styles.item}>
               <span className={styles.caption}>{el.caption}</span>

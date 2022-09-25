@@ -8,7 +8,7 @@ export const movieApi = createApi({
         getMoviesById: builder.query<IMovie, any>({
             query: (id: number) => `/movie/${id}?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU`,
         }),
-        getSimular: builder.query<any, any>({
+        getSimular: builder.query<[], any>({
             query: ({id, name}) => `/${name}/${id}/similar?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU&page=1`
         }),
         getTvShowsById: builder.query<IMovie, any>({

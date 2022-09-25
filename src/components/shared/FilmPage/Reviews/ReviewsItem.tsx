@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { convertTimestampToDate } from '../../../helpers/convertTimestampToDate/convertTimestampToDate';
+import { convertTimestampToDate } from '../../../../hooks/convertTimestampToDate/convertTimestampToDate';
 
 interface ReviewsItemProps {
     author: string;

@@ -1,13 +1,13 @@
 import  { FC } from 'react'
-import {  useGetSimularQuery } from '../../../services/MovieService'
-import {  IMovie } from '../../../types/MoviesTypes';
-import FilmItem from '../FilmItem/FilmItem'
+import {  useGetSimularQuery } from '../../../../services/MovieService'
+import {  IMovie } from '../../../../types/MoviesTypes';
+import FilmItem from '../../FilmItem/FilmItem'
 import styles from './style.module.css'
 
 interface SimularMoviesProps {
     id: string | undefined;
     header: string;
-    name: string;
+    name: string | null;
 }
 
 const SimularMovies: FC<SimularMoviesProps> = ({id, header, name}) => {

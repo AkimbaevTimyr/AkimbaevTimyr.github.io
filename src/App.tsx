@@ -1,3 +1,4 @@
+import React from 'react'
 import Main from './components/pages/Main/Main';
 import NavBar from './components/shared/NavBar/NavBar';
 import { Routes, Route} from 'react-router-dom'

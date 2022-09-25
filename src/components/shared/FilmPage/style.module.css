@@ -139,7 +139,8 @@ img{
 }
 
 .loading{
-    margin-left: 1000px;
+    margin-left: 900px;
+    background-color: rgb(244,244,244);
 }
 
 

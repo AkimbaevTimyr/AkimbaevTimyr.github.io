@@ -11,9 +11,7 @@ const PersonalFilmsItems: FC = () => {
         <div className={styles.films}>
             <Button />
             <div className={styles.container}>
-                {personalMovies.length === 0 ? <Loading /> : (
-                    <MainFilmItems data={personalMovies} sliceEndNumber={personalMovies?.length} type="movie" />
-                )}
+                <MainFilmItems data={personalMovies} sliceEndNumber={personalMovies?.length} type="movie" />
             </div>
         </div>
     )

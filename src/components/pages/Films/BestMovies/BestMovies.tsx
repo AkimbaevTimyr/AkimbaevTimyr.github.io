@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
 import { IMovie } from '../../../../types/MoviesTypes'
 import Pagination from '../../../shared/UI/Pagination.tsx/Pagination'
@@ -16,7 +16,7 @@ const BestMovies: FC = () => {
     }
     return (
         <>
-        {bestMovies.length === 0 ? <Loading /> : (<>
+        {bestMovies.lenght ? <Loading /> : (<>
           <div className={styles.items}>
             {bestMovies.map((el: IMovie) => (
                <FilmItem  key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="movie"/>

@@ -4,14 +4,15 @@ import { useAppDispatch } from '../../../hooks/redux'
 import Loading from '../UI/Loading/Loading'
 import Image from '../Image/Image'
 import Button from '../UI/Buttons/ButtonFilmPage/Button'
-import About from '../About/About'
-import SimularMovies from '../SimularMovies/SimularMovies'
+import About from './About/About'
+import SimularMovies from './SimularMovies/SimularMovies'
 import { convertTimestampToDate } from '../../../hooks/convertTimestampToDate/convertTimestampToDate'
 import { addFavoriteMovie, deleteMovieById } from '../../../store/actions/MovieActionCreator'
-import Description from '../Description/Description'
+import Description from './Description/Description'
 import { GetButtonCondition } from '../../../hooks/getButtonCondition/GetButtonCondition'
 import { getUser } from '../../../hooks/getUser/getUser'
 import styles from './style.module.css'
+import Reviews from './Reviews/Reviews'
 
 interface FilmPageProps {
     data: any;
@@ -92,8 +93,9 @@ const FilmPage: FC<FilmPageProps> = ({id, data, isLoading, name, release_date, v
                 <Description description={overview} />
                 <br />
                 <div className={styles.simular_movies}>
-                    <SimularMovies id={id} header='Похожие сериалы' name="tv" />
+                    <SimularMovies id={id} header={type === 'movie' ? 'Похожие фильмы' : 'Похожие сериалы'} name={type} />
                 </div>
+                <Reviews id={id} type={type} />
             </div>)}
         </div>
   )

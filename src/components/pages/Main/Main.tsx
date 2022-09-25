@@ -1,4 +1,4 @@
-import  {  FC } from 'react'
+import { FC } from 'react'
 import { useAppSelector } from '../../../hooks/redux'
 import Loading from '../../shared/UI/Loading/Loading'
 import PersonalFilms from './PersonalFilms/PersonalFilms'
@@ -7,15 +7,15 @@ import UpcomingPremiers from './UpcomingPremires/UpcomingPremiers'
 import styles from './style.module.css'
 
 const Main: FC = () => {
-  const {isLoading} = useAppSelector(state => state.movies)
-  if(isLoading){
+  const { isLoading } = useAppSelector(state => state.movies)
+  if (isLoading) {
     return <Loading />
   }
   return (
-   <div className={styles.main}>
-    <PersonalFilms />
-    <PersonalSeries />
-    <UpcomingPremiers />
+    <div className={styles.main}>
+      <PersonalFilms />
+      <PersonalSeries />
+      <UpcomingPremiers />
     </div>
   )
 }

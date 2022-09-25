@@ -1,4 +1,4 @@
-import { useState, } from 'react'
+import React, { useState, } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
 import {  sortingMovies, } from '../../../../store/actions/MovieActionCreator'
 import { IMovie } from '../../../../types/MoviesTypes'
@@ -30,7 +30,7 @@ const AllFilms = () => {
                 <div className={styles.body}>
                     <LeftSide filmPage={filmPage}  />
                     <div>
-                        {allMovies?.length === 0 ? <div className={styles.loading}><Loading /></div> : (<>
+                        {allMovies?.lenght ? <div className={styles.loading}><Loading /></div> : (<>
                             <div className={styles.items}>
                                 {allMovies?.map((el: IMovie) => (
                                     <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="movie" />
