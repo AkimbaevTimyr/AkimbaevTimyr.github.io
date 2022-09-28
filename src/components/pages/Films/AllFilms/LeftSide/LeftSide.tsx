@@ -39,17 +39,17 @@ const LeftSide: FC<LeftSideProps> = ({ filmPage }) => {
                 <div className={styles.rating_inputs}>
                     <div className={styles.input_rating}>
                         <p>От</p>
-                        <input onChange={e => setRating1(Number(e.target.value))} type="number" min="1" max="10" step="1" value={rating1 || ""} />
+                        <input data-testid="input-from" onChange={e => setRating1(Number(e.target.value))} type="number" min="1" max="10" step="1" value={rating1 || ""} />
                     </div>
                     <div className={styles.input_rating}>
                         <p>До</p>
-                        <input onChange={e => setRating2(Number(e.target.value))} type="number" min="1" max="10" step="1" value={rating2 || ""} />
+                        <input data-testid="input-before" onChange={e => setRating2(Number(e.target.value))} type="number" min="1" max="10" step="1" value={rating2 || ""} />
                     </div>
                 </div>
                 <h2 className={styles.rating_header}>Жанр</h2>
-                <select className={styles.select} onChange={(e) => handleChange(e)} >
+                <select data-testid="select" className={styles.select} onChange={(e) => handleChange(e)} >
                     {options.map((item: Option) => (
-                        <option selected={item.id === genre}>{item.name}</option>
+                        <option key={item.id} selected={item.id === genre}>{item.name}</option>
                     ))}
                 </select>
                 <div className={styles.buttons}>

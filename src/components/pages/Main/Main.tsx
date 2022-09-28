@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import React,{ FC } from 'react'
 import { useAppSelector } from '../../../hooks/redux'
 import Loading from '../../shared/UI/Loading/Loading'
 import PersonalFilms from './PersonalFilms/PersonalFilms'
@@ -12,7 +12,7 @@ const Main: FC = () => {
     return <Loading />
   }
   return (
-    <div className={styles.main}>
+    <div data-testid='main-page' className={styles.main}>
       <PersonalFilms />
       <PersonalSeries />
       <UpcomingPremiers />

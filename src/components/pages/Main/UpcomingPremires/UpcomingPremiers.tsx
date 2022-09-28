@@ -1,7 +1,5 @@
-import { Link } from 'react-router-dom'
+import React from 'react'
 import {  useAppSelector } from '../../../../hooks/redux'
-import { IMovie } from '../../../../types/MoviesTypes'
-import FilmItem from '../../../shared/FilmItem/FilmItem'
 import MainFilmItems from '../../../shared/MainItems/MainFilmItems/MainFilmItems'
 import MainSubHeader from '../../../shared/MainItems/MainSubHeader/MainSubHeader'
 import styles from '../style.module.css'

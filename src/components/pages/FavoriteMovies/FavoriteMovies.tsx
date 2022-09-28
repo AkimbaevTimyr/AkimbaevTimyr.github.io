@@ -1,4 +1,4 @@
-import {  FC, useEffect } from 'react'
+import React, {  FC, useEffect } from 'react'
 import { getUser } from '../../../hooks/getUser/getUser'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import {getFavoriteMovies } from '../../../store/actions/MovieActionCreator'

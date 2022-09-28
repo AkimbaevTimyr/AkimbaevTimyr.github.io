@@ -1,11 +1,7 @@
 import React, {  FC } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
-import Pagination from '../../../shared/UI/Pagination.tsx/Pagination'
-import Loading from '../../../shared/UI/Loading/Loading'
-import { IMovie } from '../../../../types/MoviesTypes'
-import FilmItem from '../../../shared/FilmItem/FilmItem'
 import { getPopularMovies } from '../../../../store/actions/MovieActionCreator'
-import styles from './style.module.css'
+import Item from '../Item'
 
 const PopularFilms: FC = () => {
   const dispatch: any = useAppDispatch()
@@ -15,15 +11,7 @@ const PopularFilms: FC = () => {
   const { popularMovies} = useAppSelector(state => state.movies)
   return (
     <>
-      {popularMovies.lenght ? <Loading /> : (<>
-        <div className={styles.items}>
-          {popularMovies.map((el: IMovie) => (
-             <FilmItem  key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="movie"/>
-          ))}
-        </div> <Pagination changePage={(page: number) => changePage(page)} />
-        <br/><br/>
-      </>
-      )}
+      <Item data={popularMovies} changePage={(page)=> changePage(page)} type="movie"/>
     </>
   )
 }

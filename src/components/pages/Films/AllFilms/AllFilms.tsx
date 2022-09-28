@@ -5,6 +5,7 @@ import { IMovie } from '../../../../types/MoviesTypes'
 import FilmItem from '../../../shared/FilmItem/FilmItem'
 import Loading from '../../../shared/UI/Loading/Loading'
 import Pagination from '../../../shared/UI/Pagination.tsx/Pagination'
+import Item from '../Item'
 import LeftSide from './LeftSide/LeftSide'
 import styles from './style.module.css'
 
@@ -29,14 +30,8 @@ const AllFilms = () => {
                 </div>
                 <div className={styles.body}>
                     <LeftSide filmPage={filmPage}  />
-                    <div>
-                        {allMovies?.lenght ? <div className={styles.loading}><Loading /></div> : (<>
-                            <div className={styles.items}>
-                                {allMovies?.map((el: IMovie) => (
-                                    <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.title} vote_average={el.vote_average} release_date={el.release_date} type="movie" />
-                                ))}
-                            </div> <Pagination changePage={(page: number) => changePage(page)} />
-                        </>)}
+                    <div className={styles.allFilmsItem}>
+                        <Item data={allMovies} changePage={(page)=> changePage(page)} type="movie"/>
                     </div>
                 </div>
             </div>

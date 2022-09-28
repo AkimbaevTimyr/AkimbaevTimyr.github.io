@@ -13,6 +13,7 @@ import { GetButtonCondition } from '../../../hooks/getButtonCondition/GetButtonC
 import { getUser } from '../../../hooks/getUser/getUser'
 import styles from './style.module.css'
 import Reviews from './Reviews/Reviews'
+import {convertNumbers} from '../../../hooks/convertNumbers/convertNumbers'
 
 interface FilmPageProps {
     data: any;
@@ -23,7 +24,7 @@ interface FilmPageProps {
     original_name: string  | undefined;
     name: string | undefined;
     production_countries: any;
-    genres: any;
+    genres: [];
     tagline: string  | undefined;
     runtime: string  | undefined;
     budget: string | undefined;
@@ -42,11 +43,10 @@ const FilmPage: FC<FilmPageProps> = ({id, data, isLoading, name, release_date, v
         { caption: 'Страны', value: production_countries?.map((el: any, index: any) => <Fragment>{el.name + ', '}</Fragment>) },
         { caption: "Жанр", value: genres?.map((el: any) => <Fragment>{el.name + ', '}</Fragment>) },
         { caption: 'Слоган', value: tagline || '—' },
-        { caption: 'Бюджет', value: `$ ${budget}` || '—' },
-        { caption: 'Время', value: `${runtime} мин.` },
+        { caption: 'Бюджет', value: budget !== undefined ?  `$ ${convertNumbers(budget)}` : '—' },
+        { caption: 'Время', value: runtime !== undefined ? `${runtime + ' мин.'}` : '—'},
         { caption: 'Премьера в мире', value: convertTimestampToDate(release_date) },
     ]
-    
     const addFavorite = () => {
         handleClick()
         dispatch(addFavoriteMovie([email, `${type}`, data]))
@@ -57,7 +57,7 @@ const FilmPage: FC<FilmPageProps> = ({id, data, isLoading, name, release_date, v
     }
   return (
     <div className={styles.movieContainer}>
-            {isLoading === true ? <div className={styles.loading}> <Loading /> </div> : (<div className={styles.moviePage}>
+            {isLoading === true ? <div className={styles.loading}> <Loading /> </div> : (<div data-testid="film-page" className={styles.moviePage}>
                 <div className={styles.movie}>
                     <div className={styles.item_img}>
                         <Image src={`https://image.tmdb.org/t/p/w220_and_h330_face/${img}`}
@@ -74,17 +74,17 @@ const FilmPage: FC<FilmPageProps> = ({id, data, isLoading, name, release_date, v
                         <h2 className={styles.item_subheader}>{original_name}</h2>
                         <div className={styles.item_buttons}>
                             <div className={styles.button_watch}>
-                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
-                                    stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                                <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round"
+                                    strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
                                     <polygon points="5 3 19 12 5 21 5 3"></polygon>
                                 </svg>
-                                <a href={`https://www.youtube.com/watch?v=${movieKey}`}>
+                                <a  href={`https://www.youtube.com/watch?v=${movieKey}`}>
                                     Смотреть
                                 </a>
                             </div>
                             {bool === true ?  
-                                <Button name="Удалить" handleClick={()=> deleteFavorites(id)} />
-                                :  <Button name="Буду смотреть" handleClick={()=> addFavorite()}/>
+                                <Button  name="Удалить" handleClick={()=> deleteFavorites(id)} />
+                                :  <Button  name="Буду смотреть" handleClick={()=> addFavorite()}/>
                             }   
                         </div>
                         <About items={items} />

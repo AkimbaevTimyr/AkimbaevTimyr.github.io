@@ -1,4 +1,4 @@
-export function convertMovieType(type: string | undefined){
+export function convertMovieType(type: string | null){
     switch(type){
         case 'tv':
             return 'сериал'

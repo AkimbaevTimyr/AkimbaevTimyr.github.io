@@ -6,6 +6,7 @@ import Pagination from '../../shared/UI/Pagination.tsx/Pagination'
 import styles from './style.module.css'
 import FilmItem from '../../shared/FilmItem/FilmItem'
 import React from 'react'
+import { IMovie } from '../../../types/MoviesTypes'
 
 const TvShows = () => {
   const dispatch: any = useAppDispatch()
@@ -14,10 +15,10 @@ const TvShows = () => {
   }
   const { popularTvShows } = useAppSelector(state => state.tvShows)
   return (
-    <>
+    <div data-testid="tv-page">
       {popularTvShows.length === 0 ? <Loading /> : (<>
         <div className={styles.items}>
-          {popularTvShows.map((el: ITvShows) => (
+          {popularTvShows.map((el: IMovie) => (
             <FilmItem key={el.id} id={el.id} img={el.poster_path} title={el.original_name} vote_average={el.vote_average} release_date={el.first_air_date} type="tv" />
           ))}
         </div> <Pagination changePage={(page: number) => changePage(page)} />
@@ -25,7 +26,7 @@ const TvShows = () => {
         <br />
       </>
       )}
-    </>
+    </div>
   )
 }
 
