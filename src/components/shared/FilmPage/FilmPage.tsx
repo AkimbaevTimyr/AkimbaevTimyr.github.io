@@ -14,7 +14,6 @@ import { getUser } from '../../../hooks/getUser/getUser'
 import styles from './style.module.css'
 import Reviews from './Reviews/Reviews'
 import {convertNumbers} from '../../../hooks/convertNumbers/convertNumbers'
-
 interface FilmPageProps {
     data: any;
     isLoading: boolean;
@@ -55,6 +54,7 @@ const FilmPage: FC<FilmPageProps> = ({id, data, isLoading, name, release_date, v
         handleClick()
         dispatch(deleteMovieById(id))
     }
+    console.log(release_date)
   return (
     <div className={styles.movieContainer}>
             {isLoading === true ? <div className={styles.loading}> <Loading /> </div> : (<div data-testid="film-page" className={styles.moviePage}>

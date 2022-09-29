@@ -17,13 +17,13 @@ const FilmsComponents: FC<FilmsComponentsProps> = ({ img, title, subtitle, link 
                         <Image  
                             src={img}  
                             className="w-36"
-                            width={180}
-                            height={144}
+                            width={250}
+                            height={160}
                         />
                     </Link>
                     <div className="p-8 sm:col-span-2 w-56">
                         <h5 className="mt-4 font-bold">{title}</h5>
-                        <p className="mt-2 text-sm text-gray-500">
+                        <p data-testid="sub" className="mt-2 text-sm text-gray-500">
                             {subtitle}
                         </p>
                     </div>

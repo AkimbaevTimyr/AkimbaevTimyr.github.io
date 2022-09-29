@@ -4,34 +4,19 @@ import userEvent from '@testing-library/user-event'
 import { Provider } from 'react-redux'
 import { setupStore } from '../store/store';
 import App from '../App'
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter } from 'react-router-dom';
 
 const store = setupStore();
 
-
 describe("Router", () => {
-    test("test Films Router", () => {
-        render(<MemoryRouter>
-            <Provider store={store}>
-                <App />
-            </Provider>
-        </MemoryRouter>)
-
-        const filmsLink = screen.getAllByTestId('films-link')[0]
-        userEvent.click(filmsLink)
-        const filmsPage = screen.getByTestId('films-page')
-        expect(filmsPage).toBeInTheDocument()
+    test("test Films Router", async() => {
+        render(<Provider store={store}><App /> </Provider>, {wrapper: BrowserRouter})
+        await userEvent.click(screen.getAllByText("Фильмы")[0])
+        expect(screen.getByTestId('films-page')).toBeInTheDocument()
     })
-    test("test Tv Router", () => {
-        render(<MemoryRouter>
-                    <Provider store={store}>
-                        <App />
-                    </Provider>
-            </MemoryRouter>)
-
-        const tvLink = screen.getAllByTestId('tv-link')[0]
-        userEvent.click(tvLink)
-        const tvPage = screen.getByTestId('tv-page')
-        expect(tvPage).toBeInTheDocument()
+    test("test Tv Router", async () => {
+        render(<Provider store={store}><App /> </Provider>, {wrapper: BrowserRouter})
+        await userEvent.click(screen.getAllByTestId('tv-link')[0])
+        expect(screen.getByTestId('tv-page')).toBeInTheDocument()
     })
 })
