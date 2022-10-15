@@ -8,7 +8,7 @@ import AuthItem from './AuthItem';
 const Login: FC = () => {
   const navigate = useNavigate()
   const dispatch: any = useAppDispatch()
-  const handleClick = (email, password) => {
+  const handleClick = (email: string, password: string) => {
       dispatch(login({navigate, email, password}))
   }
   return (

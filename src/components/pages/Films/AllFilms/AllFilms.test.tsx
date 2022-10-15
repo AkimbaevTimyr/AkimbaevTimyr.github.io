@@ -12,9 +12,9 @@ const allFilmsSetup = () => {
         </Provider>
     );
     const h1 = screen.getByText('Все фильмы')
-    const inputFrom = screen.getByTestId("input-from")
-    const inputBefore = screen.getByTestId("input-before")
-    const select = screen.getByTestId('select')
+    const inputFrom = screen.getByTestId("input-from") as HTMLInputElement
+    const inputBefore = screen.getByTestId("input-before") as HTMLInputElement
+    const select = screen.getByTestId('select') as HTMLInputElement
     return {
         h1, inputFrom, inputBefore, select, ...utils
     }

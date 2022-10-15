@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, { FC, memo } from 'react'
 import styles from './style.module.css'
 
 type Obj = {
@@ -6,22 +6,22 @@ type Obj = {
   value: any
 }
 
-interface AboutProps{
+interface AboutProps {
   items: Obj[]
 }
 
-const About: FC<AboutProps> = ({items}) => {
+const About: FC<AboutProps> = memo(({ items }) => {
   return (
     <ul className={styles.about}>
       {items?.map((el) => (
-          <li key={el.caption} className={styles.item}>
-              <span className={styles.caption}>{el.caption}</span>
-                  <span className={styles.value}>{el.value}</span>
-          </li>
+        <li key={el.caption} className={styles.item}>
+          <span className={styles.caption}>{el.caption}</span>
+          <span className={styles.value}>{el.value}</span>
+        </li>
       ))}
-</ul>
+    </ul>
   )
-}
+})
 
 export default About
 

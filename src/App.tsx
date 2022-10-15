@@ -20,7 +20,6 @@ import {  getAll } from './store/actions/MovieActionCreator';
 import Search from './components/pages/Search/Search';
 import AllFilms from './components/pages/Films/AllFilms/AllFilms';
 import { checkToken } from './store/actions/UserActionCreator';
-import Navigation from './components/shared/Navigation/Navigation';
 import NotFound from './components/shared/NotFound/NotFound';
 
 function App() {
@@ -64,7 +63,6 @@ function App() {
           <Route  path='/upcoming-premiers' element={<UpcomingPremiersItem />}/>
         </Routes>
       </div>
-      <Navigation />
     </div>
   );
 }

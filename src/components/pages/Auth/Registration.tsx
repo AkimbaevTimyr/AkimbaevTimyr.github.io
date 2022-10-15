@@ -1,4 +1,4 @@
-import React, {useState, FC,} from 'react'
+import React, { FC,} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../hooks/redux';
 import { register } from '../../../store/actions/UserActionCreator';
@@ -8,7 +8,7 @@ const Registration: FC = () => {
     const dispatch: any = useAppDispatch()
     const navigate = useNavigate()
     
-    const handleClick = (email, password) =>{
+    const handleClick = (email: string, password: string) =>{
         dispatch(register({navigate, email, password}))
     }
     return (

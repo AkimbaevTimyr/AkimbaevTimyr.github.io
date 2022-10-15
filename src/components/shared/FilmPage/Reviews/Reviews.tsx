@@ -1,14 +1,14 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import { useGetReviewsQuery } from '../../../../services/MovieService'
 import ReviewsItem from './ReviewsItem';
 import styles from './style.module.css'
 
 interface ReviewsProps {
-    id: string | undefined;
+    id?: string ;
     type: string | null;
 }
 
-const Reviews: FC<ReviewsProps> = ({id, type}) => {
+const Reviews: FC<ReviewsProps> = memo(({id, type}) => {
     const {data,  error, isLoading} = useGetReviewsQuery({type, id})
     return (
        <div className={styles.container}>
@@ -21,6 +21,6 @@ const Reviews: FC<ReviewsProps> = ({id, type}) => {
         </div>
 
     )
-}
+})
 
 export default Reviews

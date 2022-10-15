@@ -20,12 +20,12 @@ export const addUser = createAsyncThunk(
 
 export const checkToken = createAsyncThunk(
     "user/checkToken",
-    async (_, thunkAPI) => {
+    async (_, {dispatch}) => {
         const { email, token } = getUser()
         try {
             if (token?.length != 0) {
-                thunkAPI.dispatch(setIsAuth(true))
-                thunkAPI.dispatch(getFavoriteMovies(email))
+                dispatch(setIsAuth(true))
+                dispatch(getFavoriteMovies(email))
             }
         } catch (e) {
 
@@ -45,7 +45,7 @@ export const setIsAuth = createAsyncThunk(
 
 export const login = createAsyncThunk(
     "user/login",
-    async (obj: ObjType, thunkAPI) => {
+    async (obj: ObjType,{dispatch}) => {
         const { navigate, email, password } = obj;
         try {
             signInWithEmailAndPassword(authentication, email, password)
@@ -56,10 +56,9 @@ export const login = createAsyncThunk(
                         token: user.accessToken,
                         id: user.id
                     }
-                    console.log(user.email)
-                    thunkAPI.dispatch(addUser(u))
-                    thunkAPI.dispatch(setIsAuth(true))
-                    thunkAPI.dispatch(getFavoriteMovies(user.email))
+                    dispatch(addUser(u))
+                    dispatch(setIsAuth(true))
+                    dispatch(getFavoriteMovies(user.email))
                     setUser(user.email, user.accessToken)
                     navigate('/')
                 }).catch(() => alert("Не верный логин или пароль"))

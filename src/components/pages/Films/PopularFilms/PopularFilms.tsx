@@ -1,17 +1,18 @@
-import React, {  FC } from 'react'
+import React, { FC, useCallback } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/redux'
 import { getPopularMovies } from '../../../../store/actions/MovieActionCreator'
+import { FixMe } from '../../../../types/Types'
 import Item from '../Item'
 
 const PopularFilms: FC = () => {
-  const dispatch: any = useAppDispatch()
-  const changePage = (page: number) => {
-    dispatch(getPopularMovies(page))
-  }
+  const dispatch: FixMe = useAppDispatch()
   const { popularMovies} = useAppSelector(state => state.movies)
+  const changePage = useCallback((page: number) => {
+    dispatch(getPopularMovies(page))
+  }, [])
   return (
     <>
-      <Item data={popularMovies} changePage={(page)=> changePage(page)} type="movie"/>
+      <Item data={popularMovies} changePage={changePage} type="movie"/>
     </>
   )
 }

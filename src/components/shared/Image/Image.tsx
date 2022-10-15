@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import ContentLoader from "react-content-loader"
 
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -25,7 +25,7 @@ const MyLoader = ({width = 192, height = 280}: MyLoaderProps) => (
     </ContentLoader>
   )
 
-export default ({  src, height, width,  ...props }: ImageProps) => {
+export default memo(({  src, height, width,  ...props }: ImageProps) => {
     const [loading, setLoading] = useState(false)
 
     const onLoad = useCallback(() => {
@@ -46,4 +46,4 @@ export default ({  src, height, width,  ...props }: ImageProps) => {
     }else{
         return <img {...props} alt={src} src={src} />
     }
-}
+})

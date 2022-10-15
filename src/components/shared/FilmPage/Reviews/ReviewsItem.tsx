@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import { convertTimestampToDate } from '../../../../hooks/convertTimestampToDate/convertTimestampToDate';
 
 interface ReviewsItemProps {
@@ -8,7 +8,7 @@ interface ReviewsItemProps {
 }
 
 
-const ReviewsItem: FC<ReviewsItemProps> = ({ author, content, created_at }) => {
+const ReviewsItem: FC<ReviewsItemProps> = memo(({ author, content, created_at }) => {
     return (
         <div className="max-w-sm w-full lg:max-w-full lg:flex">
             <div className="border-b-4 border-neutral-300 mr-5 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
@@ -24,6 +24,6 @@ const ReviewsItem: FC<ReviewsItemProps> = ({ author, content, created_at }) => {
             </div>
         </div>
     )
-}
+})
 
 export default ReviewsItem

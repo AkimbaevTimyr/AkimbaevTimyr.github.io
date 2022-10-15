@@ -50,9 +50,6 @@ const moviesSlice = createSlice({
         [getFavoriteMovies.fulfilled.type]: (state, action) => {
             state.favoriteMovies = action.payload;
         },
-        // [getAllMovies.fulfilled.type] : (state, action) =>{
-        //     console.log(action.payload)
-        // } 
         [setSimularMoviesById.fulfilled.type] : (state, action) =>{
             state.simularMovies = action.payload
         },

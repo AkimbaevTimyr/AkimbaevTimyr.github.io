@@ -7,7 +7,7 @@ const store = setupStore();
 
 const searchSetup = () =>{
     const utils =  render(<Provider store={store}><Search /></Provider>)
-    const input = screen.getByTestId("input")
+    const input = screen.getByTestId("input") as HTMLInputElement
     return { input, ...utils}
 }
 

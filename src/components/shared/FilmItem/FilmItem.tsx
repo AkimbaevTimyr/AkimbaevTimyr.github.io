@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import { Link } from 'react-router-dom'
 import { convertMovieType } from '../../../hooks/convertMovieType/convertMovieType'
 import Image from '../Image/Image';
@@ -7,13 +7,13 @@ import './filmItem.css'
 interface FilmItemProps {
     id: number;
     img: string | null;
-    title: string | undefined;
+    title?: string ;
     vote_average: number;
-    release_date: string | undefined;
-    type: string | null;
+    release_date?: string;
+    type: string | null | undefined;
 }
 
-const FilmItem: FC<FilmItemProps> = ({ id, img, title, vote_average, release_date, type }) => {
+const FilmItem: FC<FilmItemProps> = memo(({ id, img, title, vote_average, release_date, type }) => {
     return (
         <div className="film w-52 mb-5 ml-3">
             <div className='relative hover:scale-x-105 hover:scale-y-105 transition-all'>
@@ -34,6 +34,6 @@ const FilmItem: FC<FilmItemProps> = ({ id, img, title, vote_average, release_dat
             </p>
         </div >
   )
-}
+})
 
 export default FilmItem

@@ -32,6 +32,14 @@ const LeftSide: FC<LeftSideProps> = ({ filmPage }) => {
         localStorage.setItem('genre', genres[e.target.value])
     }
 
+    const changeRating1 = (e: any) =>{
+        setRating1(Number(e.target.value))
+    }
+
+    const changeRating2 = (e: any) =>{
+        setRating2(Number(e.target.value))
+    }
+
     return (
         <div className={styles.left}>
             <div className={styles.left_body}>
@@ -39,21 +47,21 @@ const LeftSide: FC<LeftSideProps> = ({ filmPage }) => {
                 <div className={styles.rating_inputs}>
                     <div className={styles.input_rating}>
                         <p>От</p>
-                        <input data-testid="input-from" onChange={e => setRating1(Number(e.target.value))} type="number" min="1" max="10" step="1" value={rating1 || ""} />
+                        <input data-testid="input-from" onChange={changeRating1} type="number" min="1" max="10" step="1" value={rating1 || ""} />
                     </div>
                     <div className={styles.input_rating}>
                         <p>До</p>
-                        <input data-testid="input-before" onChange={e => setRating2(Number(e.target.value))} type="number" min="1" max="10" step="1" value={rating2 || ""} />
+                        <input data-testid="input-before" onChange={changeRating2} type="number" min="1" max="10" step="1" value={rating2 || ""} />
                     </div>
                 </div>
                 <h2 className={styles.rating_header}>Жанр</h2>
-                <select data-testid="select" className={styles.select} onChange={(e) => handleChange(e)} >
+                <select data-testid="select" className={styles.select} onChange={handleChange} >
                     {options.map((item: Option) => (
                         <option key={item.id} selected={item.id === genre}>{item.name}</option>
                     ))}
                 </select>
                 <div className={styles.buttons}>
-                    <button onClick={() => handleClick()} className={styles.button_1}>Применить</button>
+                    <button onClick={handleClick} className={styles.button_1}>Применить</button>
                 </div>
             </div>
         </div>

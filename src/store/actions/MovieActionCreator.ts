@@ -26,7 +26,6 @@ export const getAll = createAsyncThunk(
     }
 )
 
-
 export const getBestMovies = createAsyncThunk(
     "movies/getBestMovies",
     async (page: number, thunkAPI) => {
@@ -117,7 +116,6 @@ export const getFavoriteMovies = createAsyncThunk(
     "movies/getFavoriteMovies",
     async (email: string | null, thunkAPI) => {
         try {
-            console.log(email)
             const querySnapshot = await getDocs(collection(db, "favorites"));
             const data = querySnapshot.docs.map(doc => doc.data()).filter(el => el.email === email)
             return data
@@ -166,7 +164,7 @@ export const sortingMoviesByRating = createAsyncThunk(
 
 export const sortingMovies = createAsyncThunk(
     "movies/sortingMovies",
-    async (args: any, thunkAPI) => {
+    async (args: any[], thunkAPI) => {
         try {
             const [page, first, second, genresId] = args;
             let { data } = await axios.get<any>(`https://api.themoviedb.org/3/discover/movie?api_key=5ddccc04d5376e3e13b0cf0f39f6a00a&language=ru-RU&sort_by=vote_average.asc&page=${page}&vote_average.gte=${first}&vote_average.lte=${second}&with_genres=${genresId}&with_watch_monetization_types=flatrate`)
@@ -199,6 +197,7 @@ export const getTvShows = createAsyncThunk(
         }
     }
 )
+
 
 export const setSimularTvShowsById = createAsyncThunk(
     "movies/setSimularTvShowsById",

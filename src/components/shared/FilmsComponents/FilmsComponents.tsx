@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, memo } from 'react'
 import { Link } from 'react-router-dom'
 import Image from '../Image/Image'
 
@@ -9,7 +9,7 @@ interface FilmsComponentsProps {
     link: string;
 }
 
-const FilmsComponents: FC<FilmsComponentsProps> = ({ img, title, subtitle, link }) => {
+const FilmsComponents: FC<FilmsComponentsProps> = memo(({ img, title, subtitle, link }) => {
     return (
             <div >
                 <div className='flex justify-center w-auto mt-5'>
@@ -30,6 +30,6 @@ const FilmsComponents: FC<FilmsComponentsProps> = ({ img, title, subtitle, link 
                 </div>
             </div>
     )
-}
+})
 
 export default FilmsComponents

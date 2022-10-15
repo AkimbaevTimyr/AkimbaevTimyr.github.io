@@ -20,9 +20,19 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts", "src/setupTests.js", "src/App.test.tsx"],
-  "baseUrl": ".",
+  "include": [
+    "src",
+    "src/**/*.ts",
+    "tests/**/*.ts",
+    "src/setupTests.js",
+    "src/App.test.tsx",
+    "./src/**/*",
+    "./tests/**/*"
+  ],
+  "baseUrl": "src",
   "paths": {
-    "@hooks/": ["src/hooks/"],
+    "hooks": [
+      "hooks"
+    ],
   }
 }

@@ -1,11 +1,10 @@
+import React from 'react'
 import { getTvShows } from '../../../store/actions/TvShowActionCreator'
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux'
 import Loading from '../../shared/UI/Loading/Loading'
-import { ITvShows } from '../../../types/TvShowTypes'
 import Pagination from '../../shared/UI/Pagination.tsx/Pagination'
 import styles from './style.module.css'
 import FilmItem from '../../shared/FilmItem/FilmItem'
-import React from 'react'
 import { IMovie } from '../../../types/MoviesTypes'
 
 const TvShows = () => {
