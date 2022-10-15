@@ -22,5 +22,5 @@ Stack:\
 5)React-router-dom v6\
 6)Tailwind css\
 7)Firebase - for registration authorization - password must contain at least 6 characters\
-8)Axios
+8)Axios\
 9)React Testing Library
